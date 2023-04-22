@@ -28,12 +28,33 @@ function getElementXPath(element: HTMLElement): string {
 
 /**
  * Listener function for user input events
- * @param event - The event object representing the user input (Mouse event, Input event, or just a generic event)
- * @returns void, just console logs the XPath of the element that was interacted with
+ * @param event - The event object representing the user input (Mouse event or Input event)
+ * @returns void, just console logs the XPath, event type, and change of the element that was interacted with
+ * [STRETCH] Maybe add generic Events and KeyboardEvents to the type Union and add support for those event types later
  */
-function inputEventListener(event: MouseEvent | InputEvent | Event) {
+function inputEventListener(event: MouseEvent | InputEvent) {
+  // Get the xPath of the element that was interacted with
   const xPath = getElementXPath(event.target as HTMLElement);
   console.log(`User interaction with element: ${xPath}`);
+  // Get the event type
+  const eventType = event.type;
+  console.log(`Event type: ${eventType}`);
+
+  // Handle different event types using a switch statement
+  switch (eventType) {
+    case 'click':
+      console.log(`User interaction with element: ${xPath}, Event type: ${eventType}`);
+      break;
+    case 'input':
+    case 'change':
+      // Get the input value for input and change events and log those as well
+      const inputValue = (event.target as HTMLInputElement).value;
+      console.log(`User interaction with element: ${xPath}, Event type: ${eventType}, Input value: ${inputValue}`);
+      break;
+    default:
+      // Log a message for unhandled event types
+      console.log(`Unhandled event type: ${eventType}`);
+  }
 }
 
 // Add event listeners for clicks, inputs, and change events
