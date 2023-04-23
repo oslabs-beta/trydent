@@ -2,16 +2,25 @@
 
 ## Table of Contents
 1. [Getting Started](#getting-started)
+1. [User Input Recording and Data Privacy](#user-input-recording-and-data-privacy)
 1. [Scripts](#scripts)
     - [Client](#client)
     - [Server](#server)
 
+---
 
 ## Getting Started
 Before running the application, make sure to navigate to the correct directory for the client or server part of the project. Use the terminal to change to the desired directory:
 
 - For the client: `cd path/to/client` (replace "path/to/client" with the actual path to your client directory)
 - For the server: `cd path/to/server` (replace "path/to/server" with the actual path to your server directory)
+
+---
+
+## User Input Recording and Data Privacy
+Trydent records user inputs during development for the purpose of creating end-to-end tests. The application does not extract or store any personal data from users. However, as a precaution, developers should avoid inputting sensitive information while using Trydent. This ensure that no sensitive data is inadvertently recorded or stored in the generated tests.
+
+---
 
 ## Scripts
 ### Client
