@@ -6,7 +6,7 @@
  * @param uniqueAttribute - Optional attribute name to make the XPath more unique.
  * @returns The relative XPath of the provided HTMLElement.
  */
- export function getRelativeXPath(element: HTMLElement | null, uniqueAttribute: string = 'id'): string {
+function getRelativeXPath(element: HTMLElement | null, uniqueAttribute: string = 'id'): string {
   // If the element is null or undefined, return an empty string
   if (!element) return '';
   // Get the element's tag name and convert it to lowercase to follow xPath conventions
@@ -63,7 +63,7 @@ function inputEventListener(event: MouseEvent | InputEvent) {
       // Get the input value for input and change events and log those as well
       const inputValue = (event.target as HTMLInputElement).value;
       console.log(`User interaction with element: ${xPath}, Event type: ${eventType}, Input value: ${inputValue}`);
-      recordedEvents.push({ xPath, eventType });
+      recordedEvents.push({ xPath, eventType, inputValue });
       break;
     default:
       // Log a message for unhandled event types
@@ -90,3 +90,6 @@ document.addEventListener('change', inputEventListener as EventListener, true);
 function getRecordedEvents(): Array<RecordedEvent> {
   return recordedEvents;
 }
+
+export { getRelativeXPath, inputEventListener, getRecordedEvents };
+export type { RecordedEvent };
