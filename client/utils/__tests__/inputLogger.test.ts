@@ -1,42 +1,39 @@
-import { getElementXPath, getRecordedEvents } from '../inputLogger';
+// inputLogger.test.ts
+import { getRelativeXPath } from '../inputLogger';
 
-describe('getElementXPath', () => {
-  it('should return the correct XPath for a simple DOM structure', () => {
+describe('getRelativeXPath', () => {
+  // Set up a simple DOM structure for testing
+  const setupDOM = () => {
     document.body.innerHTML = `
-      <div id="container">
-        <button id="button">Click me</button>
+      <div>
+        <p class="test">Paragraph 1</p>
+        <p>Paragraph 2</p>
+        <div>
+          <span>Span 1</span>
+          <span>Span 2</span>
+        </div>
       </div>
     `;
+  };
 
-    const button = document.getElementById('button') as HTMLElement;
-    const xPath = getElementXPath(button);
-
-    expect(xPath).toBe('/html/body/div[@id=\'container\']/button[@id=\'button\']');
+  test('should generate a relative XPath for an element without unique attribute', () => {
+    setupDOM();
+    const span1 = document.querySelector('span');
+    if (!span1 || !(span1 instanceof HTMLElement)) throw new Error('Test element not found');
+    const xpath = getRelativeXPath(span1);
+    expect(xpath).toBe('/html[1]/body[1]/div[1]/div[1]/span[1]');
   });
-  
-  it('should return the correct XPath for a more complex DOM structure', () => {
-    document.body.innerHTML = `
-    <div id="main">
-      <div class="wrapper">
-        <div class="item" id="item-1">
-          <button class="action">Action 1</button>
-        </div>
-        <div class="item" id="item-2">
-          <button class="action">Action 2</button>
-          <div class="sub-item">
-            <button id="sub-action">Sub Action</button>
-          </div>
-        </div>
-      </div>
-      <div class="footer">
-        <button class="action">Footer Action</button>
-      </div>
-    </div>
-    `;
 
-    const subActionButton = document.getElementById('sub-action') as HTMLElement;
-    const xPath = getElementXPath(subActionButton);
+  test('should generate a relative XPath for an element with a unique attribute', () => {
+    setupDOM();
+    const p1 = document.querySelector('.test');
+    if (!p1 || !(p1 instanceof HTMLElement)) throw new Error('Test element not found');
+    const xpath = getRelativeXPath(p1, 'class');
+    expect(xpath).toBe('//p[@class="test"]');
+  });
 
-    expect(xPath).toBe('/html/body/div[@id=\'main\']/div[@class=\'wrapper\'][1]/div[@id=\'item-2\'][@class=\'item\']/div[@class=\'sub-item\'][2]/button[@id=\'sub-action\']');
-  })
+  test('should return an empty string if the element is null', () => {
+    const xpath = getRelativeXPath(null);
+    expect(xpath).toBe('');
+  });
 });
