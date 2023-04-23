@@ -1,0 +1,16 @@
+{
+  "name": "trydent",
+  "version": "1.0.0",
+  "description": "## Table of Contents 1. [Getting Started](#getting-started) 1. [User Input Recording and Data Privacy](#user-input-recording-and-data-privacy) 1. [Scripts](#scripts)     - [Client](#client)     - [Server](#server)",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^29.5.1",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
+    "ts-jest": "^29.1.0"
+  }
+}
