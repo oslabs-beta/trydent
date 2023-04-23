@@ -5,14 +5,15 @@
  * @returns The XPath of the provided HTMLElement
  */
 function getElementXPath(element: HTMLElement): string {
-  // Base Case: If the element is the document body, return the tagName
+  // Base Case: If the element is the document body, return '/html/body'
   if (element === document.body) {
-    return element.tagName.toLowerCase();
+    return '/html/body';
   }
   // Get the ID (if any) of the element
   const id = element.id ? `[@id='${element.id}']` : '';
   // Get the class name (if any) of the element
   const className = element.className ? `[@class='${element.className}']` : '';
+
   // Initialize the siblingIndex to 1
   let siblingIndex = 1;
   // Start with the current element and move to the previous sibling
@@ -23,7 +24,7 @@ function getElementXPath(element: HTMLElement): string {
     siblingIndex++;
   } 
   // Recursively call the function for the parentNode and append the current element's tagName and siblingIndex
-  return `${getElementXPath((element.parentNode as Node) as HTMLElement)}/${element.tagName.toLowerCase()}${id}${className}[${siblingIndex}]`;
+  return `${getElementXPath((element.parentNode as Node) as HTMLElement)}/${element.tagName.toLowerCase()}${id}${className}${id ? '' : `[${siblingIndex}]`}`;
 }
 
 // Interface representing recorded user input event
