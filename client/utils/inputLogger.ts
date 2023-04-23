@@ -91,4 +91,4 @@ function getRecordedEvents(): Array<RecordedEvent> {
 
 
 // Export the getRecordedEvents function
-export { getRecordedEvents };
+export { getElementXPath, getRecordedEvents };
