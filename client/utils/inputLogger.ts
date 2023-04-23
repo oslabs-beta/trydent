@@ -1,30 +1,33 @@
 
 /**
- * Recursive helper function to get the XPath of an element
- * @param element - The HTMLElement for which the XPath is to be generated
- * @returns The XPath of the provided HTMLElement
+ * Recursive function that generates a relative XPath for the given HTML element.
+ * It takes an optional unique attribute of id to enhance the uniqueness of the generated XPath.
+ * @param element - The HTMLElement for which the XPath is to be generated.
+ * @param uniqueAttribute - Optional attribute name to make the XPath more unique.
+ * @returns The relative XPath of the provided HTMLElement.
  */
-function getElementXPath(element: HTMLElement): string {
-  // Base Case: If the element is the document body, return '/html/body'
-  if (element === document.body) {
-    return '/html/body';
-  }
-  // Get the ID (if any) of the element
-  const id = element.id ? `[@id='${element.id}']` : '';
-  // Get the class name (if any) of the element
-  const className = element.className ? `[@class='${element.className}']` : '';
+ export function getRelativeXPath(element: HTMLElement | null, uniqueAttribute: string = 'id'): string {
+  // If the element is null or undefined, return an empty string
+  if (!element) return '';
+  // Get the element's tag name and convert it to lowercase to follow xPath conventions
+  const tagName = element.tagName.toLowerCase();
+  // Check if the element has the unique attribute and construct the attribute part of the XPath
+  const attr = uniqueAttribute && element.hasAttribute(uniqueAttribute) ? `[@${uniqueAttribute}="${element.getAttribute(uniqueAttribute)}"]`: '';
+  // If the element has a unique attribute, return the XPath with it
+  if (attr) return `//${tagName}${attr}`;
 
-  // Initialize the siblingIndex to 1
-  let siblingIndex = 1;
-  // Start with the current element and move to the previous sibling
-  let sibling: Element | null = element;
-  // While there is a previous sibling, increment the siblingIndex and move to the previous sibling
-  while (sibling.previousElementSibling) {
+  // Calculate the element's position among its siblings with the same tag name
+  let position = 1;
+  let sibling = element.previousElementSibling;
+  while (sibling) {
+    // Increment the position if the sibling has the same tag name
+    if (sibling.tagName.toLowerCase() === tagName) position++;
     sibling = sibling.previousElementSibling;
-    siblingIndex++;
-  } 
-  // Recursively call the function for the parentNode and append the current element's tagName and siblingIndex
-  return `${getElementXPath((element.parentNode as Node) as HTMLElement)}/${element.tagName.toLowerCase()}${id}${className}${id ? '' : `[${siblingIndex}]`}`;
+  }
+
+  // Recursively call the function for the parent element and append the current element with its position
+  const parentXPath = getRelativeXPath(element.parentElement, uniqueAttribute);
+  return `${parentXPath}/${tagName}[${position}]`;
 }
 
 // Interface representing recorded user input event
@@ -45,11 +48,9 @@ const recordedEvents: Array<RecordedEvent> = [];
  */
 function inputEventListener(event: MouseEvent | InputEvent) {
   // Get the xPath of the element that was interacted with
-  const xPath = getElementXPath(event.target as HTMLElement);
-  console.log(`User interaction with element: ${xPath}`);
+  const xPath = getRelativeXPath(event.target as HTMLElement);
   // Get the event type
   const eventType = event.type;
-  console.log(`Event type: ${eventType}`);
 
   // Store different event types using a switch statement 
   switch (eventType) {
@@ -80,7 +81,7 @@ document.addEventListener('change', inputEventListener as EventListener, true);
 /**
  * Retrieves the array of recorded user input events
  * Each event object has the following properties: xPath, eventType, and inputValue (if applicable)
- * @returns {Array<{ xPath: string; eventType: string; inputValue?: string }>} - The array of recorded events
+ * @returns {Array<{ RecordedEvent }>} - The array of recorded events
  * Each event object includes:
  * 1. xPath (string): The XPath of the element that was interacted with
  * 2. eventType (string): The type of event that was triggered (click, input, or change)
@@ -89,7 +90,3 @@ document.addEventListener('change', inputEventListener as EventListener, true);
 function getRecordedEvents(): Array<RecordedEvent> {
   return recordedEvents;
 }
-
-
-// Export the getRecordedEvents function
-export { getElementXPath, getRecordedEvents };
