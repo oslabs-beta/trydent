@@ -26,6 +26,16 @@ function getElementXPath(element: HTMLElement): string {
   return `${getElementXPath((element.parentNode as Node) as HTMLElement)}/${element.tagName.toLowerCase()}${id}${className}[${siblingIndex}]`;
 }
 
+// Interface representing recorded user input event
+interface RecordedEvent {
+  xPath: string;
+  eventType: string;
+  inputValue?: string;
+}
+
+// Declare a new array to store the recorded events
+const recordedEvents: Array<RecordedEvent> = [];
+
 /**
  * Listener function for user input events
  * @param event - The event object representing the user input (Mouse event or Input event)
@@ -40,16 +50,18 @@ function inputEventListener(event: MouseEvent | InputEvent) {
   const eventType = event.type;
   console.log(`Event type: ${eventType}`);
 
-  // Handle different event types using a switch statement
+  // Store different event types using a switch statement 
   switch (eventType) {
     case 'click':
       console.log(`User interaction with element: ${xPath}, Event type: ${eventType}`);
+      recordedEvents.push({ xPath, eventType });
       break;
     case 'input':
     case 'change':
       // Get the input value for input and change events and log those as well
       const inputValue = (event.target as HTMLInputElement).value;
       console.log(`User interaction with element: ${xPath}, Event type: ${eventType}, Input value: ${inputValue}`);
+      recordedEvents.push({ xPath, eventType });
       break;
     default:
       // Log a message for unhandled event types
@@ -62,3 +74,21 @@ function inputEventListener(event: MouseEvent | InputEvent) {
 document.addEventListener('click', inputEventListener as EventListener, true);
 document.addEventListener('input', inputEventListener as EventListener, true);
 document.addEventListener('change', inputEventListener as EventListener, true);
+
+
+/**
+ * Retrieves the array of recorded user input events
+ * Each event object has the following properties: xPath, eventType, and inputValue (if applicable)
+ * @returns {Array<{ xPath: string; eventType: string; inputValue?: string }>} - The array of recorded events
+ * Each event object includes:
+ * 1. xPath (string): The XPath of the element that was interacted with
+ * 2. eventType (string): The type of event that was triggered (click, input, or change)
+ * 3. inputValue (string | undefined): The value of the input element (if applicable)
+ */
+function getRecordedEvents(): Array<RecordedEvent> {
+  return recordedEvents;
+}
+
+
+// Export the getRecordedEvents function
+export { getRecordedEvents };
