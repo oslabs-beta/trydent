@@ -3,30 +3,36 @@
  * It takes an optional unique attribute of id to enhance the uniqueness of the generated XPath.
  * 
  * @param element - The HTMLElement for which the XPath is to be generated.
- * @param uniqueAttribute - Optional attribute name to make the XPath more unique.
  * @returns The relative XPath of the provided HTMLElement.
  */
-function getRelativeXPath(element: HTMLElement | null, uniqueAttribute: string = 'id'): string {
+function getRelativeXPath(element: HTMLElement | null): string {
   // If the element is null or undefined, return an empty string
   if (!element) return '';
   // Get the element's tag name and convert it to lowercase to follow xPath conventions
   const tagName = element.tagName.toLowerCase();
   // Check if the element has the unique attribute and construct the attribute part of the XPath
-  const attr = uniqueAttribute && element.hasAttribute(uniqueAttribute) ? `[@${uniqueAttribute}="${element.getAttribute(uniqueAttribute)}"]`: '';
-  // If the element has a unique attribute, return the XPath with it
+  const uniqueAttributes = ['data-cy', 'data-test', 'data-testid', 'id'];
+ 
+  let attr = '';
+
+  // Iterate through the uniqueAttributes array and use the first one found on the element
+  for (const attribute of uniqueAttributes) {
+    if (element.hasAttribute(attribute)) {
+      attr = `[@${attribute}="${element.getAttribute(attribute)}"]`;
+      break;
+    }
+  }
+
   if (attr) return `//${tagName}${attr}`;
 
-  // Calculate the element's position among its siblings with the same tag name
   let position = 1;
   let sibling = element.previousElementSibling;
   while (sibling) {
-    // Increment the position if the sibling has the same tag name
     if (sibling.tagName.toLowerCase() === tagName) position++;
     sibling = sibling.previousElementSibling;
   }
 
-  // Recursively call the function for the parent element and append the current element with its position
-  const parentXPath = getRelativeXPath(element.parentElement, uniqueAttribute);
+  const parentXPath = getRelativeXPath(element.parentElement);
   return `${parentXPath}/${tagName}[${position}]`;
 }
 
