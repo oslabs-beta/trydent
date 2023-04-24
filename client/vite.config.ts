@@ -22,27 +22,27 @@ export default defineConfig({
     // Empty the output directory before building
     emptyOutDir: true,
   },
-  // create dts file by saving scss file during development
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: `@use "@/styles" as common;`,
-        importer(...args) {
-          if (args[0] !== '@/styles') {
-            return
-          }
+  // // create dts file by saving scss file during development
+  // css: {
+  //   preprocessorOptions: {
+  //     scss: {
+  //       additionalData: `@use "@/styles" as common;`,
+  //       importer(...args) {
+  //         if (args[0] !== '@/styles') {
+  //           return
+  //         }
 
-          return {
-            file: `${path.resolve(__dirname, './src/assets/styles')}`,
-          }
-        },
-      },
-    },
-  },
+  //         return {
+  //           file: `${path.resolve(__dirname, './src/assets/styles')}`,
+  //         }
+  //       },
+  //     },
+  //   },
+  // },
   // Configure plugins
   plugins: [
     // Use SCSS Files during development
-    [sassDts()],
+    sassDts(),
     // Use React plugin for handling React components
     react(),
     // Use SVGR plugin for handling SVG files as React components
