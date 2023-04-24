@@ -14,8 +14,7 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.10.0",
-    "react-toastify": "^9.1.2"
+    "react-router-dom": "^6.10.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -25,8 +24,6 @@
     "@types/react-dom": "^18.0.11",
     "@types/testing-library__jest-dom": "^5.14.5",
     "@vitejs/plugin-react": "^4.0.0",
-    "sass": "^1.62.0",
-    "typescript": "^5.0.4",
     "vite": "^4.3.1",
     "vite-plugin-svgr": "^2.4.0"
   }
