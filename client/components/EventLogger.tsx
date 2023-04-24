@@ -19,6 +19,9 @@ const EventLogger: React.FC = () => {
 
   // Set up event listeners on component mount and clean up on unmount
   useEffect(() => {
+    // Grab URL for current window
+    const URL = window.location.href;
+
     const handleEvent = (event: Event) => {
       // Handle focus event: set focused element and initial input value
       if (event.type === 'focus') {
@@ -33,7 +36,7 @@ const EventLogger: React.FC = () => {
           const xPath = getRelativeXPath(event.target as HTMLElement);
           const eventType = 'input'; // ensures that the event is logged as an input event
           // update the event state with new event object
-          setEvents((prevEvents) => [...prevEvents, { xPath, eventType, inputValue: newValue }]);
+          setEvents((prevEvents) => [...prevEvents, { xPath, eventType, inputValue: newValue, URL }]);
         }
         setFocusedElement(null);
       } 
@@ -41,7 +44,7 @@ const EventLogger: React.FC = () => {
       else {
         inputEventListener(event as MouseEvent | InputEvent, (recordedEvent: RecordedEvent) => {
           if (recordedEvent.eventType !== 'input' && recordedEvent.eventType !== 'change') {
-            setEvents((prevEvents) => [...prevEvents, recordedEvent]);
+            setEvents((prevEvents) => [...prevEvents, {...recordedEvent, URL}]);
           }
         });
       }
@@ -64,6 +67,9 @@ const EventLogger: React.FC = () => {
     };
   }, [focusedElement]); // only re-run effect if focused element changes
 
+  // Log to view the different events
+  console.log('These are the events:', events);
+  
   // Render list of recorded events in a separate div
   return (
     <div className="event-logger">
@@ -71,6 +77,7 @@ const EventLogger: React.FC = () => {
         <div key={index} className="event-block">
           <p>xPath: {event.xPath}</p>
           <p>Event Type: {event.eventType}</p>
+          <p>{window.location.href}</p>
           {event.inputValue !== undefined && <p>Input Value: {event.inputValue}</p>}
         </div>
       ))}
