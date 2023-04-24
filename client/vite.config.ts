@@ -1,8 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import svgrPlugin from "vite-plugin-svgr";
-import sassDts from "vite-plugin-sass-dts";
-import path from "path";
+import sass from "vite-plugin-sass";
 
 // Define vite configurations
 export default defineConfig({
@@ -39,8 +38,8 @@ export default defineConfig({
   },
   // Configure plugins
   plugins: [
-    // Use SCSS Files during development
-    sassDts(),
+    // Handle SCSS files to CSS
+    sass(),
     // Use React plugin for handling React components
     react(),
     // Use SVGR plugin for handling SVG files as React components
