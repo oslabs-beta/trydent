@@ -1,0 +1,29 @@
+{
+  "name": "Trydent",
+  "version": "1.0.1",
+  "devtools_page": "devtool.html",
+  "description": "A Chrome extension that helps you create E2E testing thorugh Cypress",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost/*"
+      ],
+      "js": [
+        "content-script.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ]
+}

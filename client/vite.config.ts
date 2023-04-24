@@ -19,6 +19,21 @@ export default defineConfig({
     outDir: "../extension/bundles/client",
     // Empty the output directory before building
     emptyOutDir: true,
+    // Watch for changes in the source files
+    watch: {
+      // Specify which files/directories to watch for changes
+      include: 'src/**',
+      exclude: 'node_modules/**',
+    },
+    // update output to have constant build file names, removing the hash
+    rollupOptions:{
+      output: {
+        entryFileNames: 'assets/[name].js',
+        chunkFileNames: 'assets/[name].js',
+        assetFileNames: 'assets/[name].[ext]',
+      }
+    }
+
   },
   // Configure plugins
   plugins: [
