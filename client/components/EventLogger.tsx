@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { inputEventListener, RecordedEvent } from "../utils/inputLogger";
-
-// Define interface for EventLogger props
-interface EventLoggerProps {
-  onLog: (input: string) => void;
-}
+import { inputEventListener, getRelativeXPath, RecordedEvent } from "../utils/inputLogger";
 
 /**
  * Listens to user interaction events, logging the event details and rendering the recorded events in a list
@@ -16,32 +11,58 @@ interface EventLoggerProps {
  * )
  * @returns {ReactElement} A React element containing list of recorded events
  */
-const EventLogger: React.FC<EventLoggerProps> = ({ onLog }) => {
-  // Maintain state for recorded events and input value
+const EventLogger: React.FC = () => {
+  // Maintain state for recorded events, focused element, and initial input value
   const [events, setEvents] = useState<Array<RecordedEvent>>([]);
-  const [inputValue, setInputValue] = useState('');
+  const [focusedElement, setFocusedElement] = useState<HTMLElement | null>(null);
+  const [initialValue, setInitialValue] = useState<string>('');
 
-  // Event listeners on component mount and clean up on unmount
+  // Set up event listeners on component mount and clean up on unmount
   useEffect(() => {
-    const handleEvent = (event: MouseEvent | InputEvent) => {
-      // Call inputEventLIstener from utils/inputLogger.ts to process event and update events state
-      inputEventListener(event, (recordedEvent: RecordedEvent) => {
-        setEvents((prevEvents) => [...prevEvents, recordedEvent]);
-      });
+    const handleEvent = (event: Event) => {
+      // Handle focus event: set focused element and initial input value
+      if (event.type === 'focus') {
+        setFocusedElement(event.target as HTMLElement);
+        setInitialValue((event.target as HTMLInputElement).value);
+      } 
+      // Handle blur event: if input value has changed, log the event and reset focused element
+      else if (event.type === 'blur') {
+        const newValue = (event.target as HTMLInputElement).value;
+        // compare initial value to new value to avoid logging events that don't change the input value
+        if (initialValue !== newValue) {
+          const xPath = getRelativeXPath(event.target as HTMLElement);
+          const eventType = 'input'; // ensures that the event is logged as an input event
+          // update the event state with new event object
+          setEvents((prevEvents) => [...prevEvents, { xPath, eventType, inputValue: newValue }]);
+        }
+        setFocusedElement(null);
+      } 
+      // Handle click and other events: log the event
+      else {
+        inputEventListener(event as MouseEvent | InputEvent, (recordedEvent: RecordedEvent) => {
+          if (recordedEvent.eventType !== 'input' && recordedEvent.eventType !== 'change') {
+            setEvents((prevEvents) => [...prevEvents, recordedEvent]);
+          }
+        });
+      }
     };
 
-    // Add event listeners for click, input, and change events
+    // Add event listeners for click, focus, and blur events
     document.addEventListener('click', handleEvent as EventListener, true);
-    document.addEventListener('input', handleEvent as EventListener, true);
-    document.addEventListener('change', handleEvent as EventListener, true);
+    document.addEventListener('focus', handleEvent as EventListener, true);
+    document.addEventListener('blur', handleEvent as EventListener, true);
 
     // Clean up event listeners when the component is unmounted
+    /* Event listeners must be unmounted to prevent memory leaks or unexpected behavior. 
+    1. If not unmounted, listeners could still reference component even if it is not in DOM.
+    2. If component is remounted, duplicate events could also be fired.
+    */
     return () => {
       document.removeEventListener('click', handleEvent as EventListener, true);
-      document.removeEventListener('input', handleEvent as EventListener, true);
-      document.removeEventListener('change', handleEvent as EventListener, true);
+      document.removeEventListener('focus', handleEvent as EventListener, true);
+      document.removeEventListener('blur', handleEvent as EventListener, true);
     };
-  }, []);
+  }, [focusedElement]); // only re-run effect if focused element changes
 
   // Render list of recorded events in a separate div
   return (
@@ -58,4 +79,3 @@ const EventLogger: React.FC<EventLoggerProps> = ({ onLog }) => {
 };
 
 export default EventLogger;
-export type { EventLoggerProps };
