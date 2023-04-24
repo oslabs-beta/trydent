@@ -1,5 +1,8 @@
 # Trydent
 
+  ![Banner](/client/assets/trydent-banner.png)
+
+
 Trydent is a visionary open source project that seeks to empower developers with an innovative solution to automate the creation of end-to-end testing. With Trydent, developers can easily generate high-quality Cypress code that is seamlessly integrated into their codebase, enabling them to optimize and streamline their workflow like never before. Harnessing the power of cutting-edge technology, Trydent is the ultimate tool for modern developers seeking to create the most robust and reliable web applications.
 
 
@@ -73,13 +76,6 @@ We welcome contributions from the community. If you are interested in contributi
 
 ### Code Commenting Guidelines
 Please ensure that your code follows JSDoc standards for commenting. This makes it easier for other developers to understand the purpose and functionality of your code. JSDoc is a markup language used to annotate JavaScript source code files. You can find more information about JSDoc and its syntax in the official [JSDoc documentation](https://jsdoc.app/).
-
-When writing comments, please follow these guidelines:
-
-- Use complete sentences and proper grammar.
-- Use simple language that is easy to understand.
-- Explain what a function, variable, or block of code does and how it is used.
-- Use clear and concise language to describe any parameters, return values, or side effects of a function.
 
 Example:
 ```js
