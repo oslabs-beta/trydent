@@ -37,9 +37,6 @@ interface RecordedEvent {
   inputValue?: string;
 }
 
-// Declare a new array to store the recorded events
-const recordedEvents: Array<RecordedEvent> = [];
-
 /**
  * Listener function for user input events
  * Function is used in EventLogger.tsx component to record and display user input events
@@ -75,13 +72,6 @@ function inputEventListener(event: MouseEvent | InputEvent, callback: (recordedE
       console.log(`Unhandled event type: ${eventType}`);
   }
 }
-
-// // Add event listeners for clicks, inputs, and change events
-// // Use the inputEventListener function as the callback and set the capture option to true
-// document.addEventListener('click', inputEventListener as EventListener, true);
-// document.addEventListener('input', inputEventListener as EventListener, true);
-// document.addEventListener('change', inputEventListener as EventListener, true);
-
 
 export { getRelativeXPath, inputEventListener };
 export type { RecordedEvent };
