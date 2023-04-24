@@ -1,7 +1,7 @@
 {
   "name": "trydent",
   "version": "1.0.0",
-  "description": "## Table of Contents 1. [Getting Started](#getting-started) 1. [User Input Recording and Data Privacy](#user-input-recording-and-data-privacy) 1. [Scripts](#scripts)     - [Client](#client)     - [Server](#server)",
+  "description": "",
   "main": "index.js",
   "scripts": {},
   "keywords": [],
