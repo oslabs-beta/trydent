@@ -5,13 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Devtool Panel</title>
+    <link rel="stylesheet" href="../client/scss/_panel.scss">
+
   </head>
 
   <body>
+    <div>hello panel</div>
     <!-- This is the root element where the React app will be mounted. The React app is responsible for rendering the UI of the devtool panel, and it will be attached to this element during the initialization process. -->
     <div id="root"></div>
     <!-- The main.js file is the entry point of the bundled React app. Including this script tag here loads the React app, which will then render its content inside the 'root' element. -->
-    <script type="module" src="./bundles/client/main.js"></script>
+    <script type="module" src="./bundles/client/main.tsx"></script>
   </body>
+  <!-- npm i -D vite-plugin-sass-dts -->
 
 </html>
