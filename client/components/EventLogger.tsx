@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { inputEventListener, RecordedEvent } from "../utils/inputLogger";
 
+// Define interface for EventLogger props
+interface EventLoggerProps {
+  onLog: (input: string) => void;
+}
+
 /**
  * Listens to user interaction events, logging the event details and rendering the recorded events in a list
  * 
@@ -11,9 +16,10 @@ import { inputEventListener, RecordedEvent } from "../utils/inputLogger";
  * )
  * @returns {ReactElement} A React element containing list of recorded events
  */
-const EventLogger: React.FC = () => {
-  // Maintain state for recorded events
+const EventLogger: React.FC<EventLoggerProps> = ({ onLog }) => {
+  // Maintain state for recorded events and input value
   const [events, setEvents] = useState<Array<RecordedEvent>>([]);
+  const [inputValue, setInputValue] = useState('');
 
   // Event listeners on component mount and clean up on unmount
   useEffect(() => {
@@ -52,3 +58,4 @@ const EventLogger: React.FC = () => {
 };
 
 export default EventLogger;
+export type { EventLoggerProps };
