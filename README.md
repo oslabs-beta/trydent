@@ -1,6 +1,6 @@
 # Trydent
 
-  ![Banner](/client/assets/trydent-banner.png)
+  ![Banner](/client/assets/testing-tamed.png)
 
 
 Trydent is a visionary open source project that seeks to empower developers with an innovative solution to automate the creation of end-to-end testing. With Trydent, developers can easily generate high-quality Cypress code that is seamlessly integrated into their codebase, enabling them to optimize and streamline their workflow like never before. Harnessing the power of cutting-edge technology, Trydent is the ultimate tool for modern developers seeking to create the most robust and reliable web applications.
