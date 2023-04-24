@@ -6,7 +6,7 @@ describe('getRelativeXPath', () => {
   const setupDOM = () => {
     document.body.innerHTML = `
       <div>
-        <p class="test">Paragraph 1</p>
+        <p id="test" class="test" data-cy="data-cy-test" data-test="data-test-test" data-testid="data-testid-test">Paragraph 1</p>
         <p>Paragraph 2</p>
         <div>
           <span>Span 1</span>
@@ -16,20 +16,50 @@ describe('getRelativeXPath', () => {
     `;
   };
 
-  test('should generate a relative XPath for an element without unique attribute', () => {
+  // Call setupDOM before each test
+  beforeEach(() => {
     setupDOM();
+  });
+
+  test('should generate a relative XPath for an element without unique attribute', () => {
     const span1 = document.querySelector('span');
     if (!span1 || !(span1 instanceof HTMLElement)) throw new Error('Test element not found');
     const xpath = getRelativeXPath(span1);
     expect(xpath).toBe('/html[1]/body[1]/div[1]/div[1]/span[1]');
   });
 
-  test('should generate a relative XPath for an element with a unique attribute', () => {
-    setupDOM();
+  test('should prioritize data-cy attribute over data-test and data-testid and id', () => {
     const p1 = document.querySelector('.test');
     if (!p1 || !(p1 instanceof HTMLElement)) throw new Error('Test element not found');
-    const xpath = getRelativeXPath(p1, 'class');
-    expect(xpath).toBe('//p[@class="test"]');
+    const xpath = getRelativeXPath(p1);
+    expect(xpath).toBe('//p[@data-cy="data-cy-test"]');
+  });
+
+  test('should prioritize data-test attribute over data-testid and id', () => {
+    const p1 = document.querySelector('.test');
+    if (!p1 || !(p1 instanceof HTMLElement)) throw new Error('Test element not found');
+    p1.removeAttribute('data-cy');
+    const xpath = getRelativeXPath(p1);
+    expect(xpath).toBe('//p[@data-test="data-test-test"]');
+  });
+
+  test('should generate a relative XPath with data-testid over id', () => {
+    const p1 = document.querySelector('.test');
+    if (!p1 || !(p1 instanceof HTMLElement)) throw new Error('Test element not found');
+    p1.removeAttribute('data-cy');
+    p1.removeAttribute('data-test');
+    const xpath = getRelativeXPath(p1);
+    expect(xpath).toBe('//p[@data-testid="data-testid-test"]');
+  });
+
+  test('should generate a relative XPath with id if no other attributes available', () => {
+    const p1 = document.querySelector('.test');
+    if (!p1 || !(p1 instanceof HTMLElement)) throw new Error('Test element not found');
+    p1.removeAttribute('data-cy');
+    p1.removeAttribute('data-test');
+    p1.removeAttribute('data-testid');
+    const xpath = getRelativeXPath(p1);
+    expect(xpath).toBe('//p[@id="test"]');
   });
 
   test('should return an empty string if the element is null', () => {
@@ -45,9 +75,8 @@ describe('inputEventListener', () => {
   let consoleSpy: jest.SpyInstance;
   let recordedEvents: Array<RecordedEvent>;
 
-  // Setup function to run before each test case in this test suite
+  // Setup DOM before each test case
   beforeEach(() => {
-    // Create DOM elements for testing
     document.body.innerHTML = `
       <button id="testButton">Click me</button>
       <input id="testInput" type="text" />
@@ -59,7 +88,7 @@ describe('inputEventListener', () => {
     // Spy on console.log to verify log messages. Replace console.log with a mock function 
     consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
 
-    // Access the recordedEvents array
+    // Initialize the recordedEvents array to store the recorded events
     recordedEvents = [];
   });
 
