@@ -78,7 +78,6 @@ function actionCreator(eObj: itObject, URL: string) {
   return resultText;
 }
 
-// first commit
 // console.log(describeCreator(describeObj));
 
 /*
