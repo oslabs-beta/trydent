@@ -1,4 +1,5 @@
 import endent from 'endent';
+const prettier = require('prettier');
 import { Describe, itObject, EventObj } from './types/types';
 import { switchCase } from './switchCase';
 
@@ -78,7 +79,12 @@ function actionCreator(eObj: itObject, URL: string) {
   return resultText;
 }
 
-// console.log(describeCreator(describeObj));
+let test = describeCreator(describeObj);
+console.log(test)
+
+const testFormatted = prettier.format(test, { parser: 'babel' });
+
+console.log(testFormatted)
 
 /*
 case 'input':
