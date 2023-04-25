@@ -83,7 +83,6 @@ let test = describeCreator(describeObj);
 console.log(test)
 
 const testFormatted = prettier.format(test, { parser: 'babel' });
-
 console.log(testFormatted)
 
 /*
