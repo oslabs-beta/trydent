@@ -9,27 +9,56 @@ alert("My Dev Tool's content script is running!");
 //   });
 
 document.addEventListener('click', function(event) {
-    const xpath = getXPath(event.target);
-    console.log('Clicked element XPath:', xpath);
-    chrome.runtime.sendMessage({action: 'click', xpath:`${xpath}`})
+    const xPath = getXPath(event);
+    console.log('Clicked element XPath:', xPath);
+    window.postMessage({xPath}, "*")
+    chrome.runtime.sendMessage({action: 'click', xPath:`${xPath}`})
   });
   
-  function getXPath(element) {
-    if (element && element.nodeType === Node.ELEMENT_NODE) {
-      const paths = [];
-      while (element) {
-        console.log(element)
-        const index = getIndex(element);
-        const tagName = element.tagName;
-        const path = `${tagName}[${index}]`;
-        console.log(path)
-        paths.unshift(path);
-        element = element.parentNode;
+  // function getXPath(element) {
+  //   if (element && element.nodeType === Node.ELEMENT_NODE) {
+  //     const paths = [];
+  //     while (element) {
+  //       console.log(element)
+  //       const index = getIndex(element);
+  //       const tagName = element.tagName;
+  //       const path = `${tagName}[${index}]`;
+  //       console.log(path)
+  //       paths.unshift(path);
+  //       element = element.parentNode;
+  //     }
+  //     return `//${paths.join('/')}`;
+  //   }
+  //   return '';
+  // }
+
+  function getXPath(event) {
+  let element = event.target;
+  const path = [];
+  while (element && element.nodeType === Node.ELEMENT_NODE) {
+    let selector = element.nodeName.toLowerCase();
+    if (element.id) {
+      selector += `[@id="${element.id}"]`;
+      path.unshift(selector);
+      break;
+    } else {
+      let index = 1;
+      let sibling = element.previousSibling;
+      while (sibling) {
+        if (sibling.nodeType === Node.ELEMENT_NODE && sibling.nodeName === element.nodeName) {
+          index++;
+        }
+        sibling = sibling.previousSibling;
       }
-      return `//${paths.join('/')}`;
+      if (index > 1) {
+        selector += `[${index}]`;
+      }
     }
-    return '';
+    path.unshift(selector);
+    element = element.parentNode;
   }
+  return `//${path.join('/')}`;
+}
   
   function getIndex(element) {
     let index = 1;
