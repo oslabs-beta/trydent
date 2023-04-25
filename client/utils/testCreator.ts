@@ -106,6 +106,8 @@ function actionCreator (eObj: itObject, URL:string){
     return resultText;
 };
 
+// first commit
+
 /*
 case 'input':
     //some logic formatting the event into cypress code push to formatted events array
