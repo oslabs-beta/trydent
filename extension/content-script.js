@@ -1,11 +1,8 @@
-
-// small test to confirm content script is actively communicating with the background.js
-alert("My Dev Tool's content script is running!");
-
 document.addEventListener('click', function(event) {
-    const xpath = getRelativeXPath(event.target);
-    console.log('Clicked element XPath:', xpath);
-    chrome.runtime.sendMessage({action: 'click', xpath:`${xpath}`})
+    const xPath = getRelativeXPath(event.target);
+    console.log('Clicked element XPath:', xPath);
+    window.postMessage({xPath}, "*")
+    chrome.runtime.sendMessage({action: 'click', xPath:`${xPath}`})
   });
   
 function getRelativeXPath(element) {
@@ -16,6 +13,7 @@ function getRelativeXPath(element) {
   // Array of unique attributes to use for the XPath
   const uniqueAttributes = ['data-cy', 'data-test', 'data-testid', 'id'];
   let attr = '';
+
   
   // Iterate through the uniqueAttributes array and use the first one found on the element
   for (const attribute of uniqueAttributes) {
