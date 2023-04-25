@@ -11,6 +11,12 @@ import { inputEventListener, getRelativeXPath, RecordedEvent } from "../utils/in
  * )
  * @returns {ReactElement} A React element containing list of recorded events
  */
+
+window.addEventListener('message', (event) => {
+  const xPath = event.data.xPath;
+  console.log('in app', xPath)
+  // Display xPath in your app UI
+});
 const EventLogger: React.FC = () => {
   // Maintain state for recorded events, focused element, and initial input value
   const [events, setEvents] = useState<Array<RecordedEvent>>([]);
