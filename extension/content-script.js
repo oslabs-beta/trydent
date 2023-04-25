@@ -1,5 +1,5 @@
 document.addEventListener('click', function(event) {
-    const xPath = getRelativeXPath(event);
+    const xPath = getRelativeXPath(event.target);
     console.log('Clicked element XPath:', xPath);
     window.postMessage({xPath}, "*")
     chrome.runtime.sendMessage({action: 'click', xPath:`${xPath}`})
