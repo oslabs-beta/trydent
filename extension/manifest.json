@@ -5,7 +5,11 @@
   "description": "A Chrome extension that helps you create E2E testing thorugh Cypress",
   "manifest_version": 3,
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "devtools": {
+      "panel": "panel.html",
+      "title": "panel"
+    }
   },
   "content_scripts": [
     {
@@ -15,9 +19,11 @@
       "js": [
         "content-script.js"
       ]
+      
     }
   ],
   "permissions": [
+    "background",
     "contextMenus",
     "tabs",
     "activeTab",
