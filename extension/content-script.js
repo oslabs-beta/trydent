@@ -1,3 +1,4 @@
+document.addEventListener('click', function(event) {
     const xPath = getRelativeXPath(event);
     console.log('Clicked element XPath:', xPath);
     window.postMessage({xPath}, "*")
