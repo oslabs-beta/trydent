@@ -1,5 +1,6 @@
 import endent from 'endent';
 import { Describe, itObject, EventObj } from './types/types';
+import { switchCase } from './switchCase';
 
 // ###TO-DO: Fully convert to TypeScript
 // ###TO-DO: modularize switch case in actionCreator, import it from utility file
@@ -66,18 +67,8 @@ function actionCreator(eObj: itObject, URL: string) {
 
   //parse through eventArr to look at each event individually
   eventArr.forEach((event) => {
-    //deconstruct each event
-    const { selector, action, input } = event;
-    //depending on action type, change the functionality, add result to text block
-    switch (action) {
-      case 'click':
-        textBlock += `cy.xpath('["${selector}"]').click();`;
-        break;
-      case 'input':
-        textBlock += `cy.xpath('["${selector}"]').input('${input}')`;
-      default:
-        return 'didnt input a valid action';
-    }
+    // switchCase imported from switchCase.ts
+    textBlock += switchCase(event);
   });
   //return a block of text that includes each event text, statment, visit location
   let resultText = `${itStatement}', () => {
@@ -88,7 +79,7 @@ function actionCreator(eObj: itObject, URL: string) {
 }
 
 // first commit
-console.log(describeCreator(describeObj));
+// console.log(describeCreator(describeObj));
 
 /*
 case 'input':
@@ -103,4 +94,3 @@ case 'input':
     default:
         throw new Error;
     */
-
