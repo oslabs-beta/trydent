@@ -44,7 +44,8 @@ To run your application, follow the steps below:
 Below are descriptions of each npm script:
 
 - `npm start`: Starts the development server using Vite.
-- `npm run build`: Runs the TypeScript compiler (`tsc`) to type-check the TypeScript files. If type-checking passes without errors, it runs `vite build` to build your application for production. This command generates the final, optimized assets that can be deployed to a web server.
+- `npm run build`: Runs `vite build` to build your application for production. This command generates the final, optimized assets that can be deployed to a web server. Also runs the TypeScript compiler (`tsc`) to type-check the TypeScript files and convert to js files in `extensions/bundle` folder
+- `npm run build:watch`: Runs `vite build` on watch mode, monitoring for any changes and updating bundling on save.
 - `npm run serve`: Starts a local server to preview the production build. This is for testing the built assets before deploying. This should not be used as a production server.
 - `npm test`: Runs Jest tests
 
