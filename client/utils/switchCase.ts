@@ -15,7 +15,7 @@ export function switchCase(event: EventObj) {
       return `cy.xpath('["${selector}"]').input('${input}')`;
       break;
     case 'navigate':
-      return `cy.url`;
+      return `cy.url().should('include','${URL}');`;
       break;
     default:
       return 'didnt input a valid action';
