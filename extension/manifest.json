@@ -17,6 +17,7 @@
         "<all_urls>"
       ],
       "js": [
+        "bundles/client/utils/inputLogger.js",
         "content-script.js"
       ]
     }
