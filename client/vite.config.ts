@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import svgrPlugin from "vite-plugin-svgr";
+import { resolve } from "path";
 
 // Define vite configurations
 export default defineConfig({
@@ -26,14 +27,16 @@ export default defineConfig({
       exclude: 'node_modules/**',
     },
     // update output to have constant build file names, removing the hash
-    rollupOptions:{
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'src/main.tsx')
+      },
       output: {
         entryFileNames: 'assets/[name].js',
         chunkFileNames: 'assets/[name].js',
         assetFileNames: 'assets/[name].[ext]',
       }
     }
-
   },
   // Configure plugins
   plugins: [
