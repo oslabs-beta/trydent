@@ -14,10 +14,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": false,
-    "outDir": "../extension/bundles/client",
+    "outDir": "../extension/bundles",
     "rootDir": "./",
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+    "declaration": false
   },
-  "include": ["src","*.ts", "*.tsx"],
+  "include": ["src", "*.ts", "*.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
