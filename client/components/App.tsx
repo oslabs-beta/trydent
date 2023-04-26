@@ -1,22 +1,39 @@
-import React from "react";
-import EventLogger from "./EventLogger";
+import React, { useState, useEffect } from 'react';
 
-/**
- * App is root component of application
- * @component
- */
 const App: React.FC = () => {
+  const [events, setEvents] = useState<any[]>(JSON.parse(localStorage.getItem('loggedEvents') || '[]'));
+
+  useEffect(() => {
+    if (typeof chrome === 'undefined' || typeof chrome.runtime === 'undefined') {
+      console.warn('chrome.runtime is not available');
+      return;
+    }
+  
+    const listener = (request, sender, sendResponse) => {
+      console.log('Received message:', request);
+      if (request.action === 'logEvent') {
+        const newEvents = [...events, request.eventData];
+        setEvents(newEvents);
+        localStorage.setItem('loggedEvents', JSON.stringify(newEvents));
+      }
+    };
+  
+    chrome.runtime.onMessage.addListener(listener);
+    return () => {
+      chrome.runtime.onMessage.removeListener(listener);
+    };
+  }, [events]);
+  
+  
+
   return (
     <div>
-      <h1 data-test="hello-class" id="hello-world-id">Hello World</h1>
-      <button data-cy="click-me-class">Click Me</button>
-      <button id="click-me-2-id">Click Me 2</button>
-      <input type="text" placeholder="Type here" />
-
-      {/* EventLogger component is responsible for displaying the recorded user input events */}
-      <EventLogger />
+      <h1>Logged Events</h1>
+      {events.map((event, index) => (
+        <pre key={index}>{JSON.stringify(event, null, 2)}</pre>
+      ))}
     </div>
   );
-}
+};
 
 export default App;

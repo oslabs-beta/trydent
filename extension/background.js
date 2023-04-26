@@ -1,3 +1,4 @@
+
 // upon connection execute the content-script 
 chrome.runtime.onConnect.addListener(function(devToolsConnection) {
     // assign the listener function to a variable so we can remove it later
@@ -17,8 +18,7 @@ chrome.runtime.onConnect.addListener(function(devToolsConnection) {
     chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
         // Check if the message is a click event
         if (message.action === 'click') {
-            console.log('clicked, message: ',)
-            console.log(message)
+            console.log('clicked, message: ', message)
           // Send the message to the DevTools panel
           chrome.devtools.panels.sendMessage('panel', message);
         }

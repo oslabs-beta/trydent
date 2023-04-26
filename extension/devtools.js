@@ -11,6 +11,7 @@ var backgroundPageConnection = chrome.runtime.connect({
 });
 backgroundPageConnection.onMessage.addListener(function (message) {
   // Handle responses from the background page, if any
+  console.log('message received', message);
 
 });
 
