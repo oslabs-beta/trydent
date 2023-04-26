@@ -98,6 +98,8 @@ console.log(sampleTextFormatted);
 
 // publish branch
 
+// publish branch
+
 /*
 case 'input':
     //some logic formatting the event into cypress code push to formatted events array
