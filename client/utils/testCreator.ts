@@ -19,6 +19,13 @@ const describeObj = {
         { selector: '.XPATH', action: 'input', URL: '/user/login', input: 'typed into the box' },
       ],
     },
+    {
+      itStatement: 'should be a input4',
+      eventArr: [
+        { selector: '.XPATH', action: 'click', URL: '/user/login' },
+        { selector: '.XPATH', action: 'input', URL: '/user/login', input: 'typed into the box' },
+      ],
+    },
   ],
 };
 
@@ -37,10 +44,14 @@ function describeCreator(obj: Describe): string {
   return (resultStr = `
     //${writeUp}
     describe('${description}', () => {
-      it('${itCreator(itStatements, URL)}
+      beforeEach(() => {
+        cy.visit('${URL}')
+        cy.window().should('have.property', 'appReady', true)
+      })
+        
+      ${itCreator(itStatements, URL)}
     })`);
 }
-
 /**
  * 
  *
@@ -57,7 +68,8 @@ function itCreator(itStatementsArr: itObject[], URL: string): string {
 
   itStatementsArr.forEach((itState) => {
     // concatenate evaluated result of each itState into itText
-    itText += `${actionCreator(itState, URL)}`;
+    itText += `
+    it(${actionCreator(itState, URL)})`;
   });
 
   return itText;
@@ -77,13 +89,14 @@ function actionCreator(eObj: itObject, URL: string): string {
   //parse through eventArr to look at each event individually
   eventArr.forEach((event) => {
     // switchCase imported from switchCase.ts
+    if (textBlock !== '') textBlock += `
+        `;
     textBlock += switchCase(event);
   });
   //return a block of text that includes each event text, statment, visit location
-  let resultText = `${itStatement}', () => {
-        cy.visit('${URL}')
+  let resultText = `'${itStatement}', () => {
         ${textBlock}
-      })`;
+      }`;
   return resultText;
 }
 
@@ -95,21 +108,3 @@ const sampleTextFormatted = prettier.format(sampleText, { parser: 'babel' });
 console.log(sampleTextFormatted);
 
 // export default sampleTextFormatted;
-
-// publish branch
-
-// publish branch
-
-/*
-case 'input':
-    //some logic formatting the event into cypress code push to formatted events array
-    //this may need to be in a function depending on the depth of our tests
-    //ex. cy.get('${selector}').type('{input}')
-    case 'change/blur':
-    //some logic formatting the event into cypress code push to formatted events array
-    //this may need to be in a seperate function depending on the depth of our tests
-    case 'assertion/expectation':
-    //some logic formatting the event into cypress code push to formatted events array
-    default:
-        throw new Error;
-    */
