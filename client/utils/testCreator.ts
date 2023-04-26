@@ -1,5 +1,20 @@
 import endent from 'endent';
-const prettier = require('prettier');
+// const prettier = require('prettier');
+import prettier from 'prettier/standalone';
+import parserBabel from 'prettier/parser-babel';
+
+const prettierFormat = input => {
+  return prettier.format(input, {
+    parser: "babel",
+    plugins: [parserBabel]
+  });
+}
+
+
+
+// import prettier from 'prettier';
+// console.log(prettier)
+// const sampleTextFormatted = prettier.format('a', { parser: 'babel' });
 import { Describe, itObject, EventObj } from './types/types';
 import { switchCase } from './switchCase';
 
@@ -53,7 +68,7 @@ function describeCreator(obj: Describe): string {
     })`);
 }
 /**
- * 
+ *
  *
  * @param {array} itStatementsArr - Array containing it statement objects.
  * @param {string} URL - URL of the page to be tested.
@@ -75,7 +90,7 @@ function itCreator(itStatementsArr: itObject[], URL: string): string {
   return itText;
 }
 /**
- * 
+ *
  *
  * @param {itObject} eObj - Event Object containing it statement and array of events.
  * @param {string} URL - URL of the page to be tested.
@@ -89,7 +104,8 @@ function actionCreator(eObj: itObject, URL: string): string {
   //parse through eventArr to look at each event individually
   eventArr.forEach((event) => {
     // switchCase imported from switchCase.ts
-    if (textBlock !== '') textBlock += `
+    if (textBlock !== '')
+      textBlock += `
         `;
     textBlock += switchCase(event);
   });
@@ -103,8 +119,15 @@ function actionCreator(eObj: itObject, URL: string): string {
 // // ### current tests: can be deleted
 let sampleText = describeCreator(describeObj);
 console.log(sampleText);
+console.log(prettier);
 
-const sampleTextFormatted = prettier.format(sampleText, { parser: 'babel' });
-console.log(sampleTextFormatted);
+const sampleTextFormatted = prettierFormat(sampleText);
+// console.log(sampleTextFormatted);
 
-// export default sampleTextFormatted;
+// module.exports = {
+//   // 'sampleTextFormatted': sampleTextFormatted
+//   test,
+// };
+
+// const test = 'from testCreator.ts'
+export {sampleText, sampleTextFormatted};
