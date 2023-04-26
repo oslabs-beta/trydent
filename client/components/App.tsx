@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import EventLogger from './EventLogger';
+
 
 const App: React.FC = () => {
   const [events, setEvents] = useState<any[]>(JSON.parse(localStorage.getItem('loggedEvents') || '[]'));
@@ -29,11 +31,13 @@ const App: React.FC = () => {
   return (
     <div>
       <h1>Logged Events</h1>
+      <EventLogger />
       {events.map((event, index) => (
         <pre key={index}>{JSON.stringify(event, null, 2)}</pre>
       ))}
     </div>
   );
 };
+
 
 export default App;
