@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build && tsc",
     "build:watch": "vite build --watch",
     "serve": "vite preview",
     "test": "jest"

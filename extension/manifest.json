@@ -14,12 +14,11 @@
   "content_scripts": [
     {
       "matches": [
-        "http://localhost/*"
+        "<all_urls>"
       ],
       "js": [
         "content-script.js"
       ]
-      
     }
   ],
   "permissions": [
