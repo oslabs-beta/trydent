@@ -11,7 +11,15 @@ const describeObj = {
   URL: 'localhost:3000',
   description: 'click on the thing',
   writeUp: 'High level description on how the button should be clicked',
-  itStatements: [{ itStatement: 'should be a click3', eventArr: [{ selector: '.XPATH', action: 'click' }] }],
+  itStatements: [
+    {
+      itStatement: 'should be a click3',
+      eventArr: [
+        { selector: '.XPATH', action: 'click', URL: '/user/login' },
+        { selector: '.XPATH', action: 'input', URL: '/user/login', input: 'typed into the box' },
+      ],
+    },
+  ],
 };
 
 /**
@@ -20,7 +28,7 @@ const describeObj = {
  * @param {object} describeObj - Full object that comes from user
  * @returns {string} Full cypress test suite to be sent to user
  */
-function describeCreator(obj: Describe):string {
+function describeCreator(obj: Describe): string {
   // destructuring the 'describe' object
   const { URL, description, writeUp, itStatements } = obj;
   let resultStr;
@@ -34,14 +42,14 @@ function describeCreator(obj: Describe):string {
 }
 
 /**
- * Finds the sum of two numbers.
+ * 
  *
  * @param {array} itStatementsArr - Array containing it statement objects.
  * @param {string} URL - URL of the page to be tested.
  * @returns {string} - Concatenated string of it statements.
  */
 // ###TO-DO: Fully convert to TypeScript
-function itCreator(itStatementsArr: itObject[], URL: string):string{
+function itCreator(itStatementsArr: itObject[], URL: string): string {
   // initialize empty array to push formatted it statements into
   const formattedItStatments = [];
   // initialize empty string to push formatted it statements into
@@ -55,13 +63,13 @@ function itCreator(itStatementsArr: itObject[], URL: string):string{
   return itText;
 }
 /**
- * Finds the sum of two numbers.
+ * 
  *
  * @param {itObject} eObj - Event Object containing it statement and array of events.
  * @param {string} URL - URL of the page to be tested.
  * @returns {string} - Concatenated string of actions within it statement.
  */
-function actionCreator(eObj: itObject, URL: string):string {
+function actionCreator(eObj: itObject, URL: string): string {
   //deconstructing event object
   const { itStatement, eventArr } = eObj;
   let textBlock = '';
@@ -80,11 +88,11 @@ function actionCreator(eObj: itObject, URL: string):string {
 }
 
 // // ### current tests: can be deleted
-// let sampleText = describeCreator(describeObj);
-// console.log(sampleText);
+let sampleText = describeCreator(describeObj);
+console.log(sampleText);
 
-// const sampleTextFormatted = prettier.format(sampleText, { parser: 'babel' });
-// console.log(sampleTextFormatted);
+const sampleTextFormatted = prettier.format(sampleText, { parser: 'babel' });
+console.log(sampleTextFormatted);
 
 // export default sampleTextFormatted;
 
