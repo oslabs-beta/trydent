@@ -13,7 +13,9 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+    "noEmit": false,
+    "outDir": "../extension/bundles/client",
+    "rootDir": "./",
     "jsx": "react-jsx"
   },
   "include": ["src","*.ts", "*.tsx"],
