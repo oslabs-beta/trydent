@@ -20,7 +20,7 @@ const describeObj = {
  * @param {object} describeObj - Full object that comes from user
  * @returns {string} Full cypress test suite to be sent to user
  */
-function describeCreator(obj: Describe) {
+function describeCreator(obj: Describe):string {
   // destructuring the 'describe' object
   const { URL, description, writeUp, itStatements } = obj;
   let resultStr;
@@ -41,7 +41,7 @@ function describeCreator(obj: Describe) {
  * @returns {string} - Concatenated string of it statements.
  */
 // ###TO-DO: Fully convert to TypeScript
-function itCreator(itStatementsArr, URL) {
+function itCreator(itStatementsArr: itObject[], URL: string):string{
   // initialize empty array to push formatted it statements into
   const formattedItStatments = [];
   // initialize empty string to push formatted it statements into
@@ -61,7 +61,7 @@ function itCreator(itStatementsArr, URL) {
  * @param {string} URL - URL of the page to be tested.
  * @returns {string} - Concatenated string of actions within it statement.
  */
-function actionCreator(eObj: itObject, URL: string) {
+function actionCreator(eObj: itObject, URL: string):string {
   //deconstructing event object
   const { itStatement, eventArr } = eObj;
   let textBlock = '';
@@ -79,11 +79,14 @@ function actionCreator(eObj: itObject, URL: string) {
   return resultText;
 }
 
-let test = describeCreator(describeObj);
-console.log(test)
+// // ### current tests: can be deleted
+// let sampleText = describeCreator(describeObj);
+// console.log(sampleText);
 
-const testFormatted = prettier.format(test, { parser: 'babel' });
-console.log(testFormatted)
+// const sampleTextFormatted = prettier.format(sampleText, { parser: 'babel' });
+// console.log(sampleTextFormatted);
+
+// export default sampleTextFormatted;
 
 /*
 case 'input':
