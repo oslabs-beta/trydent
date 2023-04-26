@@ -16,7 +16,7 @@ export default defineConfig({
   // Configure the build process
   build: {
     // Set output directory for built files
-    outDir: "../extension/bundles/client",
+    outDir: "../extension/bundles",
     // Empty the output directory before building
     emptyOutDir: true,
     // Watch for changes in the source files
@@ -48,3 +48,4 @@ export default defineConfig({
     }),
   ],
 });
+
