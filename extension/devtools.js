@@ -6,16 +6,21 @@ chrome.devtools.panels.create(
   null,
 );
 
-// const backgroundPageConnection = chrome.runtime.connect({
-//   name: 'devtools-page',
-// });
-// backgroundPageConnection.onMessage.addListener((message) => {
-//   // Handle responses from the background page, if any
-//   console.log('message received', message);
-// });
+const backgroundPageConnection = chrome.runtime.connect({
+  name: 'devtools-page',
+});
+chrome.runtime.onMessage.addListener((message) => {
+  // Handle responses from the background page, if any
+  console.log('message received', message);
 
-// // Relay the tab ID to the background page as an object
-// backgroundPageConnection.postMessage({
-//   tabId: chrome.devtools.inspectedWindow.tabId,
-//   scriptToInject: 'content-script.js',
-// });
+  const panel = document.getElementById('panel');
+  // made it into a string 
+  panel.innerText = `${message.xPath.xPath}`;
+
+});
+
+// Relay the tab ID to the background page as an object
+backgroundPageConnection.postMessage({
+  tabId: chrome.devtools.inspectedWindow.tabId,
+  scriptToInject: 'content-script.js',
+});
