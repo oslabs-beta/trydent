@@ -8,15 +8,7 @@ import TestPage from './pages/testPage';
 
 const App: React.FC = () => {
   return (
-<<<<<<< HEAD
     <div className='router'>
-=======
-    <div>
-      <h1>Logged Events</h1>
-      <p>Pain</p>
-      <h3>Code Block</h3>
-      <CodeBlock />
->>>>>>> dev
       <EventLogger />
       <TopBar />
       <Routes>
