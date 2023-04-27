@@ -9,6 +9,7 @@ chrome.devtools.panels.create(
 const backgroundPageConnection = chrome.runtime.connect({
   name: 'devtools-page',
 });
+
 chrome.runtime.onMessage.addListener((message) => {
   // Handle responses from the background page, if any
   console.log('message received', message);
