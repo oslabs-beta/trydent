@@ -94,18 +94,3 @@ console.log(sampleText);
 const sampleTextFormatted = prettier.format(sampleText, { parser: 'babel' });
 console.log(sampleTextFormatted);
 
-// export default sampleTextFormatted;
-
-/*
-case 'input':
-    //some logic formatting the event into cypress code push to formatted events array
-    //this may need to be in a function depending on the depth of our tests
-    //ex. cy.get('${selector}').type('{input}')
-    case 'change/blur':
-    //some logic formatting the event into cypress code push to formatted events array
-    //this may need to be in a seperate function depending on the depth of our tests
-    case 'assertion/expectation':
-    //some logic formatting the event into cypress code push to formatted events array
-    default:
-        throw new Error;
-    */
