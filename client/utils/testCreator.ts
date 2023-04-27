@@ -1,5 +1,15 @@
 import endent from 'endent';
-const prettier = require('prettier');
+import prettier from 'prettier/standalone';
+import parserBabel from 'prettier/parser-babel';
+
+const prettierFormat = (input: string) => {
+  return prettier.format(input, {
+    parser: 'babel',
+    plugins: [parserBabel],
+  });
+};
+
+// import prettier from 'prettier';
 import { Describe, itObject, EventObj } from './types/types';
 import { switchCase } from './switchCase';
 
@@ -14,6 +24,13 @@ const describeObj = {
   itStatements: [
     {
       itStatement: 'should be a click3',
+      eventArr: [
+        { selector: '.XPATH', action: 'click', URL: '/user/login' },
+        { selector: '.XPATH', action: 'input', URL: '/user/login', input: 'typed into the box' },
+      ],
+    },
+    {
+      itStatement: 'should be a input4',
       eventArr: [
         { selector: '.XPATH', action: 'click', URL: '/user/login' },
         { selector: '.XPATH', action: 'input', URL: '/user/login', input: 'typed into the box' },
@@ -37,12 +54,16 @@ function describeCreator(obj: Describe): string {
   return (resultStr = `
     //${writeUp}
     describe('${description}', () => {
-      it('${itCreator(itStatements, URL)}
+      beforeEach(() => {
+        cy.visit('${URL}')
+        cy.window().should('have.property', 'appReady', true)
+      })
+        
+      ${itCreator(itStatements, URL)}
     })`);
 }
-
 /**
- * 
+ *
  *
  * @param {array} itStatementsArr - Array containing it statement objects.
  * @param {string} URL - URL of the page to be tested.
@@ -57,13 +78,14 @@ function itCreator(itStatementsArr: itObject[], URL: string): string {
 
   itStatementsArr.forEach((itState) => {
     // concatenate evaluated result of each itState into itText
-    itText += `${actionCreator(itState, URL)}`;
+    itText += `
+    it(${actionCreator(itState, URL)})`;
   });
 
   return itText;
 }
 /**
- * 
+ *
  *
  * @param {itObject} eObj - Event Object containing it statement and array of events.
  * @param {string} URL - URL of the page to be tested.
@@ -77,35 +99,20 @@ function actionCreator(eObj: itObject, URL: string): string {
   //parse through eventArr to look at each event individually
   eventArr.forEach((event) => {
     // switchCase imported from switchCase.ts
+    if (textBlock !== '')
+      textBlock += `
+        `;
     textBlock += switchCase(event);
   });
   //return a block of text that includes each event text, statment, visit location
-  let resultText = `${itStatement}', () => {
-        cy.visit('${URL}')
+  let resultText = `'${itStatement}', () => {
         ${textBlock}
-      })`;
+      }`;
   return resultText;
 }
 
-// // ### current tests: can be deleted
+// ### current tests: can be deleted
 let sampleText = describeCreator(describeObj);
-console.log(sampleText);
+const sampleTextFormatted = prettierFormat(sampleText);
 
-const sampleTextFormatted = prettier.format(sampleText, { parser: 'babel' });
-console.log(sampleTextFormatted);
-
-// export default sampleTextFormatted;
-
-/*
-case 'input':
-    //some logic formatting the event into cypress code push to formatted events array
-    //this may need to be in a function depending on the depth of our tests
-    //ex. cy.get('${selector}').type('{input}')
-    case 'change/blur':
-    //some logic formatting the event into cypress code push to formatted events array
-    //this may need to be in a seperate function depending on the depth of our tests
-    case 'assertion/expectation':
-    //some logic formatting the event into cypress code push to formatted events array
-    default:
-        throw new Error;
-    */
+export { sampleText, sampleTextFormatted };
