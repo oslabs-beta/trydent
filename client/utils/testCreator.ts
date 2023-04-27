@@ -1,16 +1,13 @@
 import endent from 'endent';
-// const prettier = require('prettier');
 import prettier from 'prettier/standalone';
 import parserBabel from 'prettier/parser-babel';
 
-const prettierFormat = input => {
+const prettierFormat = (input: string) => {
   return prettier.format(input, {
-    parser: "babel",
-    plugins: [parserBabel]
+    parser: 'babel',
+    plugins: [parserBabel],
   });
-}
-
-
+};
 
 // import prettier from 'prettier';
 // console.log(prettier)
@@ -116,18 +113,7 @@ function actionCreator(eObj: itObject, URL: string): string {
   return resultText;
 }
 
-// // ### current tests: can be deleted
+// ### current tests: can be deleted
 let sampleText = describeCreator(describeObj);
-console.log(sampleText);
-console.log(prettier);
-
 const sampleTextFormatted = prettierFormat(sampleText);
-// console.log(sampleTextFormatted);
-
-// module.exports = {
-//   // 'sampleTextFormatted': sampleTextFormatted
-//   test,
-// };
-
-// const test = 'from testCreator.ts'
-export {sampleText, sampleTextFormatted};
+export { sampleText, sampleTextFormatted };
