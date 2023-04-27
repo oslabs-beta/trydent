@@ -71,7 +71,7 @@ function getRelativeXPath(element) {
   const parentXPath = getRelativeXPath(element.parentElement);
   return `${parentXPath}/${tagName}[${position}]`;
 }
-
+// change to general event listener and use switch cases
 document.addEventListener('click', (event) => {
   const xPath = getRelativeXPath(event.target);
   console.log('Clicked element XPath:', xPath);
