@@ -10,8 +10,6 @@ const prettierFormat = (input: string) => {
 };
 
 // import prettier from 'prettier';
-// console.log(prettier)
-// const sampleTextFormatted = prettier.format('a', { parser: 'babel' });
 import { Describe, itObject, EventObj } from './types/types';
 import { switchCase } from './switchCase';
 
@@ -116,4 +114,5 @@ function actionCreator(eObj: itObject, URL: string): string {
 // ### current tests: can be deleted
 let sampleText = describeCreator(describeObj);
 const sampleTextFormatted = prettierFormat(sampleText);
+
 export { sampleText, sampleTextFormatted };
