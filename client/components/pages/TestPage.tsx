@@ -15,7 +15,7 @@ const TestPage: React.FC = () => {
             <h1>User Inputs</h1>
             <input type="text" />
             <button onClick={ handleClick }>Start Test</button>
-            <ol></ol>
+            <ol>
                 <li>Enter a description for a new test</li>
                 <li>Start recording</li>
                 <li>Perform actions on the page</li>
