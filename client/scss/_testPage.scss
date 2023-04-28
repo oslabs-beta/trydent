@@ -2,8 +2,6 @@
   font-family: $font-family;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   height: calc(100vh - 4rem); // Subtract topBar height
   padding: 2rem;
   background-color: $color-background;
@@ -16,12 +14,10 @@
   }
 
   input {
-    width: 100%;
-    max-width: 18.75rem;
     padding: 0.625rem;
     margin-bottom: 1.25rem;
-    border: 1px solid $color-input-border;
-    border-radius: 3px;
+    border: 0.1rem solid $color-input-border;
+    border-radius: 0.3rem;
     font-size: $font-size-base;
     color: $color-text;
     background-color: $color-input-background;
