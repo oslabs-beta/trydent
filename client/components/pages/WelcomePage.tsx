@@ -16,7 +16,7 @@ const WelcomePage: React.FC = () => {
     return(
         <div className="welcomePage">
           <p> I'm in welcomePage.tsx</p>
-                <input type="text" placeholder="describe statement"/>
+                <textarea placeholder="describe statement"/>
                 <button onClick={handleClick}>Start Test</button>
         </div>
     )

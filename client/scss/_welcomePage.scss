@@ -2,8 +2,7 @@
   font-family: $font-family;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  margin: 1rem 2rem;
   height: 100vh;
   background-color: $color-background;
   color: $color-text;
@@ -14,17 +13,16 @@
     margin-bottom: 1.25rem;
   }
 
-  input {
-    width: 100%;
-    max-width: 18.75rem;
-    padding: 0.625rem; 
+  textarea {
+    padding: 1rem 0.625rem;
     margin-bottom: 1.25rem;
-    border: 1px solid $color-input-border;
-    border-radius: 3px;
+    border: 0.1rem solid $color-input-border;
+    border-radius: 0.3rem;
     font-size: $font-size-base;
     color: $color-text;
     background-color: $color-input-background;
     outline: none;
+    
 
     &::placeholder {
       color: $color-input-placeholder;
