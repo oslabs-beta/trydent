@@ -19,6 +19,7 @@ const CodeBlock: React.FC = () => {
 
   return (
     <div className="codeBlock">
+      <h1>Generated Test</h1>
       <pre>
         <button
           onClick={handleCopy}
@@ -29,6 +30,7 @@ const CodeBlock: React.FC = () => {
         </button>
         <code id="codeBlock">{sampleTextFormatted}</code>
       </pre>
+      <p>Thank you for supporting TRYDENT. If you enjoyed, please give our <a href="https://github.com/oslabs-beta/trydent">Github</a> a star!</p>
     </div>
   );
 };
