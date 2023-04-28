@@ -12,7 +12,6 @@ const backgroundPageConnection = chrome.runtime.connect({
 
 const eventArr = [];
 
-
 chrome.runtime.onMessage.addListener((message) => {
   // Handle responses from the background page, if any
   eventArr.push(message)
@@ -22,17 +21,6 @@ chrome.runtime.onMessage.addListener((message) => {
 
 
 const panel = document.getElementById('panel');
-//  function submitToPanel(eventArr){
-//   console.log('submitting')
-//   console.log('array', eventArr)
-//   eventArr.forEach((event)=>{
-//     console.log('in panel', event)
-//     // const test = document.createElement('div');
-//     //   // made it into a string
-//     // test.innerText = `Action: ${message.action} \n Selector: ${message.xPath} \n URL: ${message.URL} \n Input: ${message.input}`;
-//     // panel.appendChild(test);
-//   })
-// }
 
 const submitButton =  document.createElement("button")
 panel.appendChild(submitButton)
