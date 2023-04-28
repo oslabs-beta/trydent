@@ -9,7 +9,6 @@ import TestPage from './pages/TestPage';
 const App: React.FC = () => {
   return (
     <div className='router'>
-      <div>This is my App.tsx</div>
       <TopBar />
       <Routes>
         <Route path="/" element={<WelcomePage />} />
