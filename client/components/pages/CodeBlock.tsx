@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { sampleTextFormatted } from '../utils/testCreator';
+import { sampleTextFormatted } from '../../utils/testCreator';
 
 const CodeBlock: React.FC = () => {
   const [copied, setCopied] = useState(false);
