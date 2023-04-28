@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import CodeBlock from './pages/CodeBlock'
 import EventLogger from './EventLogger';
-import TopBar from './topBar';
+import TopBar from './TopBar';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import WelcomePage from './pages/welcomePage';
-import TestPage from './pages/testPage';
+import WelcomePage from './pages/WelcomePage';
+import TestPage from './pages/TestPage';
 
 const App: React.FC = () => {
   return (
