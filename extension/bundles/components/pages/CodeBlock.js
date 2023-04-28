@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState } from 'react';
-import { sampleTextFormatted } from '../utils/testCreator';
+import { sampleTextFormatted } from '../../utils/testCreator';
 const CodeBlock = () => {
     const [copied, setCopied] = useState(false);
     const handleCopy = () => {

@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import CodeBlock from './CodeBlock'
+import CodeBlock from './pages/CodeBlock'
 import EventLogger from './EventLogger';
 import TopBar from './topBar';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import WelcomePage from './pages/welcomePage';
 import TestPage from './pages/testPage';
 
 const App: React.FC = () => {
   return (
     <div className='router'>
-      <EventLogger />
+      <div>This is my App.tsx</div>
       <TopBar />
       <Routes>
         <Route path="/" element={<WelcomePage />} />
-        <Route path="/test" element={<TestPage />} />
+        <Route path="/testPage" element={<TestPage />} />
+        <Route path="/codeBlock" element={<CodeBlock />} />
+
       </Routes>
     </div>
   );
