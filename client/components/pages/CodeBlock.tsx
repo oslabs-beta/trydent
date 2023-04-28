@@ -18,12 +18,16 @@ const CodeBlock: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="codeBlock">
       <pre>
-        <code id="codeBlock">{sampleTextFormatted}</code>
-        <button onClick={handleCopy} disabled={copied}>
-          {copied ? 'Copied!' : 'Copy'}
+        <button
+          onClick={handleCopy}
+          disabled={copied}
+          className={copied ? 'copied' : ''}
+        >
+          {copied ? 'Copied to clipboard!' : 'Copy'}
         </button>
+        <code id="codeBlock">{sampleTextFormatted}</code>
       </pre>
     </div>
   );
