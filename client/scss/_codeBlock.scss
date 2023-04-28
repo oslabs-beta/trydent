@@ -1,0 +1,38 @@
+.codeBlock {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: $color-background;
+  color: $color-text;
+
+  pre {
+    position: relative;
+    padding: 3rem 2rem 2rem;
+    background-color: $color-code-background;
+    border-radius: 5px;
+    overflow: auto;
+    max-width: 100%;
+    font-family: $font-family-monospace;
+    font-size: $font-size-base;
+    margin: 0;
+
+    code {
+      display: block;
+      background-color: $color-code-background;
+    }
+
+    button {
+      @extend .standard-button;
+      position: absolute;
+      top: 0.75rem;
+      right: 2rem;
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
+      transition: background-color 0.3s ease-in-out;
+
+      &.copied {
+        background-color: #4caf50;
+      }
+    }
+  }
+}

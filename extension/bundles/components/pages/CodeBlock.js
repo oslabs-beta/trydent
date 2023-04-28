@@ -15,6 +15,6 @@ const CodeBlock = () => {
             setCopied(false);
         }, 2000);
     };
-    return (_jsx("div", { children: _jsxs("pre", { children: [_jsx("code", { id: "codeBlock", children: sampleTextFormatted }), _jsx("button", { onClick: handleCopy, disabled: copied, children: copied ? 'Copied!' : 'Copy' })] }) }));
+    return (_jsxs("div", { className: "codeBlock", children: [_jsx("h1", { children: "Generated Test" }), _jsxs("pre", { children: [_jsx("button", { onClick: handleCopy, disabled: copied, className: copied ? 'copied' : '', children: copied ? 'Copied to clipboard!' : 'Copy' }), _jsx("code", { id: "codeBlock", children: sampleTextFormatted })] }), _jsxs("p", { children: ["Thank you for supporting TRYDENT. If you enjoyed, please give our ", _jsx("a", { href: "https://github.com/oslabs-beta/trydent", target: "_blank", children: "Github" }), " a star!"] })] }));
 };
 export default CodeBlock;

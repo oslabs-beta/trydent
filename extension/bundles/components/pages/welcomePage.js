@@ -9,6 +9,6 @@ const WelcomePage = () => {
         // setTestDescribe(event.target[0].value);
         navigate('/testPage');
     };
-    return (_jsxs("div", { className: "welcomePage", children: [_jsx("p", { children: " I'm in welcomePage.tsx" }), _jsx("input", { type: "text", placeholder: "describe statement" }), _jsx("button", { onClick: handleClick, children: "Start Test" })] }));
+    return (_jsxs("div", { className: "welcomePage", children: [_jsx("p", { children: " I'm in welcomePage.tsx" }), _jsx("textarea", { placeholder: "describe statement" }), _jsx("button", { onClick: handleClick, children: "Start Test" })] }));
 };
 export default WelcomePage;

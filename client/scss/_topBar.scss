@@ -1,9 +1,33 @@
-.topBar{
-    .top-block {
-        border: 1px solid black;
-        border-radius: 1rem;
-        padding: 1rem;
-        margin: 1rem;
-        background-color: lightblue;
-      }
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: $color-background;
+  color: $color-text;
+  font-family: $font-family;
+
+  .topBar__logo {
+    display: flex;
+    align-items: left;
+    width: 2rem;
+    height: 2rem;
+    background-color: $color-primary;
+    border-radius: 0.5rem;
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: $font-weight-semibold;
+      margin-left: 1rem;
+    }
+  }
+
+  .Title {
+    display: flex;
+    align-items: center;
+
+    button {
+      @extend .standard-button;
+    }
+  }
 }

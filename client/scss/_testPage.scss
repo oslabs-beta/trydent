@@ -1,0 +1,49 @@
+.testPage {
+  font-family: $font-family;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 4rem); // Subtract topBar height
+  padding: 2rem;
+  background-color: $color-background;
+  color: $color-text;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: $font-weight-semibold;
+    margin-bottom: 1.5rem;
+  }
+
+  input {
+    padding: 0.625rem;
+    margin-bottom: 1.25rem;
+    border: 0.1rem solid $color-input-border;
+    border-radius: 0.3rem;
+    font-size: $font-size-base;
+    color: $color-text;
+    background-color: $color-input-background;
+    outline: none;
+
+    &::placeholder {
+      color: $color-input-placeholder;
+    }
+
+    &:focus {
+      border-color: $color-primary;
+    }
+  }
+
+  button {
+    @extend .standard-button;
+    margin-bottom: 2rem;
+  }
+
+  ol {
+    font-size: $font-size-base;
+    font-weight: $font-weight-light;
+    line-height: 1.5;
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
+}

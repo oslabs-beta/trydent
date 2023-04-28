@@ -13,13 +13,14 @@ const TopBar: React.FC =() => {
     navigate('/');
 }
     return(
-        <div className="topBar">
-            <div className="topBar__logo"></div>
-            <div className="Title">
-                <h1>TRYDENT</h1>
-                <button onClick={ handleSubmit }>New Test</button>
-            </div>
+      <div className="topBar">
+        <div className="topBar__logo">
+          <h1>TRYDENT</h1>
         </div>
+        <div className="Title">
+          <button onClick={ handleSubmit }>New Test</button>
+        </div>
+      </div>
     )
 }   
 

@@ -13,15 +13,17 @@ const TestPage: React.FC = () => {
     return(
         <div className="testPage">
             <h1>User Inputs</h1>
-            <input type="text" />
-            <button onClick={ handleClick }>Start Test</button>
             <ol>
                 <li>Enter a description for a new test</li>
                 <li>Start recording</li>
                 <li>Perform actions on the page</li>
                 <li>Stop recording</li>
-                <li>Save test</li>
+                <li>Generate test</li>
             </ol>
+            <input type="text" placeholder='"it" statement' />
+            <button>Start Recording</button>
+            <button onClick={ handleClick }>Generate Test</button>
+
         </div>
     )
 }

@@ -8,6 +8,6 @@ const TopBar = () => {
         // setTestDescribe(event.target[0].value);
         navigate('/');
     };
-    return (_jsxs("div", { className: "topBar", children: [_jsx("div", { className: "topBar__logo" }), _jsxs("div", { className: "Title", children: [_jsx("h1", { children: "TRYDENT" }), _jsx("button", { onClick: handleSubmit, children: "New Test" })] })] }));
+    return (_jsxs("div", { className: "topBar", children: [_jsx("div", { className: "topBar__logo", children: _jsx("h1", { children: "TRYDENT" }) }), _jsx("div", { className: "Title", children: _jsx("button", { onClick: handleSubmit, children: "New Test" }) })] }));
 };
 export default TopBar;
