@@ -37,13 +37,22 @@
     margin-bottom: 2rem;
   }
 
-  ol {
-    font-size: $font-size-base;
-    font-weight: $font-weight-light;
-    line-height: 1.5;
-
-    li {
+  details {
+    summary {
+      font-weight: $font-weight-semibold;
       margin-bottom: 0.5rem;
+      cursor: pointer;
     }
+    ol {
+      margin-bottom: 1rem;
+      li {
+        margin: 0.5rem 0;
+      }
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
   }
 }
