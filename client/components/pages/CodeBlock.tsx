@@ -22,6 +22,10 @@ const CodeBlock: React.FC = () => {
     // creates temporary textarea element. setting the value to sample text and appending to body
     const textArea = document.createElement('textarea');
     textArea.value = sampleTextFormatted;
+    // Set CSS properties to make the textarea invisible
+    textArea.style.position = 'absolute';
+    textArea.style.left = '-9999px';
+    textArea.style.top = '-9999px';
     document.body.appendChild(textArea);
     // selects the text in the text area
     textArea.select();
