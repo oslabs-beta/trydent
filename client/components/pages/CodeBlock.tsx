@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { sampleTextFormatted } from '../../utils/testCreator';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import prettier from 'prettier/standalone';
 import parserBabel from 'prettier/parser-babel';
+
+import GitHubButton from 'react-github-btn'
 
 const prettierFormat = (input: string): string => {
   return prettier.format(input, {
@@ -119,6 +118,7 @@ const CodeBlock: React.FC = () => {
         </SyntaxHighlighter>
       </pre>
       <p>Thank you for supporting TRYDENT. If you enjoyed, please give our <a href="https://github.com/oslabs-beta/trydent" target="_blank">Github</a> a star!</p>
+      <GitHubButton href="https://github.com/oslabs-beta/trydent" data-icon="octicon-star" aria-label="Star oslabs-beta/trydent on GitHub">Star</GitHubButton>
     </div>
   );
 };
