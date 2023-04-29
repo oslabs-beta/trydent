@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { sampleTextFormatted } from '../../utils/testCreator';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 /**
  * CodeBlock component displays the generated test code and provides functionality to copy to clipboard
- * 
+ *
  * @component
  * @returns {ReactElement} JSX code for rendering the component
  */
@@ -14,7 +16,7 @@ const CodeBlock: React.FC = () => {
   /**
    * handleCopy function copies sampleTextFormatted to clipboard
    * Also updates copied status and resets it after 2 seconds
-   * 
+   *
    * @async
    * @function
    */
@@ -55,7 +57,33 @@ const CodeBlock: React.FC = () => {
           {copied ? 'Copied to clipboard!' : 'Copy'}
         </button>
         {/* Render the code block with the sample text */}
-        <code id="codeBlock">{sampleTextFormatted}</code>
+        <SyntaxHighlighter
+          // automatic parsing of the language set to javascript
+          language="javascript"
+          // use the oneDark theme
+          style={oneDark}
+          // set the pre tag style
+          customStyle={{
+            background: '#1A1A1A',
+          }}
+          // set the code tag style
+          codeTagProps={{
+            style: {
+              background: '#1A1A1A',
+            },
+          }}
+          // must be enabled for lineProps to work
+          wrapLines={true}
+          // set the line style of the span that wraps each span of code
+          lineProps={{
+            style: {
+              // set padding-right to make padding symmetrical
+              paddingRight: '1em',
+            }, 
+          }}
+        >
+          {sampleTextFormatted}
+        </SyntaxHighlighter>
       </pre>
       <p>Thank you for supporting TRYDENT. If you enjoyed, please give our <a href="https://github.com/oslabs-beta/trydent" target="_blank">Github</a> a star!</p>
     </div>
