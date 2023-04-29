@@ -1,0 +1,39 @@
+.welcomePage {
+  font-family: $font-family;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 2rem;
+  height: 100vh;
+  background-color: $color-background;
+  color: $color-text;
+
+  p {
+    font-size: 1.5rem;
+    font-weight: $font-weight-semibold;
+    margin-bottom: 1.25rem;
+  }
+
+  textarea {
+    padding: 1rem 0.625rem;
+    margin-bottom: 1.25rem;
+    border: 0.1rem solid $color-input-border;
+    border-radius: 0.3rem;
+    font-size: $font-size-base;
+    color: $color-text;
+    background-color: $color-input-background;
+    outline: none;
+    
+
+    &::placeholder {
+      color: $color-input-placeholder;
+    }
+
+    &:focus {
+      border-color: $color-primary;
+    }
+  }
+
+  button {
+    @extend .standard-button;
+  }
+}

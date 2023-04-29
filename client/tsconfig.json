@@ -13,9 +13,13 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
+    "noEmit": false,
+    "outDir": "../extension/bundles",
+    "rootDir": "./",
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+    "declaration": false
   },
-  "include": ["*.ts", "*.tsx"],
+  "include": ["src", "*.ts", "*.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
