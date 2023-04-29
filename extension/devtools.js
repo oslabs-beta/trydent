@@ -11,33 +11,61 @@ const backgroundPageConnection = chrome.runtime.connect({
 });
 
 const eventArr = [];
+// add in isMonitioring boolean to see if "start recording" has been clicked -- intial value false 
+//  create eventlistener to monitor "start recording"
+  //  grab intial url 
+  //  grab value from describe box
+  //  grab value from it description box
+  //  change is monitoring to true 
 
 chrome.runtime.onMessage.addListener((message) => {
   // Handle responses from the background page, if any
+  // if (isMonitoring){ // we want a conditional here to check isMonitoring so once we click start recording we begin to build our eventArr 
   eventArr.push(message);
-  console.log('message received:', message);
-  console.log('all the events: ', eventArr);
+  // }
 });
 
 const panel = document.getElementById('panel');
 
+const describeObj = {
+  URL: 'localhost:3000',
+  description: 'Test go Boom',
+  writeUp: 'This is a test and its going to work :)... eventually',
+  itStatements: [
+    {
+      itStatement: 'Track my random clicks',
+      eventArr: eventArr,
+    },
+  ],
+};
+
+  async function describeCreatorImport() {
+  const { describeCreator} = await import('./bundles/utils/testCreator.js');
+  return describeCreator(describeObj);
+}
+
+// This is how you can return a value without it being a promise 
+// (async function() {
+//   console.log(await describeCreatorImport());
+// })();
+
 const submitButton = document.createElement('button');
 panel.appendChild(submitButton);
 submitButton.innerText = 'submit';
-submitButton.addEventListener('click', (e) => {
+submitButton.addEventListener('click', async (e) => {
   console.log('clicked submit');
   console.log('events array?', eventArr);
-  eventArr.forEach((message) => {
-    const testItem = document.createElement('div');
-    testItem.innerText = `Action: ${message.action} \n Selector: ${message.selector} \n URL: ${message.URL} \n Input: ${message.input}`;
-    panel.appendChild(testItem);
-    eventArr.splice(0, eventArr.length);
-    console.log('cleared the event Arr: ', eventArr);
-  });
+
+  console.log(describeCreatorImport());
+  
 });
+
 
 // Relay the tab ID to the background page as an object
 backgroundPageConnection.postMessage({
   tabId: chrome.devtools.inspectedWindow.tabId,
   scriptToInject: 'content-script.js',
 });
+
+
+   

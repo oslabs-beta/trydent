@@ -1,51 +1,29 @@
-import endent from 'endent';
-import prettier from 'prettier/standalone';
-import parserBabel from 'prettier/parser-babel';
-
-const prettierFormat = (input: string) => {
-  return prettier.format(input, {
-    parser: 'babel',
-    plugins: [parserBabel],
-  });
-};
-
-// import prettier from 'prettier';
 import { Describe, itObject, EventObj } from './types/types';
-import { switchCase } from './switchCase';
 
-// ###TO-DO: Fully convert to TypeScript
-// ###TO-DO: modularize switch case in actionCreator, import it from utility file
-
-//Example object to be deleted
-const describeObj = {
-  URL: 'localhost:3000',
-  description: 'click on the thing',
-  writeUp: 'High level description on how the button should be clicked',
-  itStatements: [
-    {
-      itStatement: 'should be a click3',
-      eventArr: [
-        { selector: '.XPATH', action: 'click', URL: '/user/login' },
-        { selector: '.XPATH', action: 'input', URL: '/user/login', input: 'typed into the box' },
-      ],
-    },
-    {
-      itStatement: 'should be a input4',
-      eventArr: [
-        { selector: '.XPATH', action: 'click', URL: '/user/login' },
-        { selector: '.XPATH', action: 'input', URL: '/user/login', input: 'typed into the box' },
-      ],
-    },
-  ],
-};
-
+function switchCase(event: EventObj): string {
+  const { selector, action, input, URL } = event;
+  switch (action) {
+    case 'click':
+      return `cy.xpath('["${selector}"]').click();
+        cy.url().should('include','${URL}');`;
+      break;
+    case 'input':
+      return `cy.xpath('["${selector}"]').input('${input}');`;
+      break;
+    case 'navigate':
+      return `cy.url().should('include','${URL}');`;
+      break;
+    default:
+      return 'didnt input a valid action';
+  }
+}
 /**
  * Mother function, creates a textblock for an entire describe suite in Cypress.
  *
  * @param {object} describeObj - Full object that comes from user
  * @returns {string} Full cypress test suite to be sent to user
  */
-function describeCreator(obj: Describe): string {
+export function describeCreator(obj: Describe): string {
   // destructuring the 'describe' object
   const { URL, description, writeUp, itStatements } = obj;
   let resultStr;
@@ -111,9 +89,3 @@ function actionCreator(eObj: itObject, URL: string): string {
   return resultText;
 }
 
-// ### current tests: can be deleted
-let sampleText = describeCreator(describeObj);
-// const sampleTextFormatted = prettierFormat(sampleText);
-const sampleTextFormatted = sampleText;
-
-export { sampleText, sampleTextFormatted };
