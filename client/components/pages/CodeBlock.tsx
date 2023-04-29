@@ -33,7 +33,7 @@ const CodeBlock: React.FC = () => {
     textArea.select();
     try {
       // try to copy selected content to the clipboard
-      await navigator.clipboard.writeText(sampleTextFormatted);
+      document.execCommand('copy');
       setCopied(true);
     } catch (err) {
       console.log('Unable to copy text', err);
