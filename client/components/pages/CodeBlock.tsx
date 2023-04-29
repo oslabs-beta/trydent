@@ -27,7 +27,8 @@ const CodeBlock: React.FC = () => {
     textArea.select();
     try {
       // try to copy selected content to the clipboard
-      document.execCommand('copy');
+      // document.execCommand('copy');
+      await navigator.clipboard.writeText(sampleTextFormatted);
       setCopied(true);
     } catch (err) {
       console.log('Unable to copy text', err);
@@ -41,7 +42,6 @@ const CodeBlock: React.FC = () => {
   return (
     <div className="codeBlock">
       <h1>Generated Test</h1>
-      <p> here is Alastair's change </p>
       <pre>
         {/* Render the copy button and change its text and class depending on the 'copied' state */}
         <button
