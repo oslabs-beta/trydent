@@ -113,6 +113,7 @@ function actionCreator(eObj: itObject, URL: string): string {
 
 // ### current tests: can be deleted
 let sampleText = describeCreator(describeObj);
-const sampleTextFormatted = prettierFormat(sampleText);
+// const sampleTextFormatted = prettierFormat(sampleText);
+const sampleTextFormatted = sampleText;
 
 export { sampleText, sampleTextFormatted };
