@@ -2,6 +2,39 @@ import React, { useState, useEffect } from 'react';
 import { sampleTextFormatted } from '../../utils/testCreator';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import prettier from 'prettier/standalone';
+import parserBabel from 'prettier/parser-babel';
+
+const prettierFormat = (input: string): string => {
+  return prettier.format(input, {
+    parser: 'babel',
+    plugins: [parserBabel],
+  });
+};
+
+let sampleText = `//High level description on how the button should be clicked
+describe("click on the thing", () => {
+  beforeEach(() => {
+    cy.visit("localhost:3000");
+    cy.window().should("have.property", "appReady", true);
+  });
+
+  it("should be a click3", () => {
+    cy.xpath('[".XPATH"]').click();
+    cy.url().should("include", "/user/login");
+    cy.xpath('[".XPATH"]').input("typed into the box");
+  });
+  it("should be a input4", () => {
+    cy.xpath('[".XPATH"]').click();
+    cy.url().should("include", "/user/login");
+    cy.xpath('[".XPATH"]').input("typed into the box");
+  });
+});`
+let sampleTextFormatted = prettierFormat(sampleText);
+
+
 
 /**
  * CodeBlock component displays the generated test code and provides functionality to copy to clipboard
@@ -33,7 +66,7 @@ const CodeBlock: React.FC = () => {
     textArea.select();
     try {
       // try to copy selected content to the clipboard
-      document.execCommand('copy');
+      await navigator.clipboard.writeText(sampleTextFormatted);
       setCopied(true);
     } catch (err) {
       console.log('Unable to copy text', err);

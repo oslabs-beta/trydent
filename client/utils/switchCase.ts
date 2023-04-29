@@ -3,7 +3,7 @@ import endent from 'endent';
 import { EventObj } from './types/types';
 
 // ###TO-DO: basic switch case function, will expand upon this later
-export function switchCase(event: EventObj) {
+function switchCase(event: EventObj) {
   const { selector, action, input, URL } = event;
   switch (action) {
     case 'click':
