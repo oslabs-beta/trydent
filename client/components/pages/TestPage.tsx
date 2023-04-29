@@ -13,17 +13,20 @@ const TestPage: React.FC = () => {
     return(
         <div className="testPage">
             <h1>User Inputs</h1>
-            <ol>
-                <li>Enter a description for a new test</li>
-                <li>Start recording</li>
-                <li>Perform actions on the page</li>
-                <li>Stop recording</li>
-                <li>Generate test</li>
-            </ol>
             <input type="text" placeholder='"it" statement' />
             <button>Start Recording</button>
             <button onClick={ handleClick }>Generate Test</button>
-
+            <details>
+              <summary>Instructions</summary>
+              <ol>
+                <li>Enter your `it` statement</li>
+                <li>Start recording</li>
+                <li>Perform actions on the page</li>
+                <li>When you are ready, "Generate Test"</li>
+              </ol>
+              <p>Remember, `describe` breaks your test suite into components. </p>
+              <p>`it` statements further break down `describe` tests into smaller individual tests</p>
+            </details>
         </div>
     )
 }

@@ -7,10 +7,10 @@
   background-color: $color-background;
   color: $color-text;
 
-  p {
-    font-size: 1.5rem;
+  h1 {
+    font-size: 2rem;
     font-weight: $font-weight-semibold;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
   }
 
   textarea {
@@ -35,5 +35,25 @@
 
   button {
     @extend .standard-button;
+    margin-bottom: 2rem;
+  }
+
+  details {
+    summary {
+      font-weight: $font-weight-semibold;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+    }
+
+    ol {
+      margin-bottom: 1rem;
+      li {
+        margin: 0.5rem 0;
+      }
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
   }
 }

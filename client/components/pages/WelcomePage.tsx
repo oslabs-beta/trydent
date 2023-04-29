@@ -14,11 +14,22 @@ const WelcomePage: React.FC = () => {
     }
 
     return(
-        <div className="welcomePage">
-          <p> I'm in welcomePage.tsx</p>
-                <textarea placeholder="describe statement"/>
-                <button onClick={handleClick}>Start Test</button>
-        </div>
+      <div className="welcomePage">
+        <h1>New Test</h1>
+        <textarea placeholder="describe statement"/>	         
+        <textarea placeholder="describe statement"/>
+        <button onClick={handleClick}>Start Test</button>	          
+        <button onClick={handleClick}>Start Test</button>
+        <details>
+          <summary>Instructions</summary>
+          <ol>
+            <li>Enter your describe statement for your test!</li>
+            <li>Once you are ready, "Start Test"</li>
+          </ol>
+          <p>Remember, `describe` breaks your test suite into components. </p>
+          <p>`it` statements further break down `describe` tests into smaller individual tests</p>
+        </details>
+      </div>
     )
 }
 
