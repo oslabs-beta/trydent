@@ -56,6 +56,22 @@
     }
 
   }
+  .input-history {
+    margin: 1rem 0;
+    height: 10rem;
+    // width: 80vw;
+    overflow: auto;
+    border: 0.1rem solid $color-input-border;
+    padding:0.5rem 1.5rem;
+    border-radius: 0.3rem;
+    font-size: $font-size-base;
+    color: $color-text;
+    background-color: $color-input-background;
+
+    li {
+      background-color: transparent;
+    }
+  }
 
   .recording {
     background-color: #4caf50;
