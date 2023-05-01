@@ -13,11 +13,14 @@ let isConnected = false;
 let backgroundPageConnection;
 
 // array to store the recorded events
+
 const eventArr = [];
+// add in isMonitioring boolean to see if "start recording" has been clicked -- intial value false 
+let isMonitioring = false; 
 
 // test object used to create test script
 const describeObj = {
-  URL: 'localhost:3000',
+  URL: null,
   description: 'Test go Boom',
   writeUp: "This is a test and it's going to work :)... eventually",
   itStatements: [
@@ -45,10 +48,16 @@ const connectToBackground = () => {
   // listens for messages from the background page and add them to eventArr **where to put this... isn't pushing into eventArr fffs"
   backgroundPageConnection.onMessage.addListener((message) => {
     console.log('This is the message in devtools.js: ', message);
+    // Grab current URL for when the test is intiated - check to see if the describeObj.url has a value -- if not assign it one
+    if (describeObj.URL === null) describeObj.URL = message.URL;
     eventArr.push(message);
   });
   // set the connection status to true
   isConnected = true;
+  //  set our isMonitoring to true so we start adding events into the eventArr. This is more important to have so we can STOP recording as well
+  isMonitioring = true; 
+  // Grab describe statement box value -- I might want to move this to where start test button is clicked?? 
+  // describeObj.description = '';
 };
 
 // Listen for the "startRecording" event triggered from TestPage
@@ -56,6 +65,16 @@ window.addEventListener('startRecording', (e) => {
   // if connection is not established, connect to background
   if (!isConnected) {
     connectToBackground();
+  }
+});
+
+// Listen for the "startRecording" event triggered from TestPage
+window.addEventListener('stopRecording', (e) => {
+  // if connection is not established, connect to background
+  if (isConnected) {
+    isMonitioring = false; 
+    console.log(describeCreatorImport());
+    eventArr.splice(0, eventArr.length)
   }
 });
 
@@ -68,22 +87,12 @@ async function describeCreatorImport() {
   return describeCreator(describeObj);
 }
 
-// create and configure the submit button
-const submitButton = document.createElement('button');
-panel.appendChild(submitButton);
-submitButton.innerText = 'submit';
-
-submitButton.addEventListener('click', async (e) => {
-  console.log('clicked submit');
-  console.log('events array?', eventArr);
-
-  // call the describeCreatorImport function and log the results
-  console.log(describeCreatorImport());
-
 // SAM I SWEAR TO GOD IF YOU DELETE THIS AGAIN IM COMING FOR YOU!!
 //  This is how you can return a value without it being a promise 
 // // (async function() {
 // //   console.log(await describeCreatorImport());
 // // })();
-});
+// });
 
+
+   

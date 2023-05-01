@@ -14,6 +14,15 @@ const TestPage: React.FC = () => {
     const evt = new CustomEvent("startRecording");
     window.dispatchEvent(evt);
   };
+
+  // dispatch a custom event startRecording to signal the stop of recording
+  const handleStopRecording = () => {
+    setIsRecording(false);
+    // create and dispatch custom startRecording event
+    const evt = new CustomEvent("stopRecording");
+    window.dispatchEvent(evt);
+  };
+
   const handleClick = (event) => {
       event.preventDefault();
       navigate('/codeBlock');
@@ -29,7 +38,7 @@ const TestPage: React.FC = () => {
             >
               {isRecording ? 'Recording in progress...' : 'Start Recording'}
             </button>
-            <button onClick={ handleClick }>Generate Test</button>
+            <button id='generate' onClick={ handleClick && handleStopRecording} >Generate Test</button>
             <details>
               <summary>Instructions</summary>
               <ol>
