@@ -10,13 +10,13 @@ const WelcomePage = () => {
         // setTestDescribe(event.target[0].value);
         navigate('/testPage');
     };
-    // dispatch a custom event startRecording to signal the start of recording
+    // dispatch a custom event describeStatement to so we can assign our describeObj.description's value 
     const handleSendDescribe = () => {
         // create and dispatch custom startRecording event
         // Get the current value of the input field
         const describeStatement = document.querySelector('#describeStatement');
         const describeStatementValue = describeStatement.value;
-        // Create and dispatch the custom stopRecording event, including the input field value as data
+        // Create and dispatch the custom event, including the input field value as data
         const evt = new CustomEvent("describeStatement", { detail: { inputValue: describeStatementValue } });
         window.dispatchEvent(evt);
     };

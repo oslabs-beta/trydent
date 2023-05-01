@@ -44,6 +44,8 @@ const TestPage: React.FC = () => {
             >
               {isRecording ? 'Recording in progress...' : 'Start Recording'}
             </button>
+            <summary>Track your input here:</summary>
+            <ol className='input-history'></ol>
             <button id='generate' onClick={ handleClick} >Generate Test</button>
             <details>
               <summary>Instructions</summary>
