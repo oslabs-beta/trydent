@@ -83,7 +83,7 @@ if (!document.getElementById(contentScriptId)) {
           inputEventListener(event, (recordedEvent) => {
             console.log('Content-script.js This is the recordedEvent: ', recordedEvent);
             const { xPath, eventType, inputValue } = recordedEvent;
-            // send the xPath as a message to the window ... is this important...?
+            // send the xPath as a message to the window
             window.postMessage({ xPath }, '*');
             // send message to the background script with the event details
             chrome.runtime.sendMessage({
