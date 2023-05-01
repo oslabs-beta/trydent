@@ -17,7 +17,6 @@ const WelcomePage: React.FC = () => {
       <div className="welcomePage">
         <h1>New Test</h1>
         <textarea placeholder="describe statement"/>	         
-        <textarea placeholder="describe statement"/>
         <button onClick={handleClick}>Start Test</button>	          
         <details>
           <summary>Instructions</summary>
