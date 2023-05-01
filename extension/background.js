@@ -1,5 +1,8 @@
+let devToolsConnection;
+
 // upon connection execute the content-script
-chrome.runtime.onConnect.addListener((devToolsConnection) => {
+chrome.runtime.onConnect.addListener((connection) => {
+  devToolsConnection = connection;
   // assign the listener function to a variable so we can remove it later
   const devToolsListener = function (message, sender, sendResponse) {
     console.log('we are in background.js');
@@ -67,5 +70,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       break;
     default:
       console.log('Unknown event, message: ', message);
+  }
+  if (devToolsConnection) {
+    devToolsConnection.postMessage(message);
+  } else {
+    console.error('devToolsConnection is not established yet');
   }
 });
