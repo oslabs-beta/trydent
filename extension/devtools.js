@@ -79,4 +79,11 @@ submitButton.addEventListener('click', async (e) => {
 
   // call the describeCreatorImport function and log the results
   console.log(describeCreatorImport());
+
+// SAM I SWEAR TO GOD IF YOU DELETE THIS AGAIN IM COMING FOR YOU!!
+//  This is how you can return a value without it being a promise 
+// // (async function() {
+// //   console.log(await describeCreatorImport());
+// // })();
 });
+
