@@ -5,10 +5,21 @@ const WelcomePage = () => {
     const navigate = useNavigate();
     const handleClick = (event) => {
         event.preventDefault();
+        handleSendDescribe();
         // console.log(event.target[0].value);
         // setTestDescribe(event.target[0].value);
         navigate('/testPage');
     };
-    return (_jsxs("div", { className: "welcomePage", children: [_jsx("h1", { children: "New Test" }), _jsx("textarea", { placeholder: "describe statement" }), _jsx("button", { onClick: handleClick, children: "Start Test" }), _jsxs("details", { children: [_jsx("summary", { children: "Instructions" }), _jsxs("ol", { children: [_jsx("li", { children: "Enter your describe statement for your test!" }), _jsx("li", { children: "Once you are ready, \"Start Test\"" })] }), _jsx("p", { children: "Remember, `describe` breaks your test suite into components. " }), _jsx("p", { children: "`it` statements further break down `describe` tests into smaller individual tests" })] })] }));
+    // dispatch a custom event startRecording to signal the start of recording
+    const handleSendDescribe = () => {
+        // create and dispatch custom startRecording event
+        // Get the current value of the input field
+        const describeStatement = document.querySelector('#describeStatement');
+        const describeStatementValue = describeStatement.value;
+        // Create and dispatch the custom stopRecording event, including the input field value as data
+        const evt = new CustomEvent("describeStatement", { detail: { inputValue: describeStatementValue } });
+        window.dispatchEvent(evt);
+    };
+    return (_jsxs("div", { className: "welcomePage", children: [_jsx("h1", { children: "New Test" }), _jsx("textarea", { id: 'describeStatement', placeholder: "describe statement" }), _jsx("button", { id: 'startTest', onClick: handleClick, children: "Start Test" }), _jsxs("details", { children: [_jsx("summary", { children: "Instructions" }), _jsxs("ol", { children: [_jsx("li", { children: "Enter your describe statement for your test!" }), _jsx("li", { children: "Once you are ready, \"Start Test\"" })] }), _jsx("p", { children: "Remember, `describe` breaks your test suite into components. " }), _jsx("p", { children: "`it` statements further break down `describe` tests into smaller individual tests" })] })] }));
 };
 export default WelcomePage;
