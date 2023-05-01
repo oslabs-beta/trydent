@@ -1,6 +1,6 @@
 import { jsxs as _jsxs, jsx as _jsx } from "react/jsx-runtime";
-import { useState, useEffect } from "react";
-import { inputEventListener, getRelativeXPath } from "../utils/inputLogger";
+import { useState, useEffect } from 'react';
+import { inputEventListener, getRelativeXPath } from '../utils/inputLogger';
 /**
  * Listens to user interaction events, logging the event details and rendering the recorded events in a list
  *
@@ -9,7 +9,7 @@ import { inputEventListener, getRelativeXPath } from "../utils/inputLogger";
  * return (
  *  <EventLogger/>
  * )
- * @returns {ReactElement} A React element containing list of recorded events
+ * @returns {ReactElement} - A React element containing list of recorded events
  */
 const EventLogger = () => {
     // Maintain state for recorded events, focused element, and initial input value
@@ -18,7 +18,7 @@ const EventLogger = () => {
     const [initialValue, setInitialValue] = useState('');
     // Set up event listeners on component mount and clean up on unmount
     useEffect(() => {
-        // Grab URL for current window
+        // Grab URL of the current window
         const URL = window.location.href;
         const handleEvent = (event) => {
             // Handle focus event: set focused element and initial input value

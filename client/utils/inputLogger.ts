@@ -1,7 +1,7 @@
 /**
  * Recursive function that generates a relative XPath for the given HTML element.
  * It takes an optional unique attribute of id to enhance the uniqueness of the generated XPath.
- * 
+ *
  * @param element - The HTMLElement for which the XPath is to be generated.
  * @returns The relative XPath of the provided HTMLElement.
  */
@@ -48,7 +48,7 @@ interface RecordedEvent {
  * Listener function for user input events
  * Function is used in EventLogger.tsx component to record and display user input events
  * [STRETCH] Maybe add generic Events and KeyboardEvents to the type Union and add support for those event types later
- * 
+ *
  * @param event - The event object representing the user input (Mouse event or Input event)
  * @param callback - The callback function that receives the recorded event object
  * @returns void, just console logs the XPath, event type, and change of the element that was interacted with
@@ -59,7 +59,7 @@ function inputEventListener(event: MouseEvent | InputEvent, callback: (recordedE
   // Get the event type
   const eventType = event.type;
 
-  // Store different event types using a switch statement 
+  // Store different event types using a switch statement
   switch (eventType) {
     case 'click':
       // ! WARNING: Removal of these tests will fail some of the tests in the inputLogger.test.ts file. Can put an x before the test to skip it.

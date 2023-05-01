@@ -50,7 +50,7 @@ function inputEventListener(event, callback) {
     const xPath = getRelativeXPath(event.target);
     // Get the event type
     const eventType = event.type;
-    // Store different event types using a switch statement 
+    // Store different event types using a switch statement
     switch (eventType) {
         case 'click':
             // ! WARNING: Removal of these tests will fail some of the tests in the inputLogger.test.ts file. Can put an x before the test to skip it.

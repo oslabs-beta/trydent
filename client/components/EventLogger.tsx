@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { inputEventListener, getRelativeXPath, RecordedEvent } from "../utils/inputLogger";
+import React, { useState, useEffect } from 'react';
+import { inputEventListener, getRelativeXPath, RecordedEvent } from '../utils/inputLogger';
 
 /**
  * Listens to user interaction events, logging the event details and rendering the recorded events in a list
- * 
+ *
  * @component
  * @example
  * return (
  *  <EventLogger/>
  * )
- * @returns {ReactElement} A React element containing list of recorded events
+ * @returns {ReactElement} - A React element containing list of recorded events
  */
 
 const EventLogger: React.FC = () => {
@@ -20,7 +20,7 @@ const EventLogger: React.FC = () => {
 
   // Set up event listeners on component mount and clean up on unmount
   useEffect(() => {
-    // Grab URL for current window
+    // Grab URL of the current window
     const URL = window.location.href;
 
     const handleEvent = (event: Event) => {
@@ -28,7 +28,7 @@ const EventLogger: React.FC = () => {
       if (event.type === 'focus') {
         setFocusedElement(event.target as HTMLElement);
         setInitialValue((event.target as HTMLInputElement).value);
-      } 
+      }
       // Handle blur event: if input value has changed, log the event and reset focused element
       else if (event.type === 'blur') {
         const newValue = (event.target as HTMLInputElement).value;
@@ -40,12 +40,12 @@ const EventLogger: React.FC = () => {
           setEvents((prevEvents) => [...prevEvents, { xPath, eventType, inputValue: newValue, URL }]);
         }
         setFocusedElement(null);
-      } 
+      }
       // Handle click and other events: log the event
       else {
         inputEventListener(event as MouseEvent | InputEvent, (recordedEvent: RecordedEvent) => {
           if (recordedEvent.eventType !== 'input' && recordedEvent.eventType !== 'change') {
-            setEvents((prevEvents) => [...prevEvents, {...recordedEvent, URL}]);
+            setEvents((prevEvents) => [...prevEvents, { ...recordedEvent, URL }]);
           }
         });
       }
@@ -70,7 +70,7 @@ const EventLogger: React.FC = () => {
 
   // Log to view the different events
   console.log('These are the events:', events);
-  
+
   // Render list of recorded events in a separate div
   return (
     <div className="event-logger">

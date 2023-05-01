@@ -12,7 +12,7 @@ function switchCase(event: EventObj): string {
       return `cy.xpath('${selector}').click();
         cy.url().should('include','${URL}');`;
       break;
-    case 'input':
+    case 'change':
       return `cy.xpath('["${selector}"]').input('${input}');`;
       break;
     case 'navigate':
@@ -45,7 +45,7 @@ export function describeCreator(obj: Describe): string {
     })`);
 }
 /**
- *
+ * separate itStatements function to make a describe with multiple its
  *
  * @param {array} itStatementsArr - Array containing it statement objects.
  * @param {string} URL - URL of the page to be tested.
@@ -67,7 +67,7 @@ function itCreator(itStatementsArr: itObject[], URL: string): string {
   return itText;
 }
 /**
- *
+ * separate action function to make an it statement with multiple actions
  *
  * @param {itObject} eObj - Event Object containing it statement and array of events.
  * @param {string} URL - URL of the page to be tested.
@@ -92,4 +92,3 @@ function actionCreator(eObj: itObject, URL: string): string {
       }`;
   return resultText;
 }
-
