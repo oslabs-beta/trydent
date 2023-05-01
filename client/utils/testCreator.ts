@@ -2,9 +2,14 @@ import { Describe, itObject, EventObj } from './types/types';
 
 function switchCase(event: EventObj): string {
   const { selector, action, input, URL } = event;
+    // if (mode === 'assertion'){
+  //   switch (action){
+  //     case 'click':
+  //       return `cy.xpath('${selector}').should('exist');`
+  //   }
   switch (action) {
     case 'click':
-      return `cy.xpath('["${selector}"]').click();
+      return `cy.xpath('${selector}').click();
         cy.url().should('include','${URL}');`;
       break;
     case 'input':
@@ -34,7 +39,6 @@ export function describeCreator(obj: Describe): string {
     describe('${description}', () => {
       beforeEach(() => {
         cy.visit('${URL}')
-        cy.window().should('have.property', 'appReady', true)
       })
         
       ${itCreator(itStatements, URL)}

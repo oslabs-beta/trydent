@@ -2,7 +2,7 @@ function switchCase(event) {
     const { selector, action, input, URL } = event;
     switch (action) {
         case 'click':
-            return `cy.xpath('["${selector}"]').click();
+            return `cy.xpath('${selector}').click();
         cy.url().should('include','${URL}');`;
             break;
         case 'input':
@@ -32,7 +32,6 @@ export function describeCreator(obj) {
     describe('${description}', () => {
       beforeEach(() => {
         cy.visit('${URL}')
-        cy.window().should('have.property', 'appReady', true)
       })
         
       ${itCreator(itStatements, URL)}
