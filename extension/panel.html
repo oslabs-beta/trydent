@@ -17,8 +17,13 @@
     <!-- <div id="panel"> -->
     <script type="module" src="/bundles/assets/index.js"></script>
     <script src="devtools.js"></script>
-    <!-- <script type="module" src="bundles/client/assets/index-809a8f52.js"></script> -->
-    <!-- extension/bundles/client/assets/index-809a8f52.js -->
+    <script>
+      window.addEventListener('message', (event) => {
+        if (event.data.action === 'startRecording') {
+          window.startRecording();
+        }
+      });
+    </script>
   </body>
 
 </html>

@@ -6,6 +6,10 @@ import { useNavigate } from 'react-router-dom';
 const TestPage: React.FC = () => {
   const navigate = useNavigate();
 
+  const handleStartRecording = () => {
+    const evt = new CustomEvent("startRecording");
+    window.dispatchEvent(evt);
+  };
   const handleClick = (event) => {
       event.preventDefault();
       navigate('/codeBlock');
@@ -14,7 +18,7 @@ const TestPage: React.FC = () => {
         <div className="testPage">
             <h1>User Inputs</h1>
             <input type="text" placeholder='"it" statement' />
-            <button>Start Recording</button>
+            <button id = "startRecording" onClick={handleStartRecording}>Start Recording</button>
             <button onClick={ handleClick }>Generate Test</button>
             <details>
               <summary>Instructions</summary>

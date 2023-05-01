@@ -2,26 +2,25 @@
 chrome.runtime.onConnect.addListener((devToolsConnection) => {
   // assign the listener function to a variable so we can remove it later
   const devToolsListener = function (message, sender, sendResponse) {
-    // console.log('we are in?')
-    // console.log(message)
+    console.log('we are in background.js');
+
     // Inject a content script into the identified tab
     chrome.scripting.executeScript({
       target: { tabId: message.tabId },
       files: [message.scriptToInject],
+    }, () => {
+      chrome.tabs.sendMessage(message.tabId, { action: 'startContentScript' });
     });
   };
-  // add the listener
-  devToolsConnection.onMessage.addListener(devToolsListener);
+  // chrome.tabs.onActivated.addListener((tabInfo) => {
+  //   const { tabId } = tabInfo;
+  //   console.log('changed to tab: ', tabId);
+  //   chrome.scripting.executeScript({
+  //     target: { tabId: message.tabId },
+  //     files: [message.scriptToInject],
 
-  chrome.tabs.onActivated.addListener((tabInfo) => {
-    const { tabId } = tabInfo;
-    console.log('changed to tab: ', tabId);
-    chrome.scripting.executeScript({
-      target: { tabId: message.tabId },
-      files: [message.scriptToInject],
-
-    });
-  });
+  //   });
+  // });
 
   // const contentScriptListener = (message, sender, sendResponse) => {
   //   switch (message.action) {
@@ -42,6 +41,7 @@ chrome.runtime.onConnect.addListener((devToolsConnection) => {
   //   }
   // };
   // removes the event listener when disconnecting
+  devToolsConnection.onMessage.addListener(devToolsListener);
   devToolsConnection.onDisconnect.addListener(() => {
     devToolsConnection.onMessage.removeListener(devToolsListener);
   });

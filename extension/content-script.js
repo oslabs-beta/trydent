@@ -83,20 +83,23 @@ if (!document.getElementById(contentScriptId)) {
   scriptTag.id = contentScriptId;
   document.head.appendChild(scriptTag);
 
-  const URL = window.location.href;
-  // change to general event listener and use switch cases
-  ['click', 'focus', 'blur', 'change'].forEach((action) => {
-    document.addEventListener(action, (event) => {
-      inputEventListener(event, (recordedEvent) => {
-        console.log('This is the recordedEvent: ', recordedEvent);
-        const { xPath, eventType, inputValue } = recordedEvent;
-        window.postMessage({ xPath }, '*');
-        chrome.runtime.sendMessage({
-          action: eventType, selector: xPath, input: inputValue, URL,
+  chrome.runtime.onMessage.addListener((message) => {
+    if (message.action === 'startContentScript') {
+      const URL = window.location.href;
+      ['click', 'focus', 'blur', 'change'].forEach((action) => {
+        document.addEventListener(action, (event) => {
+          inputEventListener(event, (recordedEvent) => {
+            console.log('This is the recordedEvent: ', recordedEvent);
+            const { xPath, eventType, inputValue } = recordedEvent;
+            window.postMessage({ xPath }, '*');
+            chrome.runtime.sendMessage({
+              action: eventType, selector: xPath, input: inputValue, URL,
+            });
+          });
         });
       });
-    });
+      // Set up the inputEventListener with an empty callback function
+      inputEventListener({}, () => {});
+    }
   });
-  // Set up the inputEventListener with an empty callback function
-  inputEventListener({}, () => {});
 }
