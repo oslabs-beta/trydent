@@ -4,11 +4,12 @@ chrome.runtime.onConnect.addListener((devToolsConnection) => {
   const devToolsListener = function (message, sender, sendResponse) {
     console.log('we are in background.js');
 
-    // Inject a content script into the identified tab
+    // Inject a content script into the tab specified by the message
     chrome.scripting.executeScript({
       target: { tabId: message.tabId },
       files: [message.scriptToInject],
     }, () => {
+      // send a message to the content script to start itself
       chrome.tabs.sendMessage(message.tabId, { action: 'startContentScript' });
     });
   };
@@ -40,15 +41,17 @@ chrome.runtime.onConnect.addListener((devToolsConnection) => {
   //       console.log('Unknown event, message: ', message);
   //   }
   // };
-  // removes the event listener when disconnecting
+  // add devToolsListener function as a listener for messages from devtools script
   devToolsConnection.onMessage.addListener(devToolsListener);
+  // remove devToolsListener function from listeners when devtools disconnects
   devToolsConnection.onDisconnect.addListener(() => {
     devToolsConnection.onMessage.removeListener(devToolsListener);
   });
 });
 
+// listen for message from content script
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  // Check if the message is a click event
+  // Check event and proceed message accordingly
   switch (message.action) {
     case 'click':
       console.log('Clicked, message: ', message);
