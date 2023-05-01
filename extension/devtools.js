@@ -13,7 +13,6 @@ let isConnected = false;
 let backgroundPageConnection;
 
 // array to store the recorded events
-
 const eventArr = [];
 // add in isMonitioring boolean to see if "start recording" has been clicked -- intial value false 
 let isMonitioring = false; 
@@ -49,37 +48,44 @@ const connectToBackground = () => {
   backgroundPageConnection.onMessage.addListener((message) => {
     console.log('This is the message in devtools.js: ', message);
     // Grab current URL for when the test is intiated - check to see if the describeObj.url has a value -- if not assign it one
-    if (describeObj.URL === null) describeObj.URL = message.URL;
-    eventArr.push(message);
+    if (isMonitioring){
+      if (describeObj.URL === null) describeObj.URL = message.URL;
+      eventArr.push(message);
+    }
   });
   // set the connection status to true
   isConnected = true;
   //  set our isMonitoring to true so we start adding events into the eventArr. This is more important to have so we can STOP recording as well
   isMonitioring = true; 
-  // Grab describe statement box value -- I might want to move this to where start test button is clicked?? 
-  // describeObj.description = '';
+  // clear eventArr for a new test
+  eventArr.splice(0, eventArr.length);
 };
 
 // Listen for the "startRecording" event triggered from TestPage
 window.addEventListener('startRecording', (e) => {
   // if connection is not established, connect to background
   if (!isConnected) {
+    describeObj.itStatements[0].itStatement = e.detail.inputValue
+    // assign our it description in here 
     connectToBackground();
   }
 });
 
-// Listen for the "startRecording" event triggered from TestPage
+// Listen for the "stoptRecording" event triggered from TestPage
 window.addEventListener('stopRecording', (e) => {
   // if connection is not established, connect to background
   if (isConnected) {
     isMonitioring = false; 
     console.log(describeCreatorImport());
-    eventArr.splice(0, eventArr.length)
   }
 });
 
-// get the panel DOM elements from panel.html
-const panel = document.getElementById('panel');
+
+// Listen for the "describeStatement" event triggered from WelcomePage
+window.addEventListener('describeStatement', (e) => {
+  // assign describeObj value 
+  describeObj.description = e.detail.inputValue
+});
 
 // async function to import describeCreator and execute it with describeObj
 async function describeCreatorImport() {
