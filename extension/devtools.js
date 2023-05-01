@@ -17,16 +17,14 @@ const connectToBackground = () => {
   backgroundPageConnection = chrome.runtime.connect({
     name: "devtools-page",
   });
-
+  // listens for messages from the background page and add them to eventArr **maybe throw it down to line 35?**
+backgroundPageConnection.onMessage.addListener((message) => {
+  eventArr.push(message);
+});
   // sends a message to the background to inject content-script into the inspected window
   backgroundPageConnection.postMessage({
     tabId: chrome.devtools.inspectedWindow.tabId,
     scriptToInject: "content-script.js",
-  });
-
-  // listens for messages from the background page and add them to eventArr **maybe throw it down to line 35?**
-  backgroundPageConnection.onMessage.addListener((message) => {
-    eventArr.push(message);
   });
 
   // set the connection status to true
