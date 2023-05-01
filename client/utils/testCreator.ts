@@ -7,7 +7,7 @@ function switchCase(event: EventObj): string {
       return `cy.xpath('["${selector}"]').click();
         cy.url().should('include','${URL}');`;
       break;
-    case 'input':
+    case 'change':
       return `cy.xpath('["${selector}"]').input('${input}');`;
       break;
     case 'navigate':
