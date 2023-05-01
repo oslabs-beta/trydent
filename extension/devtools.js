@@ -8,10 +8,13 @@ chrome.devtools.panels.create(
 
 // basically tracking whether devtools.js is connected to background.js
 let isConnected = false;
+
 // connection to the background page
 let backgroundPageConnection;
+
 // array to store the recorded events
 const eventArr = [];
+
 // test object used to create test script
 const describeObj = {
   URL: 'localhost:3000',
@@ -27,6 +30,7 @@ const describeObj = {
 
 // Function to connect the devtools to the background page
 const connectToBackground = () => {
+
   // establishes a connection to background with a specific name (name is not that important)
   backgroundPageConnection = chrome.runtime.connect({
     name: 'devtools-page',
@@ -47,7 +51,7 @@ const connectToBackground = () => {
   isConnected = true;
 };
 
-// Listen for the "startRecording" event triggered from panel.html
+// Listen for the "startRecording" event triggered from TestPage
 window.addEventListener('startRecording', (e) => {
   // if connection is not established, connect to background
   if (!isConnected) {
@@ -55,9 +59,7 @@ window.addEventListener('startRecording', (e) => {
   }
 });
 
-
-
-// get the panel DOM elements from panel.html....should delete later I think
+// get the panel DOM elements from panel.html
 const panel = document.getElementById('panel');
 
 // async function to import describeCreator and execute it with describeObj
@@ -77,10 +79,4 @@ submitButton.addEventListener('click', async (e) => {
 
   // call the describeCreatorImport function and log the results
   console.log(describeCreatorImport());
-});
-
-window.addEventListener('message', (event) => {
-  if (event.data.action === 'startRecording') {
-    window.startRecording();
-  }
 });

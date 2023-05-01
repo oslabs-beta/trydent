@@ -4,8 +4,10 @@ import { useNavigate } from 'react-router-dom';
 const TestPage = () => {
     const [isRecording, setIsRecording] = useState(false);
     const navigate = useNavigate();
+    // dispatch a custom event startRecording to signal the start of recording
     const handleStartRecording = () => {
         setIsRecording(true);
+        // create and dispatch custom startRecording event
         const evt = new CustomEvent("startRecording");
         window.dispatchEvent(evt);
     };
