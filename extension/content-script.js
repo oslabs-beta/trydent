@@ -1,21 +1,5 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable max-len */
-// // Import the getRelativeXPath function and inputEventListener from the inputLogger module
-// import { inputEventListener, getRelativeXPath } from './bundles/client/utils/inputLogger';
-// Load the inputLogger module dynamically
-// import('./bundles/utils/inputLogger.js').then(({ inputEventListener, getRelativeXPath }) => {
-//   document.addEventListener('click', (event) => {
-//     const xPath = getRelativeXPath(event.target);
-//     console.log('Clicked element XPath:', xPath);
-//     window.postMessage({ xPath }, '*');
-//     chrome.runtime.sendMessage({ action: 'logEvent', xPath: { xPath } });
-//   });
-
-//   // Set up the inputEventListener with an empty callback function
-//   inputEventListener({}, () => {});
-// }).catch((error) => {
-//   console.error('Error loading inputLogger:', error);
-// });
 
 function getRelativeXPath(element) {
   // If the element is null or undefined, return an empty string
