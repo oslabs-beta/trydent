@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import EventLogger from '../EventLogger';
 import { useNavigate } from 'react-router-dom'; 
 
 
 const TestPage: React.FC = () => {
+  const [isRecording, setIsRecording] = useState(false);
   const navigate = useNavigate();
 
   const handleStartRecording = () => {
+    setIsRecording(true);
     const evt = new CustomEvent("startRecording");
     window.dispatchEvent(evt);
   };
@@ -18,7 +20,13 @@ const TestPage: React.FC = () => {
         <div className="testPage">
             <h1>User Inputs</h1>
             <input type="text" placeholder='"it" statement' />
-            <button id = "startRecording" onClick={handleStartRecording}>Start Recording</button>
+            <button
+              id="startRecording"
+              onClick={handleStartRecording}
+              className={isRecording ? 'recording' : ''}
+            >
+              {isRecording ? 'Recording in progress...' : 'Start Recording'}
+            </button>
             <button onClick={ handleClick }>Generate Test</button>
             <details>
               <summary>Instructions</summary>
