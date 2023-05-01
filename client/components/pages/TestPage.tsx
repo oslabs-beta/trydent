@@ -11,17 +11,32 @@ const TestPage: React.FC = () => {
   const handleStartRecording = () => {
     setIsRecording(true);
     // create and dispatch custom startRecording event
-    const evt = new CustomEvent("startRecording");
+    // Get the current value of the input field
+    const itStatement = document.querySelector('#itStatement');
+    const itStatementValue = itStatement.value;
+
+  // Create and dispatch the custom startRecording event, including the input field value as data
+    const evt = new CustomEvent("startRecording", { detail: { inputValue: itStatementValue } });
     window.dispatchEvent(evt);
   };
+
+  // dispatch a custom event stopRecording to signal the stop of recording
+  const handleStopRecording = () => {
+    setIsRecording(false);
+    // create and dispatch custom startRecording event
+    const evt = new CustomEvent("stopRecording");
+    window.dispatchEvent(evt);
+  };
+
   const handleClick = (event) => {
       event.preventDefault();
+      handleStopRecording();
       navigate('/codeBlock');
   }
     return(
         <div className="testPage">
             <h1>User Inputs</h1>
-            <input type="text" placeholder='"it" statement' />
+            <input id="itStatement" type="text" placeholder='"it" statement' />
             <button
               id="startRecording"
               onClick={handleStartRecording}
@@ -29,7 +44,7 @@ const TestPage: React.FC = () => {
             >
               {isRecording ? 'Recording in progress...' : 'Start Recording'}
             </button>
-            <button onClick={ handleClick }>Generate Test</button>
+            <button id='generate' onClick={ handleClick} >Generate Test</button>
             <details>
               <summary>Instructions</summary>
               <ol>
