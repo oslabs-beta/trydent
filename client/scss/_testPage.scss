@@ -35,6 +35,7 @@
   button {
     @extend .standard-button;
     margin-bottom: 2rem;
+    transition: background-color 0.3s ease, transform 0.3s ease; // Add transform transition
   }
 
   details {
@@ -54,5 +55,14 @@
       margin-bottom: 1rem;
     }
 
+  }
+
+  .recording {
+    background-color: #4caf50;
+    color: white;
+    &:hover {
+      background-color: #4aa14d;
+      transform: translateY(-2px); // Add translateY transform for a subtle lift effect on hover
+    }
   }
 }

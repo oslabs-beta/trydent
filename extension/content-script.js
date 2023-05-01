@@ -1,21 +1,5 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable max-len */
-// // Import the getRelativeXPath function and inputEventListener from the inputLogger module
-// import { inputEventListener, getRelativeXPath } from './bundles/client/utils/inputLogger';
-// Load the inputLogger module dynamically
-// import('./bundles/utils/inputLogger.js').then(({ inputEventListener, getRelativeXPath }) => {
-//   document.addEventListener('click', (event) => {
-//     const xPath = getRelativeXPath(event.target);
-//     console.log('Clicked element XPath:', xPath);
-//     window.postMessage({ xPath }, '*');
-//     chrome.runtime.sendMessage({ action: 'logEvent', xPath: { xPath } });
-//   });
-
-//   // Set up the inputEventListener with an empty callback function
-//   inputEventListener({}, () => {});
-// }).catch((error) => {
-//   console.error('Error loading inputLogger:', error);
-// });
 
 function getRelativeXPath(element) {
   // If the element is null or undefined, return an empty string
@@ -76,27 +60,40 @@ function inputEventListener(event, callback) {
   }
 }
 
+// define unique ID for content script
 const contentScriptId = 'contentScriptId';
 
+// if content script has not already been injected into the page
 if (!document.getElementById(contentScriptId)) {
+  // create a new script tag and set id to contentScriptId and append to document head
   const scriptTag = document.createElement('script');
   scriptTag.id = contentScriptId;
   document.head.appendChild(scriptTag);
 
-  const URL = window.location.href;
-  // change to general event listener and use switch cases
-  ['click', 'focus', 'blur', 'change'].forEach((action) => {
-    document.addEventListener(action, (event) => {
-      inputEventListener(event, (recordedEvent) => {
-        console.log('This is the recordedEvent: ', recordedEvent);
-        const { xPath, eventType, inputValue } = recordedEvent;
-        window.postMessage({ xPath }, '*');
-        chrome.runtime.sendMessage({
-          action: eventType, selector: xPath, input: inputValue, URL,
+  // listen for messages from background script
+  chrome.runtime.onMessage.addListener((message) => {
+    // if received message is to start content script
+    if (message.action === 'startContentScript') {
+      // get URL of current page
+      const URL = window.location.href;
+      // add event listeners for 'click', 'focus', 'blur', and 'change' events
+      ['click', 'focus', 'blur', 'change'].forEach((action) => {
+        document.addEventListener(action, (event) => {
+          // call the inputEventListener for each event
+          inputEventListener(event, (recordedEvent) => {
+            console.log('Content-script.js This is the recordedEvent: ', recordedEvent);
+            const { xPath, eventType, inputValue } = recordedEvent;
+            // send the xPath as a message to the window
+            window.postMessage({ xPath }, '*');
+            // send message to the background script with the event details
+            chrome.runtime.sendMessage({
+              action: eventType, selector: xPath, input: inputValue, URL,
+            });
+          });
         });
       });
-    });
+      // Set up the inputEventListener with an empty callback function
+      inputEventListener({}, () => {});
+    }
   });
-  // Set up the inputEventListener with an empty callback function
-  inputEventListener({}, () => {});
 }
