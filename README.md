@@ -5,7 +5,20 @@
 
 Trydent is a visionary open source project that seeks to empower developers with an innovative solution to automate the creation of end-to-end testing. With Trydent, developers can easily generate high-quality Cypress code that is seamlessly integrated into their codebase, enabling them to optimize and streamline their workflow like never before. Harnessing the power of cutting-edge technology, Trydent is the ultimate tool for modern developers seeking to create the most robust and reliable web applications.
 
-
+<div align="center" style="display: flex; justify-content: center; align-items: center; gap: 25px;">
+  <a href="https://reactjs.org/" rel="nofollow">
+    <img src="https://camo.githubusercontent.com/ab4c3c731a174a63df861f7b118d6c8a6c52040a021a552628db877bd518fe84/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f72656163742d2532333230323332612e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d7265616374266c6f676f436f6c6f723d253233363144414642" data-canonical-src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" alt="ReactJs" style="max-width: 100%">
+  </a>
+   <a href="https://typescriptlang.org/" rel="nofollow">
+    <img src="https://camo.githubusercontent.com/ee71fcc1aa3d059265517741dffc4161922fd744377e7a5f07c43381d0aa9aac/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f747970657363726970742d2532333030374143432e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d74797065736372697074266c6f676f436f6c6f723d7768697465" data-canonical-src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" alt="Typescript" style="max-width: 100%">
+  </a>
+     <a href="https://www.cypress.io/" rel="nofollow">
+    <img src="https://camo.githubusercontent.com/a2cc7362377d69d8ad5147e49f7b269cab69f00509828ce2d583b9dde9130499/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2d637970726573732d2532334535453545353f7374796c653d666f722d7468652d6261646765266c6f676f3d63797072657373266c6f676f436f6c6f723d303538613565" data-canonical-src="https://img.shields.io/badge/-cypress-%23E5E5E5?style=for-the-badge&logo=cypress&logoColor=058a5e" alt="Cypress" style="max-width: 100%">
+  </a>
+       <a href="https://jestjs.io/" rel="nofollow">
+    <img src="https://camo.githubusercontent.com/38eb294a1bdc730fae415015ecac4d6c009e39d2a9c8f8631f1d16bf3f918189/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2d6a6573742d2532334332313332353f7374796c653d666f722d7468652d6261646765266c6f676f3d6a657374266c6f676f436f6c6f723d7768697465" data-canonical-src="https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white" alt="Jest" style="max-width: 100%">
+  </a>
+</div>
 
 ## Table of Contents
 1. [Getting Started](#getting-started)
