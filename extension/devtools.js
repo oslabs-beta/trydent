@@ -46,6 +46,14 @@ const connectToBackground = () => {
   backgroundPageConnection.onMessage.addListener((message) => {
     console.log('This is the message in devtools.js: ', message);
     eventArr.push(message);
+    console.log('This is our updated events array: ', eventArr)
+    // input history querys the DOM for the classname and returns an HTMLCollection which is type array
+    // in order to append to the DOM from here, we have to treat it as an array and appropriate methods against it
+    // ** should probably create a function outside of this to modularize :) - NL
+    const inputHistory = document.getElementsByClassName('input-history')
+    const input = document.createElement('li')
+    input.innerText = message.action
+    inputHistory[0].appendChild(input)
   });
   // set the connection status to true
   isConnected = true;
