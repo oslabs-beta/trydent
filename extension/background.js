@@ -19,15 +19,9 @@ chrome.runtime.onConnect.addListener((connection) => {
     });
   };
 
-  chrome.tabs.onActivated.addListener((tabInfo) => {
-    const { tabId } = tabInfo;
-    console.log('changed to tab: ', tabId);
-    chrome.scripting.executeScript({
-      target: { tabId: message.tabId },
-      files: [message.scriptToInject],
-
-    });
-  });
+  chrome.tabs.onUpdated.addListener((tabId,changeInfo,tab)=>{
+    chrome.tabs.sendMessage(tabId, {action:'startContentScript'})
+  })
 
   // add devToolsListener function as a listener for messages from devtools script
   devToolsConnection.onMessage.addListener(devToolsListener);
