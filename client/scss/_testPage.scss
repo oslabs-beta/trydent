@@ -81,4 +81,13 @@
       transform: translateY(-2px); // Add translateY transform for a subtle lift effect on hover
     }
   }
+
+  .input-history
+    li {
+      border: 0.1rem solid $color-input-border;
+      border-radius: 0.3rem;
+      padding: 0.5rem 1rem;
+      text-align: center;
+      background-color: lighten($color-input-background, 5%);
+    }
 }

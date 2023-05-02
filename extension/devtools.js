@@ -54,8 +54,9 @@ const connectToBackground = () => {
     // ** should probably create a function outside of this to modularize :) - NL
     const inputHistory = document.getElementsByClassName('input-history')
     const input = document.createElement('li')
-    input.innerText = message.action
+    input.innerText = `${message.action}${message.input ? ` to:  ${message.input}` : ''}`;
     inputHistory[0].appendChild(input)
+    input.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
   });
   // set the connection status to true
   isConnected = true;
