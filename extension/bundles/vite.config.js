@@ -27,7 +27,7 @@ export default defineConfig({
             },
         },
         // set limit of chunk size to 1kb before warning
-        chunkSizeWarningLimit: 1000,
+        chunkSizeWarningLimit: 2000,
     },
     // Configure plugins
     plugins: [
