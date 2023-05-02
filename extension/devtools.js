@@ -14,8 +14,6 @@ let backgroundPageConnection;
 
 // array to store the recorded events
 const eventArr = [];
-// add in isMonitoring boolean to see if "start recording" has been clicked -- intial value false 
-let isMonitoring = false; 
 
 // test object used to create test script
 const describeObj = {
@@ -48,23 +46,21 @@ const connectToBackground = () => {
   backgroundPageConnection.onMessage.addListener((message) => {
     console.log('This is the message in devtools.js: ', message);
     // Grab current URL for when the test is intiated - check to see if the describeObj.url has a value -- if not assign it one
-    if (isMonitoring){
-      if (describeObj.URL === null) describeObj.URL = message.URL;
-      eventArr.push(message);
+    if (describeObj.URL === null) describeObj.URL = message.URL;
+    eventArr.push(message);
     console.log('This is our updated events array: ', eventArr)
     // input history querys the DOM for the classname and returns an HTMLCollection which is type array
     // in order to append to the DOM from here, we have to treat it as an array and appropriate methods against it
     // ** should probably create a function outside of this to modularize :) - NL
     const inputHistory = document.getElementsByClassName('input-history')
     const input = document.createElement('li')
-    input.innerText = message.action
+    input.innerText = `${message.action}${message.input ? ` to:  ${message.input}` : ''}`;
     inputHistory[0].appendChild(input)
-    }
+    input.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
   });
   // set the connection status to true
   isConnected = true;
-  //  set our isMonitoring to true so we start adding events into the eventArr. This is more important to have so we can STOP recording as well
-  isMonitoring = true; 
+
   // clear eventArr for a new test
   eventArr.splice(0, eventArr.length);
 };
@@ -79,18 +75,22 @@ window.addEventListener('startRecording', (e) => {
   }
 });
 
+//add an event listener to listen for tab change??
 // Listen for the "stoptRecording" event triggered from TestPage
 window.addEventListener('stopRecording', (e) => {
   // if connection is not established, connect to background
   if (isConnected) {
-    isMonitoring = false; 
+  if (isConnected) {
+    isConnected = false; 
   //  async function so when generated code is assigned its a string and not a promise, this allows CodeBlock.tsx to easily catch the message
     (async function() {
       let generatedCode = await describeCreatorImport();
       console.log("gen code: ", generatedCode);
       window.postMessage({ type: 'GENERATED_CODE', code: generatedCode })
     })();
-}});
+  }}
+});
+
 
 
 // Listen for the "describeStatement" event triggered from WelcomePage

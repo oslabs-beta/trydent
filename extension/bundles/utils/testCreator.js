@@ -11,7 +11,7 @@ function switchCase(event) {
         cy.url().should('include','${URL}');`;
             break;
         case 'change':
-            return `cy.xpath('["${selector}"]').input('${input}');`;
+            return `cy.xpath('${selector}').type('${input}');`;
             break;
         case 'navigate':
             return `cy.url().should('include','${URL}');`;
