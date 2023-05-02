@@ -13,18 +13,26 @@ chrome.runtime.onConnect.addListener((connection) => {
     chrome.scripting.executeScript({
       target: { tabId: message.tabId },
       files: [message.scriptToInject],
-    }, () => {
-      // send a message to the content script to start itself
-      chrome.tabs.sendMessage(message.tabId, { action: 'startContentScript' });
     });
   };
 
-  chrome.tabs.onUpdated.addListener((tabId,changeInfo,tab)=>{
-    chrome.tabs.sendMessage(tabId, {action:'startContentScript'})
-  })
+  // chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  //   chrome.tabs.sendMessage(tabId, { action: 'startContentScript' });
+  // });
 
   // add devToolsListener function as a listener for messages from devtools script
   devToolsConnection.onMessage.addListener(devToolsListener);
+
+  chrome.tabs.onActivated.addListener((tabInfo) => {
+    const { tabId } = tabInfo;
+    console.log('changed to tab: ', tabId);
+    chrome.scripting.executeScript({
+      target: { tabId: message.tabId },
+      files: [message.scriptToInject],
+
+    });
+  });
+
   // remove devToolsListener function from listeners when devtools disconnects
   devToolsConnection.onDisconnect.addListener(() => {
     devToolsConnection.onMessage.removeListener(devToolsListener);
@@ -50,9 +58,9 @@ chrome.runtime.onMessage.addListener((message) => {
     default:
       console.log('Unknown event, message: ', message);
   }
-  if (devToolsConnection) {
-    devToolsConnection.postMessage(message);
-  } else {
-    console.error('devToolsConnection is not established yet');
-  }
+  // if (devToolsConnection) {
+  //   devToolsConnection.postMessage(message);
+  // } else {
+  //   console.error('devToolsConnection is not established yet');
+  // }
 });

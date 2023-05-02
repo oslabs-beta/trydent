@@ -73,31 +73,24 @@ if (!document.getElementById(contentScriptId)) {
   const scriptTag = document.createElement('script');
   scriptTag.id = contentScriptId;
   document.head.appendChild(scriptTag);
-
-  // listen for messages from background script
-  chrome.runtime.onMessage.addListener((message) => {
-    // if received message is to start content script
-    if (message.action === 'startContentScript') {
-      // get URL of current page
-      const URL = window.location.href;
-      // add event listeners for 'click', 'focus', 'blur', and 'change' events
-      ['click', 'focus', 'blur', 'change'].forEach((action) => {
-        document.addEventListener(action, (event) => {
-          // call the inputEventListener for each event
-          inputEventListener(event, (recordedEvent) => {
-            console.log('Content-script.js This is the recordedEvent: ', recordedEvent);
-            const { xPath, eventType, inputValue } = recordedEvent;
-            // send the xPath as a message to the window
-            window.postMessage({ xPath }, '*');
-            // send message to the background script with the event details
-            chrome.runtime.sendMessage({
-              action: eventType, selector: xPath, input: inputValue, URL,
-            });
-          });
+  // get URL of current page
+  const URL = window.location.href;
+  // add event listeners for 'click', 'focus', 'blur', and 'change' events
+  ['click', 'focus', 'blur', 'change'].forEach((action) => {
+    document.addEventListener(action, (event) => {
+      // call the inputEventListener for each event
+      inputEventListener(event, (recordedEvent) => {
+        console.log('Content-script.js This is the recordedEvent: ', recordedEvent);
+        const { xPath, eventType, inputValue } = recordedEvent;
+        // send the xPath as a message to the window
+        window.postMessage({ xPath }, '*');
+        // send message to the background script with the event details
+        chrome.runtime.sendMessage({
+          action: eventType, selector: xPath, input: inputValue, URL,
         });
       });
-      // Set up the inputEventListener with an empty callback function
-      inputEventListener({}, () => {});
-    }
+    });
   });
+  // Set up the inputEventListener with an empty callback function
+  inputEventListener({}, () => {});
 }
