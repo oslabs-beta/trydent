@@ -11,8 +11,7 @@ const TestPage: React.FC = () => {
     setIsRecording(true);
     // create and dispatch custom startRecording event
     // Get the current value of the input field
-    const itStatement = document.querySelector('#itStatement');
-    const itStatementValue = itStatement.value;
+    const itStatementValue = (document.querySelector('#itStatement') as HTMLInputElement).value;
 
     // Create and dispatch the custom startRecording event, including the input field value as data
     const evt = new CustomEvent('startRecording', { detail: { inputValue: itStatementValue } });
