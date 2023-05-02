@@ -66,7 +66,7 @@ const CodeBlock = () => {
         textArea.select();
         // try to copy selected content to the clipboard
         try {
-            await navigator.clipboard.writeText(sampleTextFormatted);
+            document.execCommand('copy');
             setCopied(true);
         }
         catch (err) {

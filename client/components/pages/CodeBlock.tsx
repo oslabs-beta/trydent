@@ -70,7 +70,8 @@ const CodeBlock: React.FC = () => {
 
     // try to copy selected content to the clipboard
     try {
-      await navigator.clipboard.writeText(sampleTextFormatted);
+      // KEEP AS EXECCOMMAND UNTIL A WORKING ALTERNATIVE CAN BE FOUND
+      document.execCommand('copy');
       setCopied(true);
     } catch (err) {
       console.log('Unable to copy text', err);
