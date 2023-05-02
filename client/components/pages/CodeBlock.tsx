@@ -18,22 +18,20 @@ const prettierFormat = (input: string): string => {
 };
 
 
-// RENAME THESE VARIABLES 
-let sampleText = ''
-let sampleTextFormatted = '';
+// // RENAME THESE VARIABLES 
+// let sampleText = ''
+// let sampleTextFormatted = '';
 
-// Event listener for the message being sent from devtool.js that includes the string generatedCode
-// Invoke prettierFormat function with generated code
-window.addEventListener('message', (event) => {
-  if (event.data.type === 'GENERATED_CODE') {
-    console.log("EVENT - gen code TSX: ", event)
-    sampleText = event.data.code;
-    console.log(sampleText);
-    sampleTextFormatted = prettierFormat(sampleText);
-  }
-});
+// // Event listener for the message being sent from devtool.js that includes the string generatedCode
+// // Invoke prettierFormat function with generated code
+// window.addEventListener('message', (event) => {
+//   if (event.data.type === 'GENERATED_CODE') {
+//     console.log("EVENT - gen code TSX: ", event)
+//     sampleText = event.data.code;
+//     sampleTextFormatted = prettierFormat(sampleText);
+//   }
+// });
 
-console.log('sampleTextFormatted: ', sampleTextFormatted);
 
 /**
  * Displays the generated code and provides functionality of copying to clipboard
@@ -66,7 +64,6 @@ const CodeBlock: React.FC = () => {
     }, 2000);
   };
 
-  // useEffect to monitor state change 
   useEffect(() => {
     const handleMessageEvent = (event: MessageEvent) => {
       if (event.data.type === 'GENERATED_CODE') {
@@ -99,7 +96,7 @@ const CodeBlock: React.FC = () => {
           wrapLines={true}
           lineProps={{ style: { paddingRight: '1em' } }}
         >
-          {formattedText ? formattedText : sampleText}
+          {formattedText ? formattedText : ''}
         </SyntaxHighlighter>
       </pre>
       <p>
