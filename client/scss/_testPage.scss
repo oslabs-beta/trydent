@@ -82,6 +82,15 @@
     }
   }
 
+      #generate {
+    background-color: #e44848;
+    color: white;
+    &:hover {
+      background-color: #f85c5c;
+      transform: translateY(-2px); // Add translateY transform for a subtle lift effect on hover
+    }
+  }
+
   .input-history
     li {
       border: 0.1rem solid $color-input-border;
