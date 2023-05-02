@@ -15,7 +15,7 @@ let backgroundPageConnection;
 // array to store the recorded events
 const eventArr = [];
 // add in isMonitioring boolean to see if "start recording" has been clicked -- intial value false 
-let isMonitioring = false; 
+let isMonitoring = false; 
 
 // test object used to create test script
 const describeObj = {
@@ -64,7 +64,7 @@ const connectToBackground = () => {
   // set the connection status to true
   isConnected = true;
   //  set our isMonitoring to true so we start adding events into the eventArr. This is more important to have so we can STOP recording as well
-  isMonitioring = true; 
+  isMonitoring = true; 
   // clear eventArr for a new test
   eventArr.splice(0, eventArr.length);
 };
@@ -72,13 +72,14 @@ const connectToBackground = () => {
 // Listen for the "startRecording" event triggered from TestPage
 window.addEventListener('startRecording', (e) => {
   // if connection is not established, connect to background
-  if (!isConnected) {
+  while (!isConnected) {
     describeObj.itStatements[0].itStatement = e.detail.inputValue
     // assign our it description in here 
     connectToBackground();
   }
 });
 
+//add an event listener to listen for tab change??
 // Listen for the "stoptRecording" event triggered from TestPage
 window.addEventListener('stopRecording', (e) => {
   // if connection is not established, connect to background
