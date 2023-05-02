@@ -72,7 +72,7 @@ const connectToBackground = () => {
 // Listen for the "startRecording" event triggered from TestPage
 window.addEventListener('startRecording', (e) => {
   // if connection is not established, connect to background
-  while (!isConnected) {
+  if (!isConnected) {
     describeObj.itStatements[0].itStatement = e.detail.inputValue
     // assign our it description in here 
     connectToBackground();
