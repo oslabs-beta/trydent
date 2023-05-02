@@ -18,17 +18,12 @@ const TestPage: React.FC = () => {
     window.dispatchEvent(evt);
   };
 
-  // dispatch a custom event stopRecording to signal the stop of recording
-  const handleStopRecording = () => {
+  const handleGenerate = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     setIsRecording(false);
     // create and dispatch custom startRecording event
     const evt = new CustomEvent('stopRecording');
     window.dispatchEvent(evt);
-  };
-
-  const handleClick = (event) => {
-    event.preventDefault();
-    handleStopRecording();
     navigate('/codeBlock');
   };
   return (
@@ -40,7 +35,7 @@ const TestPage: React.FC = () => {
       </button>
       <summary>Track your input here:</summary>
       <ol className="input-history"></ol>
-      <button id="generate" onClick={handleClick}>
+      <button id="generate" onClick={handleGenerate}>
         Generate Test
       </button>
       <details>
