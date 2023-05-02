@@ -16,34 +16,17 @@ chrome.runtime.onConnect.addListener((connection) => {
       chrome.tabs.sendMessage(message.tabId, { action: 'startContentScript' });
     });
   };
-  // chrome.tabs.onActivated.addListener((tabInfo) => {
-  //   const { tabId } = tabInfo;
-  //   console.log('changed to tab: ', tabId);
-  //   chrome.scripting.executeScript({
-  //     target: { tabId: message.tabId },
-  //     files: [message.scriptToInject],
 
-  //   });
-  // });
+  chrome.tabs.onActivated.addListener((tabInfo) => {
+    const { tabId } = tabInfo;
+    console.log('changed to tab: ', tabId);
+    chrome.scripting.executeScript({
+      target: { tabId: message.tabId },
+      files: [message.scriptToInject],
 
-  // const contentScriptListener = (message, sender, sendResponse) => {
-  //   switch (message.action) {
-  //     case 'click':
-  //       console.log('Clicked, message: ', message);
-  //       break;
-  //     case 'focus':
-  //       console.log('Focused, message: ', message);
-  //       break;
-  //     case 'blur':
-  //       console.log('Blurred, message: ', message);
-  //       break;
-  //     case 'change':
-  //       console.log('Changed, message: ', message);
-  //       break;
-  //     default:
-  //       console.log('Unknown event, message: ', message);
-  //   }
-  // };
+    });
+  });
+
   // add devToolsListener function as a listener for messages from devtools script
   devToolsConnection.onMessage.addListener(devToolsListener);
   // remove devToolsListener function from listeners when devtools disconnects
