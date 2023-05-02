@@ -2,13 +2,18 @@ import { Describe, itObject, EventObj } from './types/types';
 
 function switchCase(event: EventObj): string {
   const { selector, action, input, URL } = event;
+    // if (mode === 'assertion'){
+  //   switch (action){
+  //     case 'click':
+  //       return `cy.xpath('${selector}').should('exist');`
+  //   }
   switch (action) {
     case 'click':
-      return `cy.xpath('["${selector}"]').click();
+      return `cy.xpath('${selector}').click();
         cy.url().should('include','${URL}');`;
       break;
-    case 'input':
-      return `cy.xpath('["${selector}"]').input('${input}');`;
+    case 'change':
+      return `cy.xpath('${selector}').type('${input}');`;
       break;
     case 'navigate':
       return `cy.url().should('include','${URL}');`;
@@ -34,14 +39,13 @@ export function describeCreator(obj: Describe): string {
     describe('${description}', () => {
       beforeEach(() => {
         cy.visit('${URL}')
-        cy.window().should('have.property', 'appReady', true)
       })
         
       ${itCreator(itStatements, URL)}
     })`);
 }
 /**
- *
+ * separate itStatements function to make a describe with multiple its
  *
  * @param {array} itStatementsArr - Array containing it statement objects.
  * @param {string} URL - URL of the page to be tested.
@@ -63,7 +67,7 @@ function itCreator(itStatementsArr: itObject[], URL: string): string {
   return itText;
 }
 /**
- *
+ * separate action function to make an it statement with multiple actions
  *
  * @param {itObject} eObj - Event Object containing it statement and array of events.
  * @param {string} URL - URL of the page to be tested.
@@ -88,4 +92,3 @@ function actionCreator(eObj: itObject, URL: string): string {
       }`;
   return resultText;
 }
-

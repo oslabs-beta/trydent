@@ -1,5 +1,5 @@
 // will likely use on further switch cases
-import endent from 'endent';
+import endent from 'endent'; // ###TODO: remove this with `npm` command, not needed
 import { EventObj } from './types/types';
 
 // ###TO-DO: basic switch case function, will expand upon this later

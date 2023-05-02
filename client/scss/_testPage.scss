@@ -35,15 +35,59 @@
   button {
     @extend .standard-button;
     margin-bottom: 2rem;
+    transition: background-color 0.3s ease, transform 0.3s ease; // Add transform transition
   }
 
-  ol {
+  details {
+    summary {
+      font-weight: $font-weight-semibold;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+    }
+    ol {
+      margin-bottom: 1rem;
+      li {
+        margin: 0.5rem 0;
+      }
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+  }
+  .input-history {
+    margin: 1rem 0;
+    height: 10rem;
+    // width: 80vw;
+    overflow: auto;
+    border: 0.1rem solid $color-input-border;
+    padding:0.5rem 1.5rem;
+    border-radius: 0.3rem;
     font-size: $font-size-base;
-    font-weight: $font-weight-light;
-    line-height: 1.5;
+    color: $color-text;
+    background-color: $color-input-background;
 
     li {
-      margin-bottom: 0.5rem;
+      background-color: transparent;
     }
   }
+
+  .recording {
+    background-color: #4caf50;
+    color: white;
+    &:hover {
+      background-color: #4aa14d;
+      transform: translateY(-2px); // Add translateY transform for a subtle lift effect on hover
+    }
+  }
+
+  .input-history
+    li {
+      border: 0.1rem solid $color-input-border;
+      border-radius: 0.3rem;
+      padding: 0.5rem 1rem;
+      text-align: center;
+      background-color: lighten($color-input-background, 5%);
+    }
 }

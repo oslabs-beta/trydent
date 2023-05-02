@@ -1,21 +1,6 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-plusplus */
 /* eslint-disable max-len */
-// // Import the getRelativeXPath function and inputEventListener from the inputLogger module
-// import { inputEventListener, getRelativeXPath } from './bundles/client/utils/inputLogger';
-// Load the inputLogger module dynamically
-// import('./bundles/utils/inputLogger.js').then(({ inputEventListener, getRelativeXPath }) => {
-//   document.addEventListener('click', (event) => {
-//     const xPath = getRelativeXPath(event.target);
-//     console.log('Clicked element XPath:', xPath);
-//     window.postMessage({ xPath }, '*');
-//     chrome.runtime.sendMessage({ action: 'logEvent', xPath: { xPath } });
-//   });
-
-//   // Set up the inputEventListener with an empty callback function
-//   inputEventListener({}, () => {});
-// }).catch((error) => {
-//   console.error('Error loading inputLogger:', error);
-// });
 
 function getRelativeXPath(element) {
   // If the element is null or undefined, return an empty string
@@ -26,12 +11,13 @@ function getRelativeXPath(element) {
   const uniqueAttributes = ['data-cy', 'data-test', 'data-testid', 'id'];
   let attr = '';
   // Iterate through the uniqueAttributes array and use the first one found on the element
-  for (const attribute of uniqueAttributes) {
+  uniqueAttributes.some((attribute) => {
     if (element.hasAttribute(attribute)) {
       attr = `[@${attribute}="${element.getAttribute(attribute)}"]`;
-      break;
+      return true;
     }
-  }
+    return false;
+  });
   // If a unique attribute is found, return the xPath using that attribute
   if (attr) { return `//${tagName}${attr}`; }
   // Calculate position of the element among siblings with the same tag
@@ -49,7 +35,9 @@ function getRelativeXPath(element) {
 function inputEventListener(event, callback) {
   const xPath = getRelativeXPath(event.target);
   const eventType = event.type;
-
+  let initialValue;
+  let inputValue;
+  let newValue;
   // Store different event types using a switch statement
   switch (eventType) {
     case 'click':
@@ -57,7 +45,7 @@ function inputEventListener(event, callback) {
       break;
     // case 'input':
     case 'change':
-      const inputValue = event.target.value;
+      inputValue = event.target.value;
       callback({ xPath, eventType, inputValue });
       break;
     case 'focus':
@@ -65,7 +53,7 @@ function inputEventListener(event, callback) {
       callback({ xPath, eventType });
       break;
     case 'blur':
-      const newValue = event.target.value;
+      newValue = event.target.value;
       if (initialValue !== newValue) {
         callback({ xPath, eventType: 'input', inputValue: newValue });
       }
@@ -76,21 +64,27 @@ function inputEventListener(event, callback) {
   }
 }
 
+// define unique ID for content script
 const contentScriptId = 'contentScriptId';
 
+// if content script has not already been injected into the page
 if (!document.getElementById(contentScriptId)) {
+  // create a new script tag and set id to contentScriptId and append to document head
   const scriptTag = document.createElement('script');
   scriptTag.id = contentScriptId;
   document.head.appendChild(scriptTag);
-
+  // get URL of current page
   const URL = window.location.href;
-  // change to general event listener and use switch cases
+  // add event listeners for 'click', 'focus', 'blur', and 'change' events
   ['click', 'focus', 'blur', 'change'].forEach((action) => {
     document.addEventListener(action, (event) => {
+      // call the inputEventListener for each event
       inputEventListener(event, (recordedEvent) => {
-        console.log('This is the recordedEvent: ', recordedEvent);
+        console.log('Content-script.js This is the recordedEvent: ', recordedEvent);
         const { xPath, eventType, inputValue } = recordedEvent;
+        // send the xPath as a message to the window
         window.postMessage({ xPath }, '*');
+        // send message to the background script with the event details
         chrome.runtime.sendMessage({
           action: eventType, selector: xPath, input: inputValue, URL,
         });

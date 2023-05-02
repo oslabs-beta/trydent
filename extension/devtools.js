@@ -1,65 +1,75 @@
-// Creates the panels in the dev tools
+// Creates the Trydent panel in the dev tools
 chrome.devtools.panels.create(
   'Trydent',
-  null, // logo path
+  null, // logo path (none at the moment)
   'panel.html', // HTML served to the panel
-  null,
+  null, // callback function
 );
 
-const backgroundPageConnection = chrome.runtime.connect({
-  name: 'devtools-page',
-});
-
+// array to store the recorded events
 const eventArr = [];
-// add in isMonitioring boolean to see if "start recording" has been clicked -- intial value false 
-//  create eventlistener to monitor "start recording"
-  //  grab intial url 
-  //  grab value from describe box
-  //  grab value from it description box
-  //  change is monitoring to true 
-
-chrome.runtime.onMessage.addListener((message) => {
-  // Handle responses from the background page, if any
-  // if (isMonitoring){ // we want a conditional here to check isMonitoring so once we click start recording we begin to build our eventArr 
-  eventArr.push(message);
-  // }
-});
-
-const panel = document.getElementById('panel');
-
+// test object used to create test script
 const describeObj = {
-  URL: 'localhost:3000',
+  URL: null,
   description: 'Test go Boom',
-  writeUp: 'This is a test and its going to work :)... eventually',
+  writeUp: "This is a test and it's going to work :)... eventually",
   itStatements: [
     {
       itStatement: 'Track my random clicks',
-      eventArr: eventArr,
+      eventArr,
     },
   ],
 };
 
-  async function describeCreatorImport() {
-  const { describeCreator} = await import('./bundles/utils/testCreator.js');
-  return describeCreator(describeObj);
-}
-
-// This is how you can return a value without it being a promise 
-// (async function() {
-//   console.log(await describeCreatorImport());
-// })();
-
-const submitButton = document.createElement('button');
-panel.appendChild(submitButton);
-submitButton.innerText = 'submit';
-submitButton.addEventListener('click', async (e) => {
-  console.log('clicked submit');
-  console.log('events array?', eventArr);
-
-  console.log(describeCreatorImport());
-  
+// establishes a connection to background with a specific name (name is not that important)
+const backgroundPageConnection = chrome.runtime.connect({
+  name: 'devtools-page',
 });
 
+chrome.runtime.onMessage.addListener((message) => {
+  // grab current url for when the test is initiated - check to see if the describeObj.url has a value -- if not assign it one
+  if (describeObj.URL === null) describeObj.URL = message.URL;
+  eventArr.push(message);
+  console.log('This is our updated events array: ', eventArr);
+  // input history querys the DOM for the classname and returns an HTMLCollection which is type array
+  // in order to append to the DOM from here, we have to treat it as an array and appropriate methods against it
+  // ** should probably create a function outside of this to modularize :) - NL
+  const inputHistory = document.getElementsByClassName('input-history');
+  const input = document.createElement('li');
+  input.innerText = `${message.action}${message.input ? ` to:  ${message.input}` : ''}`;
+  inputHistory[0].appendChild(input);
+  input.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+})
+
+// Listen for the "describeStatement" event triggered from WelcomePage
+window.addEventListener('describeStatement', (e) => {
+  // assign describeObj value 
+  describeObj.description = e.detail.inputValue
+});
+
+// Listen for the "startRecording" event triggered from TestPage
+window.addEventListener('startRecording', (e) => {
+  describeObj.itStatements[0].itStatement = e.detail.inputValue
+  // clear eventArr for a new test
+  eventArr.splice(0, eventArr.length);
+});
+
+// Listen for the "stoptRecording" event triggered from TestPage
+window.addEventListener('stopRecording', (e) => {
+  //  async function so when generated code is assigned its a string and not a promise, this allows CodeBlock.tsx to easily catch the message
+  (async function() {
+    let generatedCode = await describeCreatorImport();
+    console.log("gen code: ", generatedCode);
+    window.postMessage({ type: 'GENERATED_CODE', code: generatedCode })
+  })();
+});
+
+
+// async function to import describeCreator and execute it with describeObj
+async function describeCreatorImport() {
+  const { describeCreator } = await import("./bundles/utils/testCreator.js");
+  return describeCreator(describeObj);
+}
 
 // Relay the tab ID to the background page as an object
 backgroundPageConnection.postMessage({
@@ -68,4 +78,11 @@ backgroundPageConnection.postMessage({
 });
 
 
+/**
+ * This is how you can return a value without it being a promise 
+// (async function() {
+//   console.log(await describeCreatorImport());
+// })();
+// });
+*/
    
