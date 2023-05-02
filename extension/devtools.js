@@ -80,10 +80,17 @@ window.addEventListener('startRecording', (e) => {
 window.addEventListener('stopRecording', (e) => {
   // if connection is not established, connect to background
   if (isConnected) {
+  if (isConnected) {
     isConnected = false; 
-    console.log(describeCreatorImport());
-  }
+  //  async function so when generated code is assigned its a string and not a promise, this allows CodeBlock.tsx to easily catch the message
+    (async function() {
+      let generatedCode = await describeCreatorImport();
+      console.log("gen code: ", generatedCode);
+      window.postMessage({ type: 'GENERATED_CODE', code: generatedCode })
+    })();
+  }}
 });
+
 
 
 // Listen for the "describeStatement" event triggered from WelcomePage
