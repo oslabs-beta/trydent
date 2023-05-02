@@ -17,22 +17,6 @@ const prettierFormat = (input: string): string => {
   });
 };
 
-
-// // RENAME THESE VARIABLES 
-// let sampleText = ''
-// let sampleTextFormatted = '';
-
-// // Event listener for the message being sent from devtool.js that includes the string generatedCode
-// // Invoke prettierFormat function with generated code
-// window.addEventListener('message', (event) => {
-//   if (event.data.type === 'GENERATED_CODE') {
-//     console.log("EVENT - gen code TSX: ", event)
-//     sampleText = event.data.code;
-//     sampleTextFormatted = prettierFormat(sampleText);
-//   }
-// });
-
-
 /**
  * Displays the generated code and provides functionality of copying to clipboard
  *
@@ -53,7 +37,7 @@ const CodeBlock: React.FC = () => {
     textArea.select();
 
     try {
-      await navigator.clipboard.writeText(formattedText);
+      document.execCommand('copy')
       setCopied(true);
     } catch (err) {
       console.log('Unable to copy text', err);
