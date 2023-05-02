@@ -1,10 +1,12 @@
+/* eslint-disable func-names */
+/* eslint-disable no-undef */
 let devToolsConnection;
 
 // upon connection execute the content-script
 chrome.runtime.onConnect.addListener((connection) => {
   devToolsConnection = connection;
   // assign the listener function to a variable so we can remove it later
-  const devToolsListener = function (message, sender, sendResponse) {
+  const devToolsListener = function (message) {
     console.log('we are in background.js');
 
     // Inject a content script into the tab specified by the message
@@ -36,7 +38,7 @@ chrome.runtime.onConnect.addListener((connection) => {
 });
 
 // listen for message from content script
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((message) => {
   // Check event and proceed message accordingly
   switch (message.action) {
     case 'click':

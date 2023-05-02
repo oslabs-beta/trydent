@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-plusplus */
 /* eslint-disable max-len */
 
@@ -10,12 +11,13 @@ function getRelativeXPath(element) {
   const uniqueAttributes = ['data-cy', 'data-test', 'data-testid', 'id'];
   let attr = '';
   // Iterate through the uniqueAttributes array and use the first one found on the element
-  for (const attribute of uniqueAttributes) {
+  uniqueAttributes.some((attribute) => {
     if (element.hasAttribute(attribute)) {
       attr = `[@${attribute}="${element.getAttribute(attribute)}"]`;
-      break;
+      return true;
     }
-  }
+    return false;
+  });
   // If a unique attribute is found, return the xPath using that attribute
   if (attr) { return `//${tagName}${attr}`; }
   // Calculate position of the element among siblings with the same tag
@@ -33,7 +35,9 @@ function getRelativeXPath(element) {
 function inputEventListener(event, callback) {
   const xPath = getRelativeXPath(event.target);
   const eventType = event.type;
-
+  let initialValue;
+  let inputValue;
+  let newValue;
   // Store different event types using a switch statement
   switch (eventType) {
     case 'click':
@@ -41,7 +45,7 @@ function inputEventListener(event, callback) {
       break;
     // case 'input':
     case 'change':
-      const inputValue = event.target.value;
+      inputValue = event.target.value;
       callback({ xPath, eventType, inputValue });
       break;
     case 'focus':
@@ -49,7 +53,7 @@ function inputEventListener(event, callback) {
       callback({ xPath, eventType });
       break;
     case 'blur':
-      const newValue = event.target.value;
+      newValue = event.target.value;
       if (initialValue !== newValue) {
         callback({ xPath, eventType: 'input', inputValue: newValue });
       }

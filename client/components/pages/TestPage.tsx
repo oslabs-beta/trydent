@@ -11,25 +11,19 @@ const TestPage: React.FC = () => {
     setIsRecording(true);
     // create and dispatch custom startRecording event
     // Get the current value of the input field
-    const itStatement = document.querySelector('#itStatement');
-    const itStatementValue = itStatement.value;
+    const itStatementValue = (document.querySelector('#itStatement') as HTMLInputElement).value;
 
     // Create and dispatch the custom startRecording event, including the input field value as data
     const evt = new CustomEvent('startRecording', { detail: { inputValue: itStatementValue } });
     window.dispatchEvent(evt);
   };
 
-  // dispatch a custom event stopRecording to signal the stop of recording
-  const handleStopRecording = () => {
+  const handleGenerate = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     setIsRecording(false);
     // create and dispatch custom startRecording event
     const evt = new CustomEvent('stopRecording');
     window.dispatchEvent(evt);
-  };
-
-  const handleClick = (event) => {
-    event.preventDefault();
-    handleStopRecording();
     navigate('/codeBlock');
   };
   return (
@@ -39,9 +33,11 @@ const TestPage: React.FC = () => {
       <button id="startRecording" onClick={handleStartRecording} className={isRecording ? 'recording' : ''}>
         {isRecording ? 'Recording in progress...' : 'Start Recording'}
       </button>
-      <summary>Track your input here:</summary>
-      <ol className="input-history"></ol>
-      <button id="generate" onClick={handleClick}>
+      <summary>Inputs Log:</summary>
+      <div className="input-container">
+        <ol className="input-history"></ol>
+      </div>
+      <button id="generate" onClick={handleGenerate}>
         Generate Test
       </button>
       <details>

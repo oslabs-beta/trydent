@@ -17,8 +17,7 @@ const WelcomePage: React.FC = () => {
   const handleSendDescribe = () => {
     // create and dispatch custom startRecording event
     // Get the current value of the input field
-    const describeStatement = document.querySelector('#describeStatement');
-    const describeStatementValue = describeStatement.value;
+    const describeStatementValue = (document.querySelector('#describeStatement') as HTMLInputElement).value;
 
     // Create and dispatch the custom event, including the input field value as data
     const evt = new CustomEvent('describeStatement', { detail: { inputValue: describeStatementValue } });
