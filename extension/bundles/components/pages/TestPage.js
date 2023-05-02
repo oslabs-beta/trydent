@@ -9,8 +9,7 @@ const TestPage = () => {
         setIsRecording(true);
         // create and dispatch custom startRecording event
         // Get the current value of the input field
-        const itStatement = document.querySelector('#itStatement');
-        const itStatementValue = itStatement.value;
+        const itStatementValue = document.querySelector('#itStatement').value;
         // Create and dispatch the custom startRecording event, including the input field value as data
         const evt = new CustomEvent('startRecording', { detail: { inputValue: itStatementValue } });
         window.dispatchEvent(evt);
