@@ -1,5 +1,10 @@
 function switchCase(event) {
     const { selector, action, input, URL } = event;
+    // if (mode === 'assertion'){
+    //   switch (action){
+    //     case 'click':
+    //       return `cy.xpath('${selector}').should('exist');`
+    //   }
     switch (action) {
         case 'click':
             return `cy.xpath('${selector}').click();
