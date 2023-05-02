@@ -14,8 +14,8 @@ let backgroundPageConnection;
 
 // array to store the recorded events
 const eventArr = [];
-// add in isMonitioring boolean to see if "start recording" has been clicked -- intial value false 
-let isMonitioring = false; 
+// add in isMonitoring boolean to see if "start recording" has been clicked -- intial value false 
+let isMonitoring = false; 
 
 // test object used to create test script
 const describeObj = {
@@ -48,7 +48,7 @@ const connectToBackground = () => {
   backgroundPageConnection.onMessage.addListener((message) => {
     console.log('This is the message in devtools.js: ', message);
     // Grab current URL for when the test is intiated - check to see if the describeObj.url has a value -- if not assign it one
-    if (isMonitioring){
+    if (isMonitoring){
       if (describeObj.URL === null) describeObj.URL = message.URL;
       eventArr.push(message);
     console.log('This is our updated events array: ', eventArr)
@@ -64,7 +64,7 @@ const connectToBackground = () => {
   // set the connection status to true
   isConnected = true;
   //  set our isMonitoring to true so we start adding events into the eventArr. This is more important to have so we can STOP recording as well
-  isMonitioring = true; 
+  isMonitoring = true; 
   // clear eventArr for a new test
   eventArr.splice(0, eventArr.length);
 };
@@ -83,10 +83,18 @@ window.addEventListener('startRecording', (e) => {
 window.addEventListener('stopRecording', (e) => {
   // if connection is not established, connect to background
   if (isConnected) {
-    isMonitioring = false; 
-    console.log(describeCreatorImport());
-  }
-});
+    isMonitoring = false; 
+    // let generatedCode = (async function() {
+    //   console.log(await describeCreatorImport());
+    // })();
+  
+    (async function() {
+      let generatedCode = await describeCreatorImport();
+      console.log("gen code: ", generatedCode);
+      window.postMessage({ type: 'GENERATED_CODE', code: generatedCode })
+    })();
+}});
+
 
 
 // Listen for the "describeStatement" event triggered from WelcomePage

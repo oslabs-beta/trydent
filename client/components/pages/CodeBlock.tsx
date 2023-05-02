@@ -17,27 +17,23 @@ const prettierFormat = (input: string): string => {
   });
 };
 
-// ###TODO: delete once page events are properly implemented
-// changed to be poorly formatted, proving that prettier works
-let sampleText = `//High level description on how the button should be clicked
-describe("click on the thing", () => {
-        beforeEach(() => {
-    cy.visit("localhost:3000");
-    cy.window().should("have.property", "appReady", true);
+
+// RENAME THESE VARIABLES 
+let sampleText = ''
+let sampleTextFormatted = '';
+
+// Event listener for the message being sent from devtool.js that includes the string generatedCode
+// Invoke prettierFormat function with generated code
+window.addEventListener('message', (event) => {
+  if (event.data.type === 'GENERATED_CODE') {
+    console.log("EVENT - gen code TSX: ", event)
+    sampleText = event.data.code;
+    console.log(sampleText);
+    sampleTextFormatted = prettierFormat(sampleText);
+  }
 });
 
-  it("should be a click3", () => {
-    cy.xpath('[".XPATH"]').click();
-        cy.url().should("include", "/user/login");
-      cy.xpath('[".XPATH"]').input("typed into the box");
-  });
-  it("should be a input4", () => {
-    cy.xpath('[".XPATH"]').click()
-    cy.url().should("include", "/user/login")
-    cy.xpath('[".XPATH"]').input("typed into the box");
-  });
-});`;
-let sampleTextFormatted = prettierFormat(sampleText);
+console.log('sampleTextFormatted: ', sampleTextFormatted);
 
 /**
  * Displays the generated code and provides functionality of copying to clipboard
@@ -46,47 +42,52 @@ let sampleTextFormatted = prettierFormat(sampleText);
  * @returns {ReactElement} - JSX code for rendering the component
  */
 const CodeBlock: React.FC = () => {
-  // State to track if code has been copied to clipboard
   const [copied, setCopied] = useState(false);
+  const [formattedText, setFormattedText] = useState('');
 
-  /**
-   * Copies sampleTextFormatted to clipboard
-   * Then updates 'copied' status and resets it after 2 seconds
-   *
-   * @async
-   * @function
-   */
   const handleCopy = async (): Promise<void> => {
-    // creates temporary textarea element. setting the value to sample text and appending to body
     const textArea = document.createElement('textarea');
-    textArea.value = sampleTextFormatted;
-    // Set CSS properties to make the textarea invisible
+    textArea.value = formattedText;
     textArea.style.position = 'absolute';
     textArea.style.left = '-9999px';
     textArea.style.top = '-9999px';
     document.body.appendChild(textArea);
-    // selects the text in the text area
     textArea.select();
 
-    // try to copy selected content to the clipboard
     try {
-      await navigator.clipboard.writeText(sampleTextFormatted);
+      await navigator.clipboard.writeText(formattedText);
       setCopied(true);
     } catch (err) {
       console.log('Unable to copy text', err);
     }
 
-    // remove textarea from document body after 2 seconds and reset copied status
     setTimeout(() => {
       setCopied(false);
     }, 2000);
   };
 
+  // useEffect to monitor state change 
+  useEffect(() => {
+    const handleMessageEvent = (event: MessageEvent) => {
+      if (event.data.type === 'GENERATED_CODE') {
+        const inputText = event.data.code;
+        console.log(inputText);
+        const formatted = prettierFormat(inputText);
+        setFormattedText(formatted);
+      }
+    };
+
+    window.addEventListener('message', handleMessageEvent);
+
+    return () => {
+      window.removeEventListener('message', handleMessageEvent);
+    };
+  }, []);
+
   return (
     <div className="codeBlock">
       <h1>Generated Test</h1>
       <pre>
-        {/* Render the copy button and change its text and class depending on the 'copied' state */}
         <button onClick={handleCopy} disabled={copied} className={copied ? 'copied' : ''}>
           {copied ? 'Copied to clipboard!' : 'Copy'}
         </button>
@@ -95,13 +96,10 @@ const CodeBlock: React.FC = () => {
           style={oneDark}
           customStyle={{ background: '#1A1A1A' }}
           codeTagProps={{ style: { background: '#1A1A1A' } }}
-          // must be enabled for lineProps to work
           wrapLines={true}
-          // set the line style of the span that wraps each span of code
-          // set padding-right of scrollable text to make padding symmetrical
           lineProps={{ style: { paddingRight: '1em' } }}
         >
-          {sampleTextFormatted}
+          {formattedText ? formattedText : sampleText}
         </SyntaxHighlighter>
       </pre>
       <p>
@@ -121,5 +119,6 @@ const CodeBlock: React.FC = () => {
     </div>
   );
 };
+
 
 export default CodeBlock;
