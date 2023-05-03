@@ -1,12 +1,19 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-plusplus */
 /* eslint-disable max-len */
-
+let a = false;
+let href = '';
 function getRelativeXPath(element) {
   // If the element is null or undefined, return an empty string
   if (!element) { return ''; }
   // Get the element's tag name and convert it to lowercase to follow xPath conventions
   const tagName = element.tagName.toLowerCase();
+  if (tagName === 'a') {
+    if (element.hasAttribute('href')) {
+      a = true;
+      href = element.getAttribute('href');
+    }
+  }
   // Array of unique attributes to use for the XPath
   const uniqueAttributes = ['data-cy', 'data-test', 'data-testid', 'id'];
   let attr = '';
@@ -77,9 +84,12 @@ const URL = window.location.href;
       window.postMessage({ xPath }, '*');
       // send message to the background script with the event details
       chrome.runtime.sendMessage({
-        action: eventType, selector: xPath, input: inputValue, URL,
+        action: eventType, selector: xPath, input: inputValue, URL, a, href,
       });
     });
+    // reset a and href here?
+    a = false;
+    href = '';
   });
 });
 // Set up the inputEventListener with an empty callback function
