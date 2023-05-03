@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable func-names */
 /* eslint-disable no-undef */
 let devToolsConnection;
@@ -39,7 +40,7 @@ chrome.runtime.onMessage.addListener((message) => {
   // Check event and proceed message accordingly
   switch (message.action) {
     case 'click':
-      console.log('Clicked, message: ', message);
+      // console.log('Clicked, message: ', message);
       break;
     case 'focus':
       // console.log('Focused, message: ', message);
