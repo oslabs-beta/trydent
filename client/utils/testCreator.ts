@@ -1,22 +1,21 @@
 import { Describe, itObject, EventObj } from './types/types';
 
 function switchCase(event: EventObj): string {
-  const { selector, action, input, URL } = event;
-    // if (mode === 'assertion'){
-  //   switch (action){
-  //     case 'click':
-  //       return `cy.xpath('${selector}').should('exist');`
-  //   }
+  let { selector, action, input, URL, a, href} = event;
+  if (a == true){
+    action = 'navigate'
+  }
   switch (action) {
     case 'click':
       return `cy.xpath('${selector}').click();
-        cy.url().should('include','${URL}');`;
+      cy.xpath('${selector}').should('exist');`;
       break;
     case 'change':
       return `cy.xpath('${selector}').type('${input}');`;
       break;
     case 'navigate':
-      return `cy.url().should('include','${URL}');`;
+      return `cy.xpath('${selector}').click();
+      cy.url().should('eq','${href}');`;
       break;
     default:
       return 'didnt input a valid action';

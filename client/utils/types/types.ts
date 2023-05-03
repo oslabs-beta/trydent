@@ -18,4 +18,6 @@ export type EventObj = {
   action: string;
   input?: string;
   URL?: string;
+  a?: boolean;
+  href?:string;
 };
