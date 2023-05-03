@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable func-names */
 /* eslint-disable no-undef */
 let devToolsConnection;

@@ -29,6 +29,7 @@ const backgroundPageConnection = chrome.runtime.connect({
 chrome.runtime.onMessage.addListener((message) => {
   // grab current url for when the test is initiated - check to see if the describeObj.url has a value -- if not assign it one
   if (describeObj.URL === null) describeObj.URL = message.URL;
+  if (message.a === true) message.action = 'navigate';
   eventArr.push(message);
   console.log('This is our updated events array: ', eventArr);
   // input history querys the DOM for the classname and returns an HTMLCollection which is type array
@@ -36,7 +37,7 @@ chrome.runtime.onMessage.addListener((message) => {
   // ** should probably create a function outside of this to modularize :) - NL
   const inputHistory = document.getElementsByClassName('input-history');
   const input = document.createElement('li');
-  input.innerText = `${message.action}${message.input ? ` to:  ${message.input}` : ''}`;
+  input.innerText = `${message.action}${message.input ? ` to:  ${message.input}` : ''}${message.a ? ` to:  ${message.href}` : ''}`;
   inputHistory[0].appendChild(input);
   input.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
 })
