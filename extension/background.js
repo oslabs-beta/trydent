@@ -60,3 +60,21 @@ chrome.runtime.onMessage.addListener((message) => {
     // console.error('devToolsConnection is not established yet');
   }
 });
+
+chrome.contextMenus.create({
+  id: 'trydent-window',
+  title: 'Trydent',
+  contexts: ['all'],
+});
+
+chrome.contextMenus.onClicked.addListener(({ menuItemId }) => {
+  const options = {
+    type: 'panel',
+    left: 0,
+    top: 0,
+    width: 1000,
+    height: 1000,
+    url: chrome.runtime.getURL('panel.html'),
+  };
+  if (menuItemId === 'trydent-window') chrome.windows.create(options);
+});
