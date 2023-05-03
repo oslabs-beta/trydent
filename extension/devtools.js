@@ -31,7 +31,7 @@ chrome.runtime.onMessage.addListener((message) => {
   if (describeObj.URL === null) describeObj.URL = message.URL;
   if (message.a === true) message.action = 'navigate';
   eventArr.push(message);
-  console.log('This is our updated events array: ', eventArr);
+  // console.log('This is our updated events array: ', eventArr);
   // input history querys the DOM for the classname and returns an HTMLCollection which is type array
   // in order to append to the DOM from here, we have to treat it as an array and appropriate methods against it
   // ** should probably create a function outside of this to modularize :) - NL
