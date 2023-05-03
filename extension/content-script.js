@@ -87,7 +87,7 @@ const URL = window.location.href;
         action: eventType, selector: xPath, input: inputValue, URL, a, href,
       });
     });
-    // reset a and href here?
+    // reset a and href here
     a = false;
     href = '';
   });
