@@ -11,11 +11,11 @@ const eventArr = [];
 // test object used to create test script
 const describeObj = {
   URL: null,
-  description: 'Test go Boom',
-  writeUp: "This is a test and it's going to work :)... eventually",
+  description: 'Cypress test block',
+  writeUp: "Trydent is cool",
   itStatements: [
     {
-      itStatement: 'Track my random clicks',
+      itStatement: '',
       eventArr,
     },
   ],
@@ -30,7 +30,7 @@ chrome.runtime.onMessage.addListener((message) => {
   // grab current url for when the test is initiated - check to see if the describeObj.url has a value -- if not assign it one
   if (describeObj.URL === null) describeObj.URL = message.URL;
   eventArr.push(message);
-  // console.log('This is our updated events array: ', eventArr);
+  console.log('This is our updated events array: ', eventArr);
   // input history querys the DOM for the classname and returns an HTMLCollection which is type array
   // in order to append to the DOM from here, we have to treat it as an array and appropriate methods against it
   // ** should probably create a function outside of this to modularize :) - NL

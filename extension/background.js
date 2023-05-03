@@ -16,7 +16,7 @@ chrome.runtime.onConnect.addListener((connection) => {
     });
   };
 
-  chrome.tabs.onActivated.addListener((tabInfo) => {
+  chrome.tabs.onActivated.addListener(() => {
     // console.log('changed to tab: ', tabId);
     chrome.scripting.executeScript({
       target: { tabId: message.tabId },
@@ -39,7 +39,7 @@ chrome.runtime.onMessage.addListener((message) => {
   // Check event and proceed message accordingly
   switch (message.action) {
     case 'click':
-      // console.log('Clicked, message: ', message);
+      console.log('Clicked, message: ', message);
       break;
     case 'focus':
       // console.log('Focused, message: ', message);
