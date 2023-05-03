@@ -16,22 +16,17 @@ chrome.runtime.onConnect.addListener((connection) => {
     });
   };
 
-  // chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  //   chrome.tabs.sendMessage(tabId, { action: 'startContentScript' });
-  // });
-
-  // add devToolsListener function as a listener for messages from devtools script
-  devToolsConnection.onMessage.addListener(devToolsListener);
-
   chrome.tabs.onActivated.addListener((tabInfo) => {
-    const { tabId } = tabInfo;
-    console.log('changed to tab: ', tabId);
+    // console.log('changed to tab: ', tabId);
     chrome.scripting.executeScript({
       target: { tabId: message.tabId },
       files: [message.scriptToInject],
 
     });
   });
+
+  // add devToolsListener function as a listener for messages from devtools script
+  devToolsConnection.onMessage.addListener(devToolsListener);
 
   // remove devToolsListener function from listeners when devtools disconnects
   devToolsConnection.onDisconnect.addListener(() => {
@@ -44,23 +39,23 @@ chrome.runtime.onMessage.addListener((message) => {
   // Check event and proceed message accordingly
   switch (message.action) {
     case 'click':
-      console.log('Clicked, message: ', message);
+      // console.log('Clicked, message: ', message);
       break;
     case 'focus':
-      console.log('Focused, message: ', message);
+      // console.log('Focused, message: ', message);
       break;
     case 'blur':
-      console.log('Blurred, message: ', message);
+      // console.log('Blurred, message: ', message);
       break;
     case 'change':
-      console.log('Changed, message: ', message);
+      // console.log('Changed, message: ', message);
       break;
     default:
-      console.log('Unknown event, message: ', message);
+      // console.log('Unknown event, message: ', message);
   }
-  // if (devToolsConnection) {
-  //   devToolsConnection.postMessage(message);
-  // } else {
-  //   console.error('devToolsConnection is not established yet');
-  // }
+  if (devToolsConnection) {
+    devToolsConnection.postMessage(message);
+  } else {
+    // console.error('devToolsConnection is not established yet');
+  }
 });

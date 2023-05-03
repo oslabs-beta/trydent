@@ -11,10 +11,6 @@ import CodeBlock from './pages/CodeBlock';
 // repo-imports necessary to prevent bundling errors.
 // ###TODO 15 May 2023: remove imports that are not used in any other file
 // --- --- --- --- --- --- --- --- ---
-// ./client/components folder
-import EventLogger from './EventLogger';
-// ./client/utils folder
-import { getRelativeXPath, inputEventListener, RecordedEvent } from '../utils/inputLogger';
 import { describeCreator } from '../utils/testCreator';
 // ./client/utils/types folder
 import { Describe, itObject, EventObj } from '../utils/types/types';

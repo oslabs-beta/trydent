@@ -30,7 +30,7 @@ chrome.runtime.onMessage.addListener((message) => {
   // grab current url for when the test is initiated - check to see if the describeObj.url has a value -- if not assign it one
   if (describeObj.URL === null) describeObj.URL = message.URL;
   eventArr.push(message);
-  console.log('This is our updated events array: ', eventArr);
+  // console.log('This is our updated events array: ', eventArr);
   // input history querys the DOM for the classname and returns an HTMLCollection which is type array
   // in order to append to the DOM from here, we have to treat it as an array and appropriate methods against it
   // ** should probably create a function outside of this to modularize :) - NL
@@ -59,7 +59,7 @@ window.addEventListener('stopRecording', (e) => {
   //  async function so when generated code is assigned its a string and not a promise, this allows CodeBlock.tsx to easily catch the message
   (async function() {
     let generatedCode = await describeCreatorImport();
-    console.log("gen code: ", generatedCode);
+    // console.log("gen code: ", generatedCode);
     window.postMessage({ type: 'GENERATED_CODE', code: generatedCode })
   })();
 });

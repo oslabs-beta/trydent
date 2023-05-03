@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import EventLogger from '../EventLogger'; // ###TODO: EventLogger is never used. Remove it?
 import { useNavigate } from 'react-router-dom';
 
 const TestPage: React.FC = () => {
@@ -38,7 +37,7 @@ const TestPage: React.FC = () => {
         <ol className="input-history"></ol>
       </div>
       <button id="generate" onClick={handleGenerate}>
-        Generate Test
+        Stop Recording & Generate Test
       </button>
       <details>
         <summary>Instructions</summary>
