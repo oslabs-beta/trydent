@@ -67,11 +67,13 @@ const CodeBlock: React.FC = () => {
 
   return (
     <div className="codeBlock">
-      <h1>Generated Test</h1>
-      <pre>
+      <div className="head-copy">
+        <h1>Generated Test</h1>
         <button onClick={handleCopy} disabled={copied} className={copied ? 'copied' : ''}>
           {copied ? 'Copied to clipboard!' : 'Copy'}
         </button>
+      </div>
+      <div className="code">
         <SyntaxHighlighter
           language="javascript"
           style={oneDark}
@@ -82,7 +84,7 @@ const CodeBlock: React.FC = () => {
         >
           {formattedText ? formattedText : ''}
         </SyntaxHighlighter>
-      </pre>
+      </div>
       <p>
         Thank you for supporting TRYDENT. If you enjoyed, please give our{' '}
         <a href="https://github.com/oslabs-beta/trydent" target="_blank">

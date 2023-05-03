@@ -11,11 +11,11 @@ const eventArr = [];
 // test object used to create test script
 const describeObj = {
   URL: null,
-  description: 'Test go Boom',
-  writeUp: "This is a test and it's going to work :)... eventually",
+  description: 'Cypress test block',
+  writeUp: "Trydent is cool",
   itStatements: [
     {
-      itStatement: 'Track my random clicks',
+      itStatement: '',
       eventArr,
     },
   ],
