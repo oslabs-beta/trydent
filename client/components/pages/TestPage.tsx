@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import EventLogger from '../EventLogger'; // ###TODO: EventLogger is never used. Remove it?
 import { useNavigate } from 'react-router-dom';
 
 const TestPage: React.FC = () => {
