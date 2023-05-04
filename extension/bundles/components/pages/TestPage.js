@@ -1,23 +1,33 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+/**
+ * The TestPage component renders a form for the user to enter
+ * an 'it' statement for their test, start recording actions,
+ * and generate the test code.
+ *
+ * @component
+ * @returns {ReactElement} The TestPage component
+ */
 const TestPage = () => {
     const [isRecording, setIsRecording] = useState(false);
     const navigate = useNavigate();
-    // dispatch a custom event startRecording to signal the start of recording
+    // Starts recording user actions and dispatches a custom 'startRecording' event
     const handleStartRecording = () => {
         setIsRecording(true);
-        // create and dispatch custom startRecording event
-        // Get the current value of the input field
         const itStatementValue = document.querySelector('#itStatement').value;
-        // Create and dispatch the custom startRecording event, including the input field value as data
         const evt = new CustomEvent('startRecording', { detail: { inputValue: itStatementValue } });
         window.dispatchEvent(evt);
     };
+    /**
+     * Stops recording user actions, generates test code,
+     * and navigates to the CodeBlock page.
+     *
+     * @param {React.MouseEvent<HTMLButtonElement>} event - The click event
+     */
     const handleGenerate = (event) => {
         event.preventDefault();
         setIsRecording(false);
-        // create and dispatch custom startRecording event
         const evt = new CustomEvent('stopRecording');
         window.dispatchEvent(evt);
         navigate('/codeBlock');
