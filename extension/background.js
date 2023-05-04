@@ -1,40 +1,68 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable func-names */
 /* eslint-disable no-undef */
+
+/**
+ * Connection to the devtools page
+ * @type {chrome.runtime.Port}
+ */
 let devToolsConnection;
 
-// upon connection execute the content-script
+/**
+ * Listener for connection from devtools page
+ * Executes the content script upon connection and sets up message listeners
+ * @see https://developer.chrome.com/docs/extensions/reference/runtime/#event-onConnect
+ * @listens chrome.runtime.onConnect
+ * @param {chrome.runtime.Port} connection - connection to devtools page
+ */
 chrome.runtime.onConnect.addListener((connection) => {
   devToolsConnection = connection;
-  // assign the listener function to a variable so we can remove it later
-  const devToolsListener = function (message) {
-    console.log('we are in background.js');
 
-    // Inject a content script into the tab specified by the message
+  /**
+   * Listener function for messages fromt the devtools script
+   * Injects a content script into the tab specified by the message
+   *
+   * @param {Object} message - The message object
+   */
+  const devToolsListener = function (message) {
+    // console.log('we are in background.js');
+
     chrome.scripting.executeScript({
       target: { tabId: message.tabId },
       files: [message.scriptToInject],
     });
   };
 
-  chrome.tabs.onActivated.addListener((tabInfo) => {
+  /**
+   * Listener for tab activation events
+   * Injects the content script into the activated tab
+   *
+   * @listens chrome.tab.onActivated
+   */
+  chrome.tabs.onActivated.addListener(() => {
     // console.log('changed to tab: ', tabId);
     chrome.scripting.executeScript({
       target: { tabId: message.tabId },
       files: [message.scriptToInject],
-
     });
   });
 
-  // add devToolsListener function as a listener for messages from devtools script
+  // Add devToolsListener function as a listener for messages from the DevTools script
   devToolsConnection.onMessage.addListener(devToolsListener);
 
-  // remove devToolsListener function from listeners when devtools disconnects
+  // Remove devToolsListener function from listeners when the DevTools disconnects
   devToolsConnection.onDisconnect.addListener(() => {
     devToolsConnection.onMessage.removeListener(devToolsListener);
   });
 });
 
-// listen for message from content script
+/**
+ * Listener for messages from the content scripts
+ * Handles events and sends messages to the devtools connection
+ *
+ * @listens chrome.runtime.onMessage
+ * @param {Object} message - The message object
+ */
 chrome.runtime.onMessage.addListener((message) => {
   // Check event and proceed message accordingly
   switch (message.action) {
@@ -58,4 +86,30 @@ chrome.runtime.onMessage.addListener((message) => {
   } else {
     // console.error('devToolsConnection is not established yet');
   }
+});
+
+// Create a context menu item for Trydent
+chrome.contextMenus.create({
+  id: 'trydent-window',
+  title: 'Trydent',
+  contexts: ['all'],
+});
+
+/**
+ * Listener for context menu item clicks
+ * Opens the Trydent window when the context menu item is clicked
+ *
+ * @listens chrome.contextMenus.onClicked
+ * @param {Object} info - Information about the context menu item that was clicked
+ */
+chrome.contextMenus.onClicked.addListener(({ menuItemId }) => {
+  const options = {
+    type: 'panel',
+    left: 0,
+    top: 0,
+    width: 1000,
+    height: 1000,
+    url: chrome.runtime.getURL('panel.html'),
+  };
+  if (menuItemId === 'trydent-window') chrome.windows.create(options);
 });

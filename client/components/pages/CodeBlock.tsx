@@ -6,9 +6,10 @@ import parserBabel from 'prettier/parser-babel';
 import GitHubButton from 'react-github-btn';
 
 /**
- * formats the input string using prettier
- * @param input - string to be formatted
- * @returns {string} - formatted string
+ * Formats the input string using prettier
+ * 
+ * @param input - String to be formatted
+ * @returns {string} - Formatted string
  */
 const prettierFormat = (input: string): string => {
   return prettier.format(input, {
@@ -18,15 +19,16 @@ const prettierFormat = (input: string): string => {
 };
 
 /**
- * Displays the generated code and provides functionality of copying to clipboard
+ * The CodeBlock component displays the generated code and provides functionality for copying the code to the clipboard.
  *
  * @component
- * @returns {ReactElement} - JSX code for rendering the component
+ * @returns {ReactElement} JSX code for rendering the component.
  */
 const CodeBlock: React.FC = () => {
   const [copied, setCopied] = useState(false);
   const [formattedText, setFormattedText] = useState('');
 
+  // Copies the formatted text to the clipboard
   const handleCopy = async (): Promise<void> => {
     const textArea = document.createElement('textarea');
     textArea.value = formattedText;
@@ -48,6 +50,7 @@ const CodeBlock: React.FC = () => {
     }, 2000);
   };
 
+  // Subscribe and unsubscribe from the 'message' event.
   useEffect(() => {
     const handleMessageEvent = (event: MessageEvent) => {
       if (event.data.type === 'GENERATED_CODE') {
@@ -67,11 +70,13 @@ const CodeBlock: React.FC = () => {
 
   return (
     <div className="codeBlock">
-      <h1>Generated Test</h1>
-      <pre>
+      <div className="head-copy">
+        <h1>Generated Test</h1>
         <button onClick={handleCopy} disabled={copied} className={copied ? 'copied' : ''}>
           {copied ? 'Copied to clipboard!' : 'Copy'}
         </button>
+      </div>
+      <div className="code">
         <SyntaxHighlighter
           language="javascript"
           style={oneDark}
@@ -82,7 +87,7 @@ const CodeBlock: React.FC = () => {
         >
           {formattedText ? formattedText : ''}
         </SyntaxHighlighter>
-      </pre>
+      </div>
       <p>
         Thank you for supporting TRYDENT. If you enjoyed, please give our{' '}
         <a href="https://github.com/oslabs-beta/trydent" target="_blank">

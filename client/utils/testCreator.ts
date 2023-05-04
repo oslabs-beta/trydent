@@ -1,22 +1,21 @@
 import { Describe, itObject, EventObj } from './types/types';
 
 function switchCase(event: EventObj): string {
-  const { selector, action, input, URL } = event;
-    // if (mode === 'assertion'){
-  //   switch (action){
-  //     case 'click':
-  //       return `cy.xpath('${selector}').should('exist');`
-  //   }
+  let { selector, action, input, URL, a, href} = event;
+  if (a == true){
+    action = 'navigate'
+  }
   switch (action) {
     case 'click':
-      return `cy.xpath('${selector}').click();
-        cy.url().should('include','${URL}');`;
+      return `cy.xpath('${selector}').should('exist');
+      cy.xpath('${selector}').click({force:true});`;
       break;
     case 'change':
       return `cy.xpath('${selector}').type('${input}');`;
       break;
     case 'navigate':
-      return `cy.url().should('include','${URL}');`;
+      return `cy.xpath('${selector}').click();
+      cy.location('pathname').should('eq','${href}');`;
       break;
     default:
       return 'didnt input a valid action';
@@ -32,7 +31,7 @@ export function describeCreator(obj: Describe): string {
   // destructuring the 'describe' object
   const { URL, description, writeUp, itStatements } = obj;
   let resultStr;
-  //create line for describe statement in which we call the it creator?
+  //create line for 'describe' statement in which we call the itCreator?
   // ###TO-DO: push 'it' statement down to itCreator
   return (resultStr = `
     //${writeUp}
@@ -45,21 +44,21 @@ export function describeCreator(obj: Describe): string {
     })`);
 }
 /**
- * separate itStatements function to make a describe with multiple its
+ * Separate itStatements function to make a 'describe' with multiple 'it's
  *
- * @param {array} itStatementsArr - Array containing it statement objects.
+ * @param {array} itStatementsArr - Array containing 'it' statement objects.
  * @param {string} URL - URL of the page to be tested.
- * @returns {string} - Concatenated string of it statements.
+ * @returns {string} - Concatenated string of 'it' statements.
  */
 // ###TO-DO: Fully convert to TypeScript
 function itCreator(itStatementsArr: itObject[], URL: string): string {
-  // initialize empty array to push formatted it statements into
+  // Initialize empty array to push formatted 'it' statements into
   const formattedItStatments = [];
-  // initialize empty string to push formatted it statements into
+  // Initialize empty string to push formatted 'it' statements into
   let itText = '';
 
   itStatementsArr.forEach((itState) => {
-    // concatenate evaluated result of each itState into itText
+    // Concatenate evaluated result of each itState into 'itText
     itText += `
     it(${actionCreator(itState, URL)})`;
   });
@@ -67,18 +66,17 @@ function itCreator(itStatementsArr: itObject[], URL: string): string {
   return itText;
 }
 /**
- * separate action function to make an it statement with multiple actions
+ * Separate action function to make an 'it' statement with multiple actions
  *
- * @param {itObject} eObj - Event Object containing it statement and array of events.
+ * @param {itObject} eObj - Event Object containing 'it' statement and array of events.
  * @param {string} URL - URL of the page to be tested.
- * @returns {string} - Concatenated string of actions within it statement.
+ * @returns {string} - Concatenated string of actions within 'it' statement.
  */
 function actionCreator(eObj: itObject, URL: string): string {
-  //deconstructing event object
   const { itStatement, eventArr } = eObj;
   let textBlock = '';
 
-  //parse through eventArr to look at each event individually
+  // Parse through eventArr to look at each event individually
   eventArr.forEach((event) => {
     // switchCase imported from switchCase.ts
     if (textBlock !== '')
@@ -86,7 +84,7 @@ function actionCreator(eObj: itObject, URL: string): string {
         `;
     textBlock += switchCase(event);
   });
-  //return a block of text that includes each event text, statment, visit location
+  // Return a block of text that includes each event text, statment, visit location
   let resultText = `'${itStatement}', () => {
         ${textBlock}
       }`;
