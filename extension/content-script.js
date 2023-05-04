@@ -1,13 +1,25 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-plusplus */
 /* eslint-disable max-len */
+
+// Flag to indicate if the target element is an anchor tag with an href attribute
 let a = false;
+// Store the href attribute value of the anchor tag
 let href = '';
+
+/**
+ * Get the relative XPath of an element
+ * @param {HTMLElement} element - The target element
+ * @returns {string} - The relative XPath of the element
+ */
 function getRelativeXPath(element) {
   // If the element is null or undefined, return an empty string
   if (!element) { return ''; }
+
   // Get the element's tag name and convert it to lowercase to follow xPath conventions
   const tagName = element.tagName.toLowerCase();
+
+  // If the element is an anchor tag, check if it has an href attribute and make assignments to global variables
   if (tagName === 'a') {
     if (element.hasAttribute('href')) {
       a = true;
@@ -17,6 +29,7 @@ function getRelativeXPath(element) {
   // Array of unique attributes to use for the XPath
   const uniqueAttributes = ['data-cy', 'data-test', 'data-testid', 'id'];
   let attr = '';
+
   // Iterate through the uniqueAttributes array and use the first one found on the element
   uniqueAttributes.some((attribute) => {
     if (element.hasAttribute(attribute)) {
@@ -25,8 +38,10 @@ function getRelativeXPath(element) {
     }
     return false;
   });
+
   // If a unique attribute is found, return the xPath using that attribute
   if (attr) { return `//${tagName}${attr}`; }
+
   // Calculate position of the element among siblings with the same tag
   let position = 1;
   let sibling = element.previousElementSibling;
@@ -34,11 +49,17 @@ function getRelativeXPath(element) {
     if (sibling.tagName.toLowerCase() === tagName) { position++; }
     sibling = sibling.previousElementSibling;
   }
+
   // Generate parent element's xPath and append current element's tag name and position
   const parentXPath = getRelativeXPath(element.parentElement);
   return `${parentXPath}/${tagName}[${position}]`;
 }
 
+/**
+ * Event listener for input events (click, focus, blur, change).
+ * @param {Event} event - The event object
+ * @param {function} callback - Callback function to execute with the recorded event data
+ */
 function inputEventListener(event, callback) {
   const xPath = getRelativeXPath(event.target);
   const eventType = event.type;
@@ -66,28 +87,28 @@ function inputEventListener(event, callback) {
       }
       break;
     default:
-      // Log a message for unhandled event types
       // console.log(`Unhandled event type: ${eventType}`);
   }
 }
 
+// Store the current window's URL
 const URL = window.location.href;
 
-// add event listeners for 'click', 'focus', 'blur', and 'change' events
+// Add event listeners for 'click', 'focus', 'blur', and 'change' events
 ['click', 'focus', 'blur', 'change'].forEach((action) => {
   document.addEventListener(action, (event) => {
-    // call the inputEventListener for each event
+    // Call the inputEventListener for each event
     inputEventListener(event, (recordedEvent) => {
       // console.log('Content-script.js This is the recordedEvent: ', recordedEvent);
       const { xPath, eventType, inputValue } = recordedEvent;
-      // send the xPath as a message to the window
+      // Send the xPath as a message to the window
       window.postMessage({ xPath }, '*');
-      // send message to the background script with the event details
+      // Send message to the background script with the event details
       chrome.runtime.sendMessage({
         action: eventType, selector: xPath, input: inputValue, URL, a, href,
       });
     });
-    // reset a and href here
+    // Reset a and href to their default values
     a = false;
     href = '';
   });
