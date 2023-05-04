@@ -7,15 +7,15 @@ function switchCase(event: EventObj): string {
   }
   switch (action) {
     case 'click':
-      return `cy.xpath('${selector}').click();
-      cy.xpath('${selector}').should('exist');`;
+      return `cy.xpath('${selector}').should('exist');
+      cy.xpath('${selector}').click({force:true});`;
       break;
     case 'change':
       return `cy.xpath('${selector}').type('${input}');`;
       break;
     case 'navigate':
       return `cy.xpath('${selector}').click();
-      cy.url().should('eq','${href}');`;
+      cy.location('pathname').should('eq','${href}');`;
       break;
     default:
       return 'didnt input a valid action';

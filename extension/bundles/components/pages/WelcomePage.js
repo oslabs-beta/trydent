@@ -1,20 +1,25 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useNavigate } from 'react-router-dom';
+/**
+ * The WelcomePage component renders a form for the user to enter
+ * a describe statement for their test. It also provides basic
+ * instructions for writing tests.
+ *
+ * @component
+ * @returns {ReactElement} The WelcomePage component
+ */
 const WelcomePage = () => {
     const navigate = useNavigate();
     const handleClick = (event) => {
         event.preventDefault();
         handleSendDescribe();
-        // console.log(event.target[0].value);
-        // setTestDescribe(event.target[0].value);
         navigate('/testPage');
     };
-    // dispatch a custom event describeStatement to so we can assign our describeObj.description's value
+    /**
+     * Dispatches a custom event 'describeStatement' to assign the value of describeObj.description.
+     */
     const handleSendDescribe = () => {
-        // create and dispatch custom startRecording event
-        // Get the current value of the input field
         const describeStatementValue = document.querySelector('#describeStatement').value;
-        // Create and dispatch the custom event, including the input field value as data
         const evt = new CustomEvent('describeStatement', { detail: { inputValue: describeStatementValue } });
         window.dispatchEvent(evt);
     };

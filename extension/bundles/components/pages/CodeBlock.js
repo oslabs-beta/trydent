@@ -6,9 +6,10 @@ import prettier from 'prettier/standalone';
 import parserBabel from 'prettier/parser-babel';
 import GitHubButton from 'react-github-btn';
 /**
- * formats the input string using prettier
- * @param input - string to be formatted
- * @returns {string} - formatted string
+ * Formats the input string using prettier
+ *
+ * @param input - String to be formatted
+ * @returns {string} - Formatted string
  */
 const prettierFormat = (input) => {
     return prettier.format(input, {
@@ -17,14 +18,15 @@ const prettierFormat = (input) => {
     });
 };
 /**
- * Displays the generated code and provides functionality of copying to clipboard
+ * The CodeBlock component displays the generated code and provides functionality for copying the code to the clipboard.
  *
  * @component
- * @returns {ReactElement} - JSX code for rendering the component
+ * @returns {ReactElement} JSX code for rendering the component.
  */
 const CodeBlock = () => {
     const [copied, setCopied] = useState(false);
     const [formattedText, setFormattedText] = useState('');
+    // Copies the formatted text to the clipboard
     const handleCopy = async () => {
         const textArea = document.createElement('textarea');
         textArea.value = formattedText;
@@ -44,6 +46,7 @@ const CodeBlock = () => {
             setCopied(false);
         }, 2000);
     };
+    // Subscribe and unsubscribe from the 'message' event.
     useEffect(() => {
         const handleMessageEvent = (event) => {
             if (event.data.type === 'GENERATED_CODE') {
