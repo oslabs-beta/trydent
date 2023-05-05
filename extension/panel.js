@@ -14,7 +14,7 @@ const describeObj = {
   ],
 };
 // Global variable to store recording state
-let recording = false;
+let isRecording = false;
 
 // Establishes a connection to background with a specific name
 const backgroundPageConnection = chrome.runtime.connect({
@@ -30,7 +30,7 @@ chrome.runtime.onMessage.addListener((message) => {
   // If the message a is true (has anchor tag), change action to navigate
   if (message.a === true) message.action = 'navigate';
 
-  if (recording === true) {
+  if (isRecording === true) {
     // Add the message to the event array
     eventArr.push(message);
     // console.log('This is our updated events array: ', eventArr);
@@ -55,7 +55,7 @@ window.addEventListener('describeStatement', (e) => {
 
 // Listener for the "startRecording" event triggered from TestPage
 window.addEventListener('startRecording', (e) => {
-  recording = true;
+  isRecording = true;
   describeObj.itStatements[0].itStatement = e.detail.inputValue
   // Clear eventArr for a new test
   eventArr.splice(0, eventArr.length);
@@ -63,7 +63,7 @@ window.addEventListener('startRecording', (e) => {
 
 // Listener for the "stopRecording" event triggered from TestPage
 window.addEventListener('stopRecording', (e) => {
-  recording = false;
+  isRecording = false;
   // Async function so when generated code is assigned, it's a string and not a promise
   // This allows CodeBlock.tsx to easily catch the message
   (async function() {
