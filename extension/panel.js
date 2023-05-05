@@ -13,6 +13,8 @@ const describeObj = {
     },
   ],
 };
+// Global variable to store recording state
+let isRecording = false;
 
 // Establishes a connection to background with a specific name
 const backgroundPageConnection = chrome.runtime.connect({
@@ -28,18 +30,20 @@ chrome.runtime.onMessage.addListener((message) => {
   // If the message a is true (has anchor tag), change action to navigate
   if (message.a === true) message.action = 'navigate';
 
-  // Add the message to the event array
-  eventArr.push(message);
-  // console.log('This is our updated events array: ', eventArr);
-
-  // Input history querys the DOM for the classname and returns an HTMLCollection which is type array
-  // In order to append to the DOM from here, we have to treat it as an array and appropriate methods against it
-  // ** should probably create a function outside of this to modularize :) - NL
-  const inputHistory = document.getElementsByClassName('input-history');
-  const input = document.createElement('li');
-  input.innerText = `${message.action}${message.input ? ` to:  ${message.input}` : ''}${message.a ? ` to:  ${message.href}` : ''}`;
-  inputHistory[0].appendChild(input);
-  input.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+  if (isRecording === true) {
+    // Add the message to the event array
+    eventArr.push(message);
+    // console.log('This is our updated events array: ', eventArr);
+  
+    // Input history querys the DOM for the classname and returns an HTMLCollection which is type array
+    // In order to append to the DOM from here, we have to treat it as an array and appropriate methods against it
+    // ** should probably create a function outside of this to modularize :) - NL
+    const inputHistory = document.getElementsByClassName('input-history');
+    const input = document.createElement('li');
+    input.innerText = `${message.action}${message.input ? ` to:  ${message.input}` : ''}${message.a ? ` to:  ${message.href}` : ''}`;
+    inputHistory[0].appendChild(input);
+    input.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+  }
 })
 
 
@@ -51,14 +55,15 @@ window.addEventListener('describeStatement', (e) => {
 
 // Listener for the "startRecording" event triggered from TestPage
 window.addEventListener('startRecording', (e) => {
+  isRecording = true;
   describeObj.itStatements[0].itStatement = e.detail.inputValue
-
   // Clear eventArr for a new test
   eventArr.splice(0, eventArr.length);
 });
 
 // Listener for the "stopRecording" event triggered from TestPage
 window.addEventListener('stopRecording', (e) => {
+  isRecording = false;
   // Async function so when generated code is assigned, it's a string and not a promise
   // This allows CodeBlock.tsx to easily catch the message
   (async function() {
