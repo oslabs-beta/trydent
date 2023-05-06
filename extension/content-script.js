@@ -60,12 +60,18 @@ function getRelativeXPath(element) {
  * @param {Event} event - The event object
  * @param {function} callback - Callback function to execute with the recorded event data
  */
+let firstKeyPressed = false;
+let secondKeyPressed = false;
+let assertionTarget;
+
 function inputEventListener(event, callback) {
   const xPath = getRelativeXPath(event.target);
   const eventType = event.type;
   let initialValue;
   let inputValue;
   let newValue;
+  // console.log(eventType);
+  // console.log(event);
   // Store different event types using a switch statement
   switch (eventType) {
     case 'click':
@@ -86,6 +92,37 @@ function inputEventListener(event, callback) {
         callback({ xPath, eventType: 'input', inputValue: newValue });
       }
       break;
+    case 'keydown':
+      initialValue = event.target.value;
+      if (!firstKeyPressed && event.key === 'e') {
+        firstKeyPressed = true;
+        console.log('you made it to step 1');
+      } else if (firstKeyPressed && !secondKeyPressed && event.key === 'z') {
+        secondKeyPressed = true;
+        // trigger your event here
+        console.log('you made it to the end of step 2');
+        console.log('Keydown hover target: ', assertionTarget);
+        // need to figure out how to capture hover element
+        callback({ xPath, eventType: 'assertion', inputValue: assertionTarget });
+      }
+      break;
+    case 'keyup':
+      if (event.key === 'e') {
+        firstKeyPressed = false;
+      } else if (event.key === 'z') {
+        secondKeyPressed = false;
+      }
+      break;
+    case 'mouseover':
+      assertionTarget = {
+        className: event.target.className,
+        innerHTML: event.target.innerHTML,
+        outerHTML: event.target.outerHTML,
+        id: event.target.id,
+        innerText: event.target.innerText,
+        outerText: event.target.outerText,
+      };
+      break;
     default:
       // console.log(`Unhandled event type: ${eventType}`);
   }
@@ -95,7 +132,7 @@ function inputEventListener(event, callback) {
 const URL = window.location.href;
 
 // Add event listeners for 'click', 'focus', 'blur', and 'change' events
-['click', 'focus', 'blur', 'change'].forEach((action) => {
+['click', 'focus', 'blur', 'change', 'keydown', 'keyup', 'mouseover'].forEach((action) => {
   document.addEventListener(action, (event) => {
     // Call the inputEventListener for each event
     inputEventListener(event, (recordedEvent) => {

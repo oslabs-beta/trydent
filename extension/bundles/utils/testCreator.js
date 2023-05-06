@@ -15,6 +15,7 @@ function switchCase(event) {
             return `cy.xpath('${selector}').click();
       cy.location('pathname').should('eq','${href}');`;
             break;
+        case 'assert':
         default:
             return 'didnt input a valid action';
     }
