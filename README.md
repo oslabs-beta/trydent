@@ -82,7 +82,7 @@ Below are descriptions of each npm script:
 
 ## Our Team
 <table><tbody><tr>
-  <td align="center" width="166">
+  <td align="center" height="10rem" width="166">
     <img src="/assets/team/alastair-s.png" style="height: 5rem; width: 5rem;" />
     <br/>
     <strong>Alastair Scheuermann</strong>
@@ -91,11 +91,10 @@ Below are descriptions of each npm script:
     <br/>
     <a href="https://www.linkedin.com/in/alastairsounds/">LinkedIn</a>
   </td>
-  <td align="center" width="166">
+  <td align="center" height="10rem" width="166">
     <img src="/assets/team/eric-d.png" style="height: 5rem; width: 5rem;" />
     <br/>
-    <strong>Eric Dunn</strong>
-    <br/>
+    <strong style="vertical-align: middle;">Eric Dunn</strong>
     <br/>
     <a href="https://github.com/ELDunn">GitHub</a>
     <br/>
