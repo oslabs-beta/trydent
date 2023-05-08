@@ -25,10 +25,10 @@ Trydent is a visionary open source project that seeks to empower developers with
   - [Table of Contents](#table-of-contents)
   - [Getting Started](#getting-started)
   - [User Input Recording and Data Privacy](#user-input-recording-and-data-privacy)
-  - [Our Team](#our-team)
   - [Scripts](#scripts)
     - [Client](#client)
     - [Server](#server)
+  - [Our Team](#our-team)
   - [Contributing](#contributing)
     - [Code Commenting Guidelines](#code-commenting-guidelines)
   - [License](#license)
@@ -45,6 +45,40 @@ Before running the application, make sure to navigate to the correct directory f
 
 ## User Input Recording and Data Privacy
 Trydent records user inputs during development for the purpose of creating end-to-end tests. The application does not extract or store any personal data from users. However, as a precaution, developers should avoid inputting sensitive information while using Trydent. This ensure that no sensitive data is inadvertently recorded or stored in the generated tests.
+
+
+## Scripts
+### Client
+To run your application, follow the steps below:
+
+1. Open a terminal window or tab.
+2. Install the required packages (if you haven't already): `npm install`.
+3. Run the development server: `npm run start`. This will start the Vite development server, and you can access your application in the browser.
+4. When you are ready to build the application for production, run `npm run build`. To preview the production build locally, run `npm run serve`.
+
+Below are descriptions of each npm script:
+
+- `npm start`: Starts the development server using Vite.
+- `npm run build`: Runs `vite build` to build your application for production. This command generates the final, optimized assets that can be deployed to a web server. Also runs the TypeScript compiler (`tsc`) to type-check the TypeScript files and convert to js files in `extensions/bundle` folder
+- `npm run build:watch`: Runs `vite build` on watch mode, monitoring for any changes and updating bundling on save.
+- `npm run serve`: Starts a local server to preview the production build. This is for testing the built assets before deploying. This should not be used as a production server.
+- `npm test`: Runs Jest tests
+
+### Server
+To run your application, follow the steps below:
+
+1. Open two terminal windows or tabs.
+2. Install the required packages (if you haven't already): `npm install`.
+3. In the first terminal, run `npm run watch` to start the TypeScript compiler in watch mode.
+4. In the second terminal, run `npm run dev` to start both server-side and client-side applications concurrently.
+
+Below are descriptions of each npm script:
+
+- `npm run watch`: Runs the TypeScript compiler (`tsc`) in watch mode (`-w`). This will compile the TypeScript files into JavaScript and watch for any changes in the TypeScript files. When a file is changed, it will recompile the affected files automatically.
+- `npm run server`: Runs your server using `nodemon`. Automatically restarts your server when it detects changes in your server file. In this case, it is watching the `dist/index.js` file, which is the compiled output from your TypeScript files.
+- `npm run dev`: Runs both the server-side and client-side applications at the same time using the `concurrently` package.
+- `npm run client`: Runs the client-side application.
+
 
 ## Our Team
 <table><tbody><tr>
@@ -94,38 +128,6 @@ Trydent records user inputs during development for the purpose of creating end-t
     <a href="https://www.linkedin.com/in/leesamuel423/">LinkedIn</a>
   </td>
 </tr></tbody></table>
-
-## Scripts
-### Client
-To run your application, follow the steps below:
-
-1. Open a terminal window or tab.
-2. Install the required packages (if you haven't already): `npm install`.
-3. Run the development server: `npm run start`. This will start the Vite development server, and you can access your application in the browser.
-4. When you are ready to build the application for production, run `npm run build`. To preview the production build locally, run `npm run serve`.
-
-Below are descriptions of each npm script:
-
-- `npm start`: Starts the development server using Vite.
-- `npm run build`: Runs `vite build` to build your application for production. This command generates the final, optimized assets that can be deployed to a web server. Also runs the TypeScript compiler (`tsc`) to type-check the TypeScript files and convert to js files in `extensions/bundle` folder
-- `npm run build:watch`: Runs `vite build` on watch mode, monitoring for any changes and updating bundling on save.
-- `npm run serve`: Starts a local server to preview the production build. This is for testing the built assets before deploying. This should not be used as a production server.
-- `npm test`: Runs Jest tests
-
-### Server
-To run your application, follow the steps below:
-
-1. Open two terminal windows or tabs.
-2. Install the required packages (if you haven't already): `npm install`.
-3. In the first terminal, run `npm run watch` to start the TypeScript compiler in watch mode.
-4. In the second terminal, run `npm run dev` to start both server-side and client-side applications concurrently.
-
-Below are descriptions of each npm script:
-
-- `npm run watch`: Runs the TypeScript compiler (`tsc`) in watch mode (`-w`). This will compile the TypeScript files into JavaScript and watch for any changes in the TypeScript files. When a file is changed, it will recompile the affected files automatically.
-- `npm run server`: Runs your server using `nodemon`. Automatically restarts your server when it detects changes in your server file. In this case, it is watching the `dist/index.js` file, which is the compiled output from your TypeScript files.
-- `npm run dev`: Runs both the server-side and client-side applications at the same time using the `concurrently` package.
-- `npm run client`: Runs the client-side application.
 
 
 
