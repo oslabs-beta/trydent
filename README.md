@@ -1,6 +1,6 @@
 # Trydent
 
-  ![Banner](/client/assets/testing-tamed.png)
+  ![Banner](/assets/trydent-banner.png)
 
 
 Trydent is a visionary open source project that seeks to empower developers with an innovative solution to automate the creation of end-to-end testing. With Trydent, developers can easily generate high-quality Cypress code that is seamlessly integrated into their codebase, enabling them to optimize and streamline their workflow like never before. Harnessing the power of cutting-edge technology, Trydent is the ultimate tool for modern developers seeking to create the most robust and reliable web applications.
@@ -21,14 +21,17 @@ Trydent is a visionary open source project that seeks to empower developers with
 </div>
 
 ## Table of Contents
-1. [Getting Started](#getting-started)
-1. [User Input Recording and Data Privacy](#user-input-recording-and-data-privacy)
-1. [Scripts](#scripts)
+- [Trydent](#trydent)
+  - [Table of Contents](#table-of-contents)
+  - [Getting Started](#getting-started)
+  - [User Input Recording and Data Privacy](#user-input-recording-and-data-privacy)
+  - [Scripts](#scripts)
     - [Client](#client)
     - [Server](#server)
-1. [Contributing](#contributing)
+  - [Our Team](#our-team)
+  - [Contributing](#contributing)
     - [Code Commenting Guidelines](#code-commenting-guidelines)
-1. [License](#license)
+  - [License](#license)
 
 
 
@@ -42,7 +45,6 @@ Before running the application, make sure to navigate to the correct directory f
 
 ## User Input Recording and Data Privacy
 Trydent records user inputs during development for the purpose of creating end-to-end tests. The application does not extract or store any personal data from users. However, as a precaution, developers should avoid inputting sensitive information while using Trydent. This ensure that no sensitive data is inadvertently recorded or stored in the generated tests.
-
 
 
 ## Scripts
@@ -76,6 +78,60 @@ Below are descriptions of each npm script:
 - `npm run server`: Runs your server using `nodemon`. Automatically restarts your server when it detects changes in your server file. In this case, it is watching the `dist/index.js` file, which is the compiled output from your TypeScript files.
 - `npm run dev`: Runs both the server-side and client-side applications at the same time using the `concurrently` package.
 - `npm run client`: Runs the client-side application.
+
+
+## Our Team
+<table><tbody><tr>
+  <td align="center" width="166">
+    <img src="/assets/team/alastair-s.png" style="height: 5rem; width: 5rem;" />
+    <br/>
+    <strong>Alastair Scheuermann</strong>
+    <br/>
+    <a href="https://github.com/alastairsounds">GitHub</a>
+    <br/>
+    <a href="https://www.linkedin.com/in/alastairsounds/">LinkedIn</a>
+  </td>
+  <td align="center" width="166">
+    <img src="/assets/team/eric-d.png" style="height: 5rem; width: 5rem;" />
+    <br/>
+    <strong>Eric Dunn</strong>
+    <br/>
+    <br/>
+    <a href="https://github.com/ELDunn">GitHub</a>
+    <br/>
+    <a href="https://www.linkedin.com/in/ericldunn/">LinkedIn</a>
+  </td>
+  <td align="center" width="166">
+    <img src="/assets/team/jacob-g.png" style="height: 5rem; width: 5rem;" />
+    <br/>
+    <strong>Jacob Gillan</strong>
+    <br/>
+    <br/>
+    <a href="https://github.com/JakeGillan/">GitHub</a>
+    <br/>
+    <a href="https://www.linkedin.com/in/jacob-gillan/">LinkedIn</a>
+  </td>
+  <td align="center" width="166">
+    <img src="/assets/team/nicholas-l.png" style="height: 5rem; width: 5rem;" />
+    <br/>
+    <strong>Nicholas Ly</strong>
+    <br/>
+    <br/>
+    <a href="https://github.com/nicholas-l-ly">GitHub</a>
+    <br/>
+    <a href="https://www.linkedin.com/in/nicholasly/">LinkedIn</a>
+  </td>
+  <td align="center" width="166">
+    <img src="/assets/team/sam-l.png" style="height: 5rem; width: 5rem;" />
+    <br/>
+    <strong>Samuel Lee</strong>
+    <br/>
+    <br/>
+    <a href="https://github.com/leesamuel423">GitHub</a>
+    <br/>
+    <a href="https://www.linkedin.com/in/leesamuel423/">LinkedIn</a>
+  </td>
+</tr></tbody></table>
 
 
 
