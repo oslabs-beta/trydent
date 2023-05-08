@@ -81,8 +81,8 @@ Below are descriptions of each npm script:
 
 
 ## Our Team
-<table><tbody><tr>
-  <td align="center" width="150">
+<table style="width: 100%;"><tbody><tr>
+  <td align="center" width="20%">
     <img src="/assets/team/alastair-s.png" style="height: 5rem; width: 5rem;" />
     <br/>
     <strong>Alastair Scheuermann</strong>
@@ -91,7 +91,7 @@ Below are descriptions of each npm script:
     <br/>
     <a href="https://www.linkedin.com/in/alastairsounds/">LinkedIn</a>
   </td>
-  <td align="center" width="150">
+  <td align="center" width="20%">
     <img src="/assets/team/eric-d.png" style="height: 5rem; width: 5rem;" />
     <br/>
     <strong>Eric Dunn</strong>
@@ -101,7 +101,7 @@ Below are descriptions of each npm script:
     <br/>
     <a href="https://www.linkedin.com/in/ericldunn/">LinkedIn</a>
   </td>
-  <td align="center" width="150">
+  <td align="center" width="20%">
     <img src="/assets/team/jacob-g.png" style="height: 5rem; width: 5rem;" />
     <br/>
     <strong>Jacob Gillan</strong>
@@ -111,7 +111,7 @@ Below are descriptions of each npm script:
     <br/>
     <a href="https://www.linkedin.com/in/jacob-gillan/">LinkedIn</a>
   </td>
-  <td align="center" width="150">
+  <td align="center" width="20%">
     <img src="/assets/team/nicholas-l.png" style="height: 5rem; width: 5rem;" />
     <br/>
     <strong>Nicholas Ly</strong>
@@ -121,7 +121,7 @@ Below are descriptions of each npm script:
     <br/>
     <a href="https://www.linkedin.com/in/nicholasly/">LinkedIn</a>
   </td>
-  <td align="center" width="150">
+  <td align="center" width="20%">
     <img src="/assets/team/sam-l.png" style="height: 5rem; width: 5rem;" />
     <br/>
     <strong>Samuel Lee</strong>
