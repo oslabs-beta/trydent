@@ -83,7 +83,7 @@ Below are descriptions of each npm script:
 ## Our Team
 <table><tbody><tr>
   <td align="center" width="150">
-    <img src="https://user-images.githubusercontent.com/1347847/180048247-6ae956ab-da6a-44dd-b43b-2ccb71414b5e.png" style="height: 5rem; width: 5rem;" />
+    <img src="/assets/team/alastair-s.png" style="height: 5rem; width: 5rem;" />
     <br/>
     <strong>Alastair Scheuermann</strong>
     <br/>
@@ -92,7 +92,7 @@ Below are descriptions of each npm script:
     <a href="https://www.linkedin.com/in/alastairsounds/">LinkedIn</a>
   </td>
   <td align="center" width="150">
-    <img src="https://user-images.githubusercontent.com/1347847/180048245-bd80e3ab-fefd-4290-a5b6-6fb11669eafe.png" style="height: 5rem; width: 5rem;" />
+    <img src="/assets/team/eric-d.png" style="height: 5rem; width: 5rem;" />
     <br/>
     <strong>Eric Dunn</strong>
     <br/>
@@ -102,7 +102,7 @@ Below are descriptions of each npm script:
     <a href="https://www.linkedin.com/in/ericldunn/">LinkedIn</a>
   </td>
   <td align="center" width="150">
-    <img src="https://user-images.githubusercontent.com/1347847/180048242-9201e19e-1f29-4dda-97cd-59c32e06767b.png" style="height: 5rem; width: 5rem;" />
+    <img src="/assets/team/jacob-g.png" style="height: 5rem; width: 5rem;" />
     <br/>
     <strong>Jacob Gillan</strong>
     <br/>
@@ -112,7 +112,7 @@ Below are descriptions of each npm script:
     <a href="https://www.linkedin.com/in/jacob-gillan/">LinkedIn</a>
   </td>
   <td align="center" width="150">
-    <img src="https://user-images.githubusercontent.com/1347847/180048249-2384e70d-8a10-4fc9-b12f-bff75a900ab3.png" style="height: 5rem; width: 5rem;" />
+    <img src="/assets/team/nicholas-l.png" style="height: 5rem; width: 5rem;" />
     <br/>
     <strong>Nicholas Ly</strong>
     <br/>
@@ -122,7 +122,7 @@ Below are descriptions of each npm script:
     <a href="https://www.linkedin.com/in/nicholasly/">LinkedIn</a>
   </td>
   <td align="center" width="150">
-    <img src="https://user-images.githubusercontent.com/1347847/180048249-2384e70d-8a10-4fc9-b12f-bff75a900ab3.png" style="height: 5rem; width: 5rem;" />
+    <img src="/assets/team/sam-l.png" style="height: 5rem; width: 5rem;" />
     <br/>
     <strong>Samuel Lee</strong>
     <br/>
