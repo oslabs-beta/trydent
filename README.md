@@ -106,6 +106,7 @@ Below are descriptions of each npm script:
     <br/>
     <strong>Jacob Gillan</strong>
     <br/>
+    <br/>
     <a href="https://github.com/JakeGillan/">GitHub</a>
     <br/>
     <a href="https://www.linkedin.com/in/jacob-gillan/">LinkedIn</a>
@@ -115,6 +116,7 @@ Below are descriptions of each npm script:
     <br/>
     <strong>Nicholas Ly</strong>
     <br/>
+    <br/>
     <a href="https://github.com/nicholas-l-ly">GitHub</a>
     <br/>
     <a href="https://www.linkedin.com/in/nicholasly/">LinkedIn</a>
@@ -123,6 +125,7 @@ Below are descriptions of each npm script:
     <img src="https://user-images.githubusercontent.com/1347847/180048249-2384e70d-8a10-4fc9-b12f-bff75a900ab3.png" style="height: 5rem; width: 5rem;" />
     <br/>
     <strong>Samuel Lee</strong>
+    <br/>
     <br/>
     <a href="https://github.com/leesamuel423">GitHub</a>
     <br/>
