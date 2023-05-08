@@ -15,7 +15,23 @@ function switchCase(event) {
             return `cy.xpath('${selector}').click();
       cy.location('pathname').should('eq','${href}');`;
             break;
-        case 'assert':
+        case 'assertion':
+            let finalText = '';
+            finalText += `cy.xpath('${selector}').should('exist');`;
+            // if contains a inner text or outerText
+            if (input.innerText !== '' && input.innerText) {
+                finalText += `cy.xpath('${selector}').should('have.text', "${input.innerText}").and('be.visible');`;
+            }
+            if (input.outerHTML !== '' && input.outerHTML) {
+                finalText += `cy.xpath('${selector}').should('have.attr', '${input.localName}').and('be.visible');`;
+            }
+            // if (input.id !== '' && input.id){
+            //   finalText += `cy.xpath('${selector}').should('have.id', '${input.id}');`
+            // }
+            // if (input.class !== '' && input.class){
+            //   finalText += `cy.xpath('${selector}').should('have.class', '${input.class}');`
+            // }
+            return finalText;
         default:
             return 'didnt input a valid action';
     }

@@ -42,8 +42,18 @@ export type itObject = {
 export type EventObj = {
   selector: string;
   action: string;
-  input?: string;
+  input: string | inputObj ;
   URL?: string;
   a?: boolean;
   href?: string;
 };
+
+export type inputObj = {
+  localName: string,
+  className: string,
+  innerHTML: string,
+  outerHTML: string,
+  id: string,
+  innerText: string,
+  outerText: string,
+}

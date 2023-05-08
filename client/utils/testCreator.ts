@@ -1,4 +1,4 @@
-import { Describe, itObject, EventObj } from './types/types';
+import { Describe, itObject, EventObj, inputObj } from './types/types';
 
 function switchCase(event: EventObj): string {
   let { selector, action, input, URL, a, href} = event;
@@ -18,7 +18,22 @@ function switchCase(event: EventObj): string {
       cy.location('pathname').should('eq','${href}');`;
       break;
     case 'assertion':
-      return ``
+      let finalText = '';
+      finalText += `cy.xpath('${selector}').should('exist');`
+      // if contains a inner text or outerText
+      if (input.innerText !== '' && input.innerText){
+        finalText += `cy.xpath('${selector}').should('have.text', "${input.innerText}").and('be.visible');`
+      }
+      if (input.outerHTML !== '' && input.outerHTML){
+        finalText += `cy.xpath('${selector}').should('have.attr', '${input.localName}').and('be.visible');`
+      }
+      if (input.id !== '' && input.id){
+        finalText += `cy.xpath('${selector}').should('have.id', '${input.id}');`
+      }
+      if (input.className !== '' && input.class){
+        finalText += `cy.xpath('${selector}').should('have.class', '${input.class}');`
+      }
+      return finalText;
     default:
       return 'didnt input a valid action';
   }

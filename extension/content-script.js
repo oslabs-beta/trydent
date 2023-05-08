@@ -115,6 +115,7 @@ function inputEventListener(event, callback) {
       break;
     case 'mouseover':
       assertionTarget = {
+        localName: event.target.localName,
         className: event.target.className,
         innerHTML: event.target.innerHTML,
         outerHTML: event.target.outerHTML,
