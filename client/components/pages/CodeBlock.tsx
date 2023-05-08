@@ -72,6 +72,11 @@ const CodeBlock: React.FC = () => {
     <div className="codeBlock">
       <div className="head">
         <h1>Generated Test</h1>
+        <div className="copy-button">
+          <button onClick={handleCopy} disabled={copied} className={copied ? 'copied' : ''}>
+            {copied ? 'Copied to clipboard!' : 'Copy'}
+          </button>
+        </div>
       </div>
       <div className="code">
         <SyntaxHighlighter
@@ -84,11 +89,6 @@ const CodeBlock: React.FC = () => {
         >
           {formattedText ? formattedText : ''}
         </SyntaxHighlighter>
-      </div>
-      <div className="copy-button">
-        <button onClick={handleCopy} disabled={copied} className={copied ? 'copied' : ''}>
-          {copied ? 'Copied to clipboard!' : 'Copy'}
-        </button>
       </div>
       <p>
         Thank you for supporting TRYDENT. If you enjoyed, please give our{' '}
