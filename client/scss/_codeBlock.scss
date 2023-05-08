@@ -4,14 +4,30 @@
   height: 100vh;
   background-color: $color-background;
   color: $color-text;
-
+  margin: 2rem;
+  
   h1 {
     font-size: 2rem;
     font-weight: $font-weight-semibold;
     margin-bottom: 1.5rem;
   }
 
-  .head-copy {
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .code {
+    display: block;
+    overflow: auto;
+    max-width: 100%;
+    max-height: 60%;
+    font-size: 0.75rem;
+  }
+  
+  .copy-button {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -27,15 +43,6 @@
       }
     }
   }
-
-  .code {
-    display: block;
-    overflow: auto;
-    max-width: 100%;
-    max-height: 60%;
-    font-size: 0.75rem;
-  }
-  
   
   a{
     color: yellow;
