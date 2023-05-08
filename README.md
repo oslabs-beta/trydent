@@ -96,6 +96,7 @@ Below are descriptions of each npm script:
     <br/>
     <strong>Eric Dunn</strong>
     <br/>
+    <br/>
     <a href="https://github.com/ELDunn">GitHub</a>
     <br/>
     <a href="https://www.linkedin.com/in/ericldunn/">LinkedIn</a>
