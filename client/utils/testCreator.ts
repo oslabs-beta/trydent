@@ -21,12 +21,15 @@ function switchCase(event: EventObj): string {
       let finalText = '';
       finalText += `cy.xpath('${selector}').should('exist');`
       // if contains a inner text or outerText
+      if (href){
+        finalText += `cy.xpath('${selector}').contains("a").should("have.attr", "href", "${href}");`
+      }
       if (input.innerText !== '' && input.innerText){
         finalText += `cy.xpath('${selector}').should('have.text', "${input.innerText}").and('be.visible');`
       }
-      if (input.outerHTML !== '' && input.outerHTML){
-        finalText += `cy.xpath('${selector}').should('have.attr', '${input.localName}').and('be.visible');`
-      }
+      // if (input.outerHTML !== '' && input.outerHTML){
+      //   finalText += `cy.xpath('${selector}').should(, '<${input.localName}>').and('be.visible');`
+      // }
       if (input.id !== '' && input.id){
         finalText += `cy.xpath('${selector}').should('have.id', '${input.id}');`
       }

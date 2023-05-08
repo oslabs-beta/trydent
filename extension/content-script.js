@@ -70,8 +70,8 @@ function inputEventListener(event, callback) {
   let initialValue;
   let inputValue;
   let newValue;
-  // console.log(eventType);
-  // console.log(event);
+  // let xPathMouse;
+
   // Store different event types using a switch statement
   switch (eventType) {
     case 'click':
@@ -103,7 +103,8 @@ function inputEventListener(event, callback) {
         console.log('you made it to the end of step 2');
         console.log('Keydown hover target: ', assertionTarget);
         // need to figure out how to capture hover element
-        callback({ xPath, eventType: 'assertion', inputValue: assertionTarget });
+        href = assertionTarget.pathName;
+        callback({ xPath: assertionTarget.mouseXPath, eventType: 'assertion', inputValue: assertionTarget });
       }
       break;
     case 'keyup':
@@ -114,7 +115,11 @@ function inputEventListener(event, callback) {
       }
       break;
     case 'mouseover':
+      const xPathMouse = getRelativeXPath(event.target);
       assertionTarget = {
+        even: event.target,
+        mouseXPath: xPathMouse,
+        pathName: event.target.pathname,
         localName: event.target.localName,
         className: event.target.className,
         innerHTML: event.target.innerHTML,

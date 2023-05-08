@@ -19,18 +19,21 @@ function switchCase(event) {
             let finalText = '';
             finalText += `cy.xpath('${selector}').should('exist');`;
             // if contains a inner text or outerText
+            if (href) {
+                finalText += `cy.xpath('${selector}').contains("a").should("have.attr", "href", "${href}");`;
+            }
             if (input.innerText !== '' && input.innerText) {
                 finalText += `cy.xpath('${selector}').should('have.text', "${input.innerText}").and('be.visible');`;
             }
-            if (input.outerHTML !== '' && input.outerHTML) {
-                finalText += `cy.xpath('${selector}').should('have.attr', '${input.localName}').and('be.visible');`;
+            // if (input.outerHTML !== '' && input.outerHTML){
+            //   finalText += `cy.xpath('${selector}').should(, '<${input.localName}>').and('be.visible');`
+            // }
+            if (input.id !== '' && input.id) {
+                finalText += `cy.xpath('${selector}').should('have.id', '${input.id}');`;
             }
-            // if (input.id !== '' && input.id){
-            //   finalText += `cy.xpath('${selector}').should('have.id', '${input.id}');`
-            // }
-            // if (input.class !== '' && input.class){
-            //   finalText += `cy.xpath('${selector}').should('have.class', '${input.class}');`
-            // }
+            if (input.className !== '' && input.class) {
+                finalText += `cy.xpath('${selector}').should('have.class', '${input.class}');`;
+            }
             return finalText;
         default:
             return 'didnt input a valid action';
