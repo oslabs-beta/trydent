@@ -21,14 +21,17 @@ Trydent is a visionary open source project that seeks to empower developers with
 </div>
 
 ## Table of Contents
-1. [Getting Started](#getting-started)
-1. [User Input Recording and Data Privacy](#user-input-recording-and-data-privacy)
-1. [Scripts](#scripts)
+- [Trydent](#trydent)
+  - [Table of Contents](#table-of-contents)
+  - [Getting Started](#getting-started)
+  - [User Input Recording and Data Privacy](#user-input-recording-and-data-privacy)
+  - [Our Team](#our-team)
+  - [Scripts](#scripts)
     - [Client](#client)
     - [Server](#server)
-1. [Contributing](#contributing)
+  - [Contributing](#contributing)
     - [Code Commenting Guidelines](#code-commenting-guidelines)
-1. [License](#license)
+  - [License](#license)
 
 
 
@@ -43,7 +46,54 @@ Before running the application, make sure to navigate to the correct directory f
 ## User Input Recording and Data Privacy
 Trydent records user inputs during development for the purpose of creating end-to-end tests. The application does not extract or store any personal data from users. However, as a precaution, developers should avoid inputting sensitive information while using Trydent. This ensure that no sensitive data is inadvertently recorded or stored in the generated tests.
 
-
+## Our Team
+<table><tbody><tr>
+  <td align="center" width="150">
+    <img src="https://user-images.githubusercontent.com/1347847/180048247-6ae956ab-da6a-44dd-b43b-2ccb71414b5e.png" style="height: 5rem; width: 5rem;" />
+    <br/>
+    <strong>Alastair Scheuermann</strong>
+    <br/>
+    <a href="https://github.com/alastairsounds">GitHub</a>
+    <br/>
+    <a href="https://www.linkedin.com/in/alastairsounds/">LinkedIn</a>
+  </td>
+  <td align="center" width="150">
+    <img src="https://user-images.githubusercontent.com/1347847/180048245-bd80e3ab-fefd-4290-a5b6-6fb11669eafe.png" style="height: 5rem; width: 5rem;" />
+    <br/>
+    <strong>Eric Dunn</strong>
+    <br/>
+    <a href="https://github.com/ELDunn">GitHub</a>
+    <br/>
+    <a href="https://www.linkedin.com/in/ericldunn/">LinkedIn</a>
+  </td>
+  <td align="center" width="150">
+    <img src="https://user-images.githubusercontent.com/1347847/180048242-9201e19e-1f29-4dda-97cd-59c32e06767b.png" style="height: 5rem; width: 5rem;" />
+    <br/>
+    <strong>Jacob Gillan</strong>
+    <br/>
+    <a href="https://github.com/JakeGillan/">GitHub</a>
+    <br/>
+    <a href="https://www.linkedin.com/in/jacob-gillan/">LinkedIn</a>
+  </td>
+  <td align="center" width="150">
+    <img src="https://user-images.githubusercontent.com/1347847/180048249-2384e70d-8a10-4fc9-b12f-bff75a900ab3.png" style="height: 5rem; width: 5rem;" />
+    <br/>
+    <strong>Nicholas Ly</strong>
+    <br/>
+    <a href="https://github.com/nicholas-l-ly">GitHub</a>
+    <br/>
+    <a href="https://www.linkedin.com/in/nicholasly/">LinkedIn</a>
+  </td>
+  <td align="center" width="150">
+    <img src="https://user-images.githubusercontent.com/1347847/180048249-2384e70d-8a10-4fc9-b12f-bff75a900ab3.png" style="height: 5rem; width: 5rem;" />
+    <br/>
+    <strong>Samuel Lee</strong>
+    <br/>
+    <a href="https://github.com/leesamuel423">GitHub</a>
+    <br/>
+    <a href="https://www.linkedin.com/in/leesamuel423/">LinkedIn</a>
+  </td>
+</tr></tbody></table>
 
 ## Scripts
 ### Client
