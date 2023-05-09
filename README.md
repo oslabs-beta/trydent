@@ -20,7 +20,7 @@ Trydent is a visionary open source project that seeks to empower developers with
   </a>
 </div>
 
-<p> align="center">
+<p align="center">
   <img src="./assets/trydent-gif.gif" width="800px"/>
 </p>
 
