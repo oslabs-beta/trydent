@@ -20,6 +20,9 @@ Trydent is a visionary open source project that seeks to empower developers with
   </a>
 </div>
 
+<img src="./assets/trydent-gif.gif"/>
+
+
 ## Table of Contents
 - [Trydent](#trydent)
   - [Table of Contents](#table-of-contents)
