@@ -70,7 +70,7 @@ function inputEventListener(event, callback) {
   let initialValue;
   let inputValue;
   let newValue;
-  // let xPathMouse;
+  let xPathMouse;
 
   // Store different event types using a switch statement
   switch (eventType) {
@@ -115,9 +115,8 @@ function inputEventListener(event, callback) {
       }
       break;
     case 'mouseover':
-      const xPathMouse = getRelativeXPath(event.target);
+      xPathMouse = getRelativeXPath(event.target);
       assertionTarget = {
-        even: event.target,
         mouseXPath: xPathMouse,
         pathName: event.target.pathname,
         localName: event.target.localName,

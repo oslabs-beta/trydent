@@ -24,12 +24,12 @@ function switchCase(event: EventObj): string {
       if (href){
         finalText += `cy.xpath('${selector}').contains("a").should("have.attr", "href", "${href}");`
       }
-      if (input.innerText !== '' && input.innerText){
-        finalText += `cy.xpath('${selector}').should('have.text', "${input.innerText}").and('be.visible');`
+      if (input.innerHTML !== '' && input.innerHTML){
+        finalText += `cy.xpath('${selector}').should('have.text', ${JSON.stringify(input.innerHTML)}).and('be.visible');`
       }
-      // if (input.outerHTML !== '' && input.outerHTML){
-      //   finalText += `cy.xpath('${selector}').should(, '<${input.localName}>').and('be.visible');`
-      // }
+      if (input.innerHTML !== '' && input.innerHTML){
+        finalText += `cy.xpath('${selector}').should('have.html',${JSON.stringify(input.innerHTML)});`
+      }
       if (input.id !== '' && input.id){
         finalText += `cy.xpath('${selector}').should('have.id', '${input.id}');`
       }
@@ -41,6 +41,23 @@ function switchCase(event: EventObj): string {
       return 'didnt input a valid action';
   }
 }
+
+//        if (input.outerHTML !== '' && input.outerHTML){
+//         finalText += `cy.xpath('${selector}').then('$div') => {
+//           const outerHTML = $div[0].outerHTML;
+
+//           expect(outerHTML.to.contain(${JSON.stringify(input.outerHTML)}))`
+// // }
+
+  //  finalText += `cy.xpath('${selector}').then('div') => {
+  //     const divEl = div[0];    
+  //     const outerHTML = divEl[0].outerHTML;
+          
+  //         expect(outerHTML.to.contain(${JSON.stringify(input.outerHTML)}))`
+// cy.xpath(${selector}).then($div) => {
+//   const outerHTML = $div[0].outerHTML;
+//   expect(outerHTML.to.contain('input.outerHTML'))
+// }
 /**
  * Mother function, creates a textblock for an entire describe suite in Cypress.
  *

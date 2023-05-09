@@ -49,11 +49,12 @@ export type EventObj = {
 };
 
 export type inputObj = {
-  localName: string,
-  className: string,
-  innerHTML: string,
-  outerHTML: string,
-  id: string,
-  innerText: string,
-  outerText: string,
+  pathName?: string
+  localName?: string,
+  className?: string,
+  innerHTML?: string,
+  outerHTML?: string,
+  id?: string,
+  innerText?: string,
+  outerText?: string,
 }
