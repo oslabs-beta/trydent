@@ -3,9 +3,9 @@
   display: flex;
   flex-direction: column;
   height: calc(100vh - 4rem); // Subtract topBar height
-  padding: 2rem;
   background-color: $color-background;
   color: $color-text;
+  margin: 2rem;
 
   h1 {
     font-size: 2rem;
