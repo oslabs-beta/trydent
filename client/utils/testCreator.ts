@@ -1,4 +1,4 @@
-import { Describe, itObject, EventObj } from './types/types';
+import { Describe, itObject, EventObj, inputObj } from './types/types';
 
 function switchCase(event: EventObj): string {
   let { selector, action, input, URL, a, href} = event;
@@ -17,10 +17,28 @@ function switchCase(event: EventObj): string {
       return `cy.xpath('${selector}').click();
       cy.location('pathname').should('eq','${href}');`;
       break;
+    case 'assertion':
+      let finalText = '';
+      finalText += `cy.xpath('${selector}').should('exist');`
+      // if contains a inner text or outerText
+      if (href){
+        finalText += `cy.xpath('${selector}').contains("a").should("have.attr", "href", "${href}");`
+      }
+      if (input.innerHTML !== '' && input.innerHTML){
+        finalText += `cy.xpath('${selector}').should('have.html',${JSON.stringify(input.innerHTML)}).and('be.visible');`
+      }
+      if (input.id !== '' && input.id){
+        finalText += `cy.xpath('${selector}').should('have.id', '${input.id}');`
+      }
+      if (input.className !== '' && input.className){
+        finalText += `cy.xpath('${selector}').should('have.attr', '${input.className}');`
+      }
+      return finalText;
     default:
       return 'didnt input a valid action';
   }
 }
+
 /**
  * Mother function, creates a textblock for an entire describe suite in Cypress.
  *
