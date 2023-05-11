@@ -25,6 +25,14 @@ describe('CodeBlock handleCopy function', () => {
   it('should copy the text to the clipboard of the user', () => {});
 });
 
+describe('CodeBlock correct output for multiple test cases' , () => {
+  it('test1')
+  it('test2')
+  it('test3')
+  
+  
+})
+
 describe('CodeBlock SyntaxHighlighter element', () => {
   it('should display the formatted code', () => {});
 });
