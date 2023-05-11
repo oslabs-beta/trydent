@@ -175,7 +175,7 @@ We welcome contributions from the community. If you are interested in contributi
 <table style="width:20%;">
   <tr>
     <td>
-      <img src="./assets/team/alastair-s.png" style=" max-width:5rem;" />
+      <img src="./assets/team/alastair-s.png" style="width:5rem;" />
     </td>
     <td>
       <strong>Alastair Scheuermann</strong><br/>
@@ -185,7 +185,7 @@ We welcome contributions from the community. If you are interested in contributi
   </tr>
   <tr>
     <td>
-      <img src="./assets/team/eric-d.png" style=" max-width:4rem;" />
+      <img src="./assets/team/eric-d.png" style="width:4rem;" />
     </td>
     <td>
       <strong>Eric Dunn</strong><br/>
@@ -195,7 +195,7 @@ We welcome contributions from the community. If you are interested in contributi
   </tr>
   <tr>
     <td>
-      <img src="./assets/team/jacob-g.png" style="max-width:3rem;" />
+      <img src="./assets/team/jacob-g.png" style="width:3rem;" />
     </td>
     <td>
       <strong>Jacob Gillan</strong><br/>
@@ -205,7 +205,7 @@ We welcome contributions from the community. If you are interested in contributi
   </tr>
   <tr>
     <td>
-      <img src="./assets/team/nicholas-l.png" style="max-width:2rem;" />
+      <img src="./assets/team/nicholas-l.png" style="width:2rem;" />
     </td>
     <td>
       <strong>Nicholas Ly</strong><br/>
@@ -215,7 +215,7 @@ We welcome contributions from the community. If you are interested in contributi
   </tr>
   <tr>
     <td>
-      <img src="./assets/team/sam-l.png" style="max-width:5rem;" />
+      <img src="./assets/team/sam-l.png" style="width:5rem;" />
     </td>
     <td>
       <strong>Samuel Lee</strong><br/>
