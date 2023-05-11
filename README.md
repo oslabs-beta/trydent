@@ -227,5 +227,13 @@ We welcome contributions from the community. If you are interested in contributi
 
 
 
+| <img src="./assets/team/alastair-s.png" style="width:8rem;"/> | <img src="./assets/team/eric-d.png" style="width:8rem;"/> | <img src="./assets/team/jacob-g.png" style="width:8rem;"/> | <img src="./assets/team/nicholas-l.png" style="width:8rem;"/> | <img src="./assets/team/sam-l.png" style="width:8rem;"/> |
+|:---:|:---:|:---:|:---:|:---:|
+| <div style="width:8rem;">**Alastair Scheuermann**</div> | <div style="width:8rem;">**Eric Dunn**</div> | <div style="width:8rem;">**Jacob Gillan**</div> | <div style="width:8rem;">**Nicholas Ly**</div> | <div style="width:8rem;">**Samuel Lee**</div> |
+| [GitHub](https://github.com/alastairsounds) | [GitHub](https://github.com/ELDunn) | [GitHub](https://github.com/JakeGillan/) | [GitHub](https://github.com/nicholas-l-ly) | [GitHub](https://github.com/leesamuel423) |
+| [LinkedIn](https://www.linkedin.com/in/alastairsounds/) | [LinkedIn](https://www.linkedin.com/in/ericldunn/) | [LinkedIn](https://www.linkedin.com/in/jacob-gillan/) | [LinkedIn](https://www.linkedin.com/in/nicholasly/) | [LinkedIn](https://www.linkedin.com/in/leesamuel423/) |
+
+
+
 ## License
 This project is licensed under the terms of the [MIT LICENSE](./LICENSE)
