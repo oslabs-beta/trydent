@@ -93,21 +93,23 @@ function inputEventListener(event, callback) {
       }
       break;
     case 'keydown':
+      // listening for first key down
       initialValue = event.target.value;
+      // only changes if first key is an 'e' - will remain until key up (see 'keyup event listener')
       if (!firstKeyPressed && event.key === 'e') {
         firstKeyPressed = true;
-        console.log('you made it to step 1');
-      } else if (firstKeyPressed && !secondKeyPressed && event.key === 'z') {
+      // eslint-disable-next-line brace-style
+      }
+      // listen for second key down an making sure its 'z'
+      else if (firstKeyPressed && !secondKeyPressed && event.key === 'z') {
         secondKeyPressed = true;
-        // trigger your event here
-        console.log('you made it to the end of step 2');
-        console.log('Keydown hover target: ', assertionTarget);
-        // need to figure out how to capture hover element
+        // trigger your event here takes assertion object created in mouseover case as input, reassigns path
         href = assertionTarget.pathName;
         callback({ xPath: assertionTarget.mouseXPath, eventType: 'assertion', inputValue: assertionTarget });
       }
       break;
     case 'keyup':
+      // reset firstKeyPressed and secondKeyPressed when the keys are released
       if (event.key === 'e') {
         firstKeyPressed = false;
       } else if (event.key === 'z') {
@@ -115,21 +117,18 @@ function inputEventListener(event, callback) {
       }
       break;
     case 'mouseover':
+      // continually reassign the Xpath and create an assertion target object as the mouse moves
       xPathMouse = getRelativeXPath(event.target);
       assertionTarget = {
         mouseXPath: xPathMouse,
         pathName: event.target.pathname,
-        localName: event.target.localName,
         className: event.target.className,
         innerHTML: event.target.innerHTML,
-        outerHTML: event.target.outerHTML,
         id: event.target.id,
         innerText: event.target.innerText,
-        outerText: event.target.outerText,
       };
       break;
     default:
-      // console.log(`Unhandled event type: ${eventType}`);
   }
 }
 
@@ -141,7 +140,6 @@ const URL = window.location.href;
   document.addEventListener(action, (event) => {
     // Call the inputEventListener for each event
     inputEventListener(event, (recordedEvent) => {
-      // console.log('Content-script.js This is the recordedEvent: ', recordedEvent);
       const { xPath, eventType, inputValue } = recordedEvent;
       // Send the xPath as a message to the window
       window.postMessage({ xPath }, '*');
