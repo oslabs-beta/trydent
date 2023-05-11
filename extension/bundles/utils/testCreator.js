@@ -31,8 +31,8 @@ function switchCase(event) {
             if (input.id !== '' && input.id) {
                 finalText += `cy.xpath('${selector}').should('have.id', '${input.id}');`;
             }
-            if (input.className !== '' && input.class) {
-                finalText += `cy.xpath('${selector}').should('have.class', '${input.class}');`;
+            if (input.className !== '' && input.className) {
+                finalText += `cy.xpath('${selector}').should('have.class', '${input.className}');`;
             }
             return finalText;
         default:

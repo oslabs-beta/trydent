@@ -25,16 +25,13 @@ function switchCase(event: EventObj): string {
         finalText += `cy.xpath('${selector}').contains("a").should("have.attr", "href", "${href}");`
       }
       if (input.innerHTML !== '' && input.innerHTML){
-        finalText += `cy.xpath('${selector}').should('have.text', ${JSON.stringify(input.innerHTML)}).and('be.visible');`
-      }
-      if (input.innerHTML !== '' && input.innerHTML){
-        finalText += `cy.xpath('${selector}').should('have.html',${JSON.stringify(input.innerHTML)});`
+        finalText += `cy.xpath('${selector}').should('have.html',${JSON.stringify(input.innerHTML)}).and('be.visible');`
       }
       if (input.id !== '' && input.id){
         finalText += `cy.xpath('${selector}').should('have.id', '${input.id}');`
       }
-      if (input.className !== '' && input.class){
-        finalText += `cy.xpath('${selector}').should('have.class', '${input.class}');`
+      if (input.className !== '' && input.className){
+        finalText += `cy.xpath('${selector}').should('have.attr', '${input.className}');`
       }
       return finalText;
     default:
@@ -42,22 +39,6 @@ function switchCase(event: EventObj): string {
   }
 }
 
-//        if (input.outerHTML !== '' && input.outerHTML){
-//         finalText += `cy.xpath('${selector}').then('$div') => {
-//           const outerHTML = $div[0].outerHTML;
-
-//           expect(outerHTML.to.contain(${JSON.stringify(input.outerHTML)}))`
-// // }
-
-  //  finalText += `cy.xpath('${selector}').then('div') => {
-  //     const divEl = div[0];    
-  //     const outerHTML = divEl[0].outerHTML;
-          
-  //         expect(outerHTML.to.contain(${JSON.stringify(input.outerHTML)}))`
-// cy.xpath(${selector}).then($div) => {
-//   const outerHTML = $div[0].outerHTML;
-//   expect(outerHTML.to.contain('input.outerHTML'))
-// }
 /**
  * Mother function, creates a textblock for an entire describe suite in Cypress.
  *
