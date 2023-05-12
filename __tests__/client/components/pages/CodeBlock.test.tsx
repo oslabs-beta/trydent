@@ -1,4 +1,4 @@
-import CodeBlock from '../../client/components/pages/CodeBlock';
+import CodeBlock from '../../../../client/components/pages/CodeBlock';
 
 import React, { useState, useEffect } from 'react'; // ###TODO: useEffect is never used. Remove it?
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -25,13 +25,11 @@ describe('CodeBlock handleCopy function', () => {
   it('should copy the text to the clipboard of the user', () => {});
 });
 
-describe('CodeBlock correct output for multiple test cases' , () => {
-  it('test1')
-  it('test2')
-  it('test3')
-  
-  
-})
+describe('CodeBlock correct output for multiple test cases', () => {
+  it('test1');
+  it('test2');
+  it('test3');
+});
 
 describe('CodeBlock SyntaxHighlighter element', () => {
   it('should display the formatted code', () => {});
