@@ -3,7 +3,9 @@
   ![Banner](/assets/trydent-banner.png)
 
 
-Trydent is a visionary open source project that seeks to empower developers with an innovative solution to automate the creation of end-to-end testing. With Trydent, developers can easily generate high-quality Cypress code that is seamlessly integrated into their codebase, enabling them to optimize and streamline their workflow like never before. Harnessing the power of cutting-edge technology, Trydent is the ultimate tool for modern developers seeking to create the most robust and reliable web applications.
+Trydent is a **lightweight** developer tool built from the ground up to **automate** the generation of Cypress test code, **simplifying** and **streamlining** the testing process for applications.
+
+The primary purpose of Trydent is to help developers and quality assurance engineers easily generate Cypress test code, saving time and effort while ensuring comprehensive test coverage. With Trydent, you can create tests quickly, detect issues earlier in the development process, and maintain high-quality code standards.  
 
 <div align="center" style="display: flex; justify-content: center; align-items: center; gap: 25px;">
   <a href="https://reactjs.org/" rel="nofollow">
@@ -18,44 +20,78 @@ Trydent is a visionary open source project that seeks to empower developers with
        <a href="https://jestjs.io/" rel="nofollow">
     <img src="https://camo.githubusercontent.com/38eb294a1bdc730fae415015ecac4d6c009e39d2a9c8f8631f1d16bf3f918189/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2d6a6573742d2532334332313332353f7374796c653d666f722d7468652d6261646765266c6f676f3d6a657374266c6f676f436f6c6f723d7768697465" data-canonical-src="https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white" alt="Jest" style="max-width: 100%">
   </a>
-</div>
+</div>  
+
+<br>  
+
+<p align="center">
+  <img src="./assets/trydent-gif.gif" width="800px"/>
+</p>
+
 
 ## Table of Contents
-- [Trydent](#trydent)
-  - [Table of Contents](#table-of-contents)
-  - [Getting Started](#getting-started)
-  - [User Input Recording and Data Privacy](#user-input-recording-and-data-privacy)
-  - [Scripts](#scripts)
-    - [Client](#client)
-    - [Server](#server)
-  - [Our Team](#our-team)
-  - [Contributing](#contributing)
-    - [Code Commenting Guidelines](#code-commenting-guidelines)
-  - [License](#license)
+1. [Trydent](#trydent)
+2. [Features](#features)
+3. [Benefits](#benefits)
+4. [Privacy Statement](#privacy-statement)
+5. [Installation](#installation)
+6. [Scripts](#scripts)
+7. [File Structure](#file-structure)
+8. [Contributions](#contributions)
+9. [Our Team](#our-team)
+10. [License](#license)
 
 
+## Features
+Trydent offers several key features that make it a valuable tool for test generation:
 
-## Getting Started
-Before running the application, make sure to navigate to the correct directory for the client or server part of the project. Use the terminal to change to the desired directory:
+1. **Automated Cypress Test Code Generation**: Trydent automatically generates Cypress test code for your web application, saving you time and effort
+2. **Intuitive Developer Tool Interface**: Trydent is a Developer Tool that can be utilized directly in your browser.
+3. **Compatibility with Various Web Applications and Frameworks**: Trydent is compatible with a wide range of web applications and frameworks, including React, Angular, Vue, and more.
 
-- For the client: `cd path/to/client` (replace "path/to/client" with the actual path to your client directory)
-- For the server: `cd path/to/server` (replace "path/to/server" with the actual path to your server directory)
+## Benefits
+By using Trydent, developers can enjoy numerous benefits, such as:
+1. **Increased Productivity**: Trydent automates the generation of Cypress test code, cutting down time spent on creating E2E test by *over 60%*.
+2. **Improved Test Coverage**: Trydent helps developers ensure comprehensive test coverage for their application.
+3. **Faster Development Cycles**: Trydent helps developers detect issues earlier in the development process, so teams can quickly address problems and move on to the next stage.  
 
+## Privacy Statement
+Trydent logs user inputs during development for the purpose of creating end-to-end tests. The application does not extract or store any personal data from users. However, as a precaution, developers should avoid using sensitive information when genereating test code. This ensure that no sensitive data is inadvertently recorded or stored in the generated tests.
 
+## Installation
+Please note that Trydent is not yet available on the Chrome Web Store.  
+1. Ensure you have the required prerequeisites installed:
+    - [Node.js](https://nodejs.org/en/)
+    - [npm](https://www.npmjs.com/)
+    - [Google Chrome](https://www.google.com/chrome/)
+2. Fork the Trydent repository to your own GitHub account.
+3. Clone your forked repository to your local machine.
+```bash
+git clone https://github.com/<your-github-username>/trydent.git
+```
+4. Navigate to the root project directory and install dependencies.
+```bash
+cd trydent
+npm install
+```
+5. Navigate to the client directory and install dependencies.
+```bash
+cd client
+npm install
+```
+6. Build the application in the client directory
+```bash
+npm run build
+```
+7. Load Trydent into your Chrome extensions.
+    - Open Google Chrome and navigate to `chrome://extensions/`
+    - Enable Developer Mode
+    - Click "Load unpacked" and select the `extensions` directory in your local 'trydent' repository.  
 
-## User Input Recording and Data Privacy
-Trydent records user inputs during development for the purpose of creating end-to-end tests. The application does not extract or store any personal data from users. However, as a precaution, developers should avoid inputting sensitive information while using Trydent. This ensure that no sensitive data is inadvertently recorded or stored in the generated tests.
+Now you should be able to access Trydent in the developer tools or right-click and select Trydent.
 
 
 ## Scripts
-### Client
-To run your application, follow the steps below:
-
-1. Open a terminal window or tab.
-2. Install the required packages (if you haven't already): `npm install`.
-3. Run the development server: `npm run start`. This will start the Vite development server, and you can access your application in the browser.
-4. When you are ready to build the application for production, run `npm run build`. To preview the production build locally, run `npm run serve`.
-
 Below are descriptions of each npm script:
 
 - `npm start`: Starts the development server using Vite.
@@ -64,106 +100,131 @@ Below are descriptions of each npm script:
 - `npm run serve`: Starts a local server to preview the production build. This is for testing the built assets before deploying. This should not be used as a production server.
 - `npm test`: Runs Jest tests
 
-### Server
-To run your application, follow the steps below:
-
-1. Open two terminal windows or tabs.
-2. Install the required packages (if you haven't already): `npm install`.
-3. In the first terminal, run `npm run watch` to start the TypeScript compiler in watch mode.
-4. In the second terminal, run `npm run dev` to start both server-side and client-side applications concurrently.
-
-Below are descriptions of each npm script:
-
-- `npm run watch`: Runs the TypeScript compiler (`tsc`) in watch mode (`-w`). This will compile the TypeScript files into JavaScript and watch for any changes in the TypeScript files. When a file is changed, it will recompile the affected files automatically.
-- `npm run server`: Runs your server using `nodemon`. Automatically restarts your server when it detects changes in your server file. In this case, it is watching the `dist/index.js` file, which is the compiled output from your TypeScript files.
-- `npm run dev`: Runs both the server-side and client-side applications at the same time using the `concurrently` package.
-- `npm run client`: Runs the client-side application.
-
-
-## Our Team
-<table><tbody><tr>
-  <td align="center" width="166">
-    <img src="/assets/team/alastair-s.png" style="height: 5rem; width: 5rem;" />
-    <br/>
-    <strong>Alastair Scheuermann</strong>
-    <br/>
-    <a href="https://github.com/alastairsounds">GitHub</a>
-    <br/>
-    <a href="https://www.linkedin.com/in/alastairsounds/">LinkedIn</a>
-  </td>
-  <td align="center" width="166">
-    <img src="/assets/team/eric-d.png" style="height: 5rem; width: 5rem;" />
-    <br/>
-    <strong>Eric Dunn</strong>
-    <br/>
-    <br/>
-    <a href="https://github.com/ELDunn">GitHub</a>
-    <br/>
-    <a href="https://www.linkedin.com/in/ericldunn/">LinkedIn</a>
-  </td>
-  <td align="center" width="166">
-    <img src="/assets/team/jacob-g.png" style="height: 5rem; width: 5rem;" />
-    <br/>
-    <strong>Jacob Gillan</strong>
-    <br/>
-    <br/>
-    <a href="https://github.com/JakeGillan/">GitHub</a>
-    <br/>
-    <a href="https://www.linkedin.com/in/jacob-gillan/">LinkedIn</a>
-  </td>
-  <td align="center" width="166">
-    <img src="/assets/team/nicholas-l.png" style="height: 5rem; width: 5rem;" />
-    <br/>
-    <strong>Nicholas Ly</strong>
-    <br/>
-    <br/>
-    <a href="https://github.com/nicholas-l-ly">GitHub</a>
-    <br/>
-    <a href="https://www.linkedin.com/in/nicholasly/">LinkedIn</a>
-  </td>
-  <td align="center" width="166">
-    <img src="/assets/team/sam-l.png" style="height: 5rem; width: 5rem;" />
-    <br/>
-    <strong>Samuel Lee</strong>
-    <br/>
-    <br/>
-    <a href="https://github.com/leesamuel423">GitHub</a>
-    <br/>
-    <a href="https://www.linkedin.com/in/leesamuel423/">LinkedIn</a>
-  </td>
-</tr></tbody></table>
-
-
-
-## Contributing
-We welcome contributions from the community. If you are interested in contributing to this project, please read the following guidelines:
-
-1. Fork the repository and create a new branch for your feature or bug fix.
-2. Ensure that your code adheres to the existing code style and conventions.
-3. Write tests for your code and ensure that all tests pass before submitting a pull request.
-4. Ensure propper code commenting
-5. Submit a pull request to the `dev` branch.
-
-### Code Commenting Guidelines
-Please ensure that your code follows JSDoc standards for commenting. This makes it easier for other developers to understand the purpose and functionality of your code. JSDoc is a markup language used to annotate JavaScript source code files. You can find more information about JSDoc and its syntax in the official [JSDoc documentation](https://jsdoc.app/).
-
-Example:
-```js
-/**
- * Finds the sum of two numbers.
- * 
- * @param {number} a - The first number.
- * @param {number} b - The second number.
- * @returns {number} The sum of the two numbers.
- */
-function sum(a, b) {
-  return a + b;
-}
+## File Structure
 ```
-In this example, the JSDoc comment explains what the sum function does, what parameters it expects, and what it returns. Following this format will help other developers understand your code and use it effectively.
+.
+├── LICENSE
+├── README.md
+├── client
+│   ├── components
+│   │   ├── App.tsx
+│   │   ├── TopBar.tsx
+│   │   └── pages
+│   │       ├── CodeBlock.tsx
+│   │       ├── TestPage.tsx
+│   │       └── WelcomePage.tsx
+│   ├── index.html
+│   ├── jest.config.js
+│   ├── main.tsx
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── scss
+│   │   ├── _codeBlock.scss
+│   │   ├── _eventLogger.scss
+│   │   ├── _styles.scss
+│   │   ├── _testPage.scss
+│   │   ├── _topBar.scss
+│   │   ├── _variables.scss
+│   │   ├── _welcomePage.scss
+│   │   └── application.scss
+│   ├── tsconfig.json
+│   ├── tsconfig.node.json
+│   ├── utils
+│   │   ├── testCreator.ts
+│   │   └── types
+│   │       └── types.ts
+│   └── vite.config.ts
+├── extension
+│   ├── background.js
+│   ├── bundles
+│   │   ├── components
+│   │   │   ├── App.js
+│   │   │   ├── TopBar.js
+│   │   │   └── pages
+│   │   │       ├── CodeBlock.js
+│   │   │       ├── TestPage.js
+│   │   │       └── WelcomePage.js
+│   │   ├── index.html
+│   │   ├── main.js
+│   │   ├── utils
+│   │   │   ├── testCreator.js
+│   │   │   └── types
+│   │   │       └── types.js
+│   │   └── vite.config.js
+│   ├── content-script.js
+│   ├── devtool.html
+│   ├── devtools.js
+│   ├── manifest.json
+│   ├── panel.html
+│   └── panel.js
+├── package-lock.json
+├── package.json
+└── server
+    ├── index.ts
+    ├── package-lock.json
+    ├── package.json
+    └── tsconfig.json
+```
 
+## Contributions
+We welcome contributions from the community. If you are interested in contributing to this project, please refer to our [Contributing Guidelines]() for more information.
+
+
+## Our Team 
+
+<table style="width:40%;">
+  <tr>
+    <td>
+      <img src="./assets/team/alastair-s.png" style="width:6rem;" />
+    </td>
+    <td>
+      <strong>Alastair Scheuermann</strong><br/>
+      <a href="https://github.com/alastairsounds">GitHub</a><br/>
+      <a href="https://www.linkedin.com/in/alastairsounds/">LinkedIn</a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="./assets/team/eric-d.png" style="width:6rem;" />
+    </td>
+    <td>
+      <strong>Eric Dunn</strong><br/>
+      <a href="https://github.com/ELDunn">GitHub</a><br/>
+      <a href="https://www.linkedin.com/in/ericldunn/">LinkedIn</a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="./assets/team/jacob-g.png" style="width:6rem;" />
+    </td>
+    <td>
+      <strong>Jacob Gillan</strong><br/>
+      <a href="https://github.com/JakeGillan/">GitHub</a><br/>
+      <a href="https://www.linkedin.com/in/jacob-gillan/">LinkedIn</a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="./assets/team/nicholas-l.png" style="width:6rem;" />
+    </td>
+    <td>
+      <strong>Nicholas Ly</strong><br/>
+      <a href="https://github.com/nicholas-l-ly">GitHub</a><br/>
+      <a href="https://www.linkedin.com/in/nicholasly/">LinkedIn</a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="./assets/team/sam-l.png" style="width:6rem;" />
+    </td>
+    <td>
+      <strong>Samuel Lee</strong><br/>
+      <a href="https://github.com/leesamuel423">GitHub</a><br/>
+      <a href="https://www.linkedin.com/in/leesamuel423/">LinkedIn</a>
+    </td>
+  </tr>
+</table>
 
 
 ## License
-This project is licensed under the [MIT License](https://opensource.org/license/mit/) - see the [LICENSE](/LICENSE) file for details.
-
+This project is licensed under the terms of the [MIT LICENSE](./LICENSE)

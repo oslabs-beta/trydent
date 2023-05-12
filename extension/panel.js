@@ -33,6 +33,7 @@ chrome.runtime.onMessage.addListener((message) => {
   if (isRecording === true) {
     // Add the message to the event array
     eventArr.push(message);
+    console.log(message)
     // console.log('This is our updated events array: ', eventArr);
   
     // Input history querys the DOM for the classname and returns an HTMLCollection which is type array
@@ -40,11 +41,11 @@ chrome.runtime.onMessage.addListener((message) => {
     // ** should probably create a function outside of this to modularize :) - NL
     const inputHistory = document.getElementsByClassName('input-history');
     const input = document.createElement('li');
-    input.innerText = `${message.action}${message.input ? ` to:  ${message.input}` : ''}${message.a ? ` to:  ${message.href}` : ''}`;
+    input.innerText = `${message.action}${message.action === 'assertion' ? ` to:  ${message.input.innerText}` : ''}${message.input && message.action !== 'assertion' ? ` to:  ${message.input}` : ''}${message.a ? ` to:  ${message.href}` : ''}`;
     inputHistory[0].appendChild(input);
     input.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
   }
-})
+})  
 
 
 // Listener for the "describeStatement" event triggered from WelcomePage
