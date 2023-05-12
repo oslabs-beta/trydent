@@ -60,12 +60,18 @@ function getRelativeXPath(element) {
  * @param {Event} event - The event object
  * @param {function} callback - Callback function to execute with the recorded event data
  */
+let firstKeyPressed = false;
+let secondKeyPressed = false;
+let assertionTarget;
+
 function inputEventListener(event, callback) {
   const xPath = getRelativeXPath(event.target);
   const eventType = event.type;
   let initialValue;
   let inputValue;
   let newValue;
+  let xPathMouse;
+
   // Store different event types using a switch statement
   switch (eventType) {
     case 'click':
@@ -86,8 +92,43 @@ function inputEventListener(event, callback) {
         callback({ xPath, eventType: 'input', inputValue: newValue });
       }
       break;
+    case 'keydown':
+      // listening for first key down
+      initialValue = event.target.value;
+      // only changes if first key is an 'e' - will remain until key up (see 'keyup event listener')
+      if (!firstKeyPressed && event.key === 'e') {
+        firstKeyPressed = true;
+      // eslint-disable-next-line brace-style
+      }
+      // listen for second key down an making sure its 'z'
+      else if (firstKeyPressed && !secondKeyPressed && event.key === 'z') {
+        secondKeyPressed = true;
+        // trigger your event here takes assertion object created in mouseover case as input, reassigns path
+        href = assertionTarget.pathName;
+        callback({ xPath: assertionTarget.mouseXPath, eventType: 'assertion', inputValue: assertionTarget });
+      }
+      break;
+    case 'keyup':
+      // reset firstKeyPressed and secondKeyPressed when the keys are released
+      if (event.key === 'e') {
+        firstKeyPressed = false;
+      } else if (event.key === 'z') {
+        secondKeyPressed = false;
+      }
+      break;
+    case 'mouseover':
+      // continually reassign the Xpath and create an assertion target object as the mouse moves
+      xPathMouse = getRelativeXPath(event.target);
+      assertionTarget = {
+        mouseXPath: xPathMouse,
+        pathName: event.target.pathname,
+        className: event.target.className,
+        innerHTML: event.target.innerHTML,
+        id: event.target.id,
+        innerText: event.target.innerText,
+      };
+      break;
     default:
-      // console.log(`Unhandled event type: ${eventType}`);
   }
 }
 
@@ -95,11 +136,10 @@ function inputEventListener(event, callback) {
 const URL = window.location.href;
 
 // Add event listeners for 'click', 'focus', 'blur', and 'change' events
-['click', 'focus', 'blur', 'change'].forEach((action) => {
+['click', 'focus', 'blur', 'change', 'keydown', 'keyup', 'mouseover'].forEach((action) => {
   document.addEventListener(action, (event) => {
     // Call the inputEventListener for each event
     inputEventListener(event, (recordedEvent) => {
-      // console.log('Content-script.js This is the recordedEvent: ', recordedEvent);
       const { xPath, eventType, inputValue } = recordedEvent;
       // Send the xPath as a message to the window
       window.postMessage({ xPath }, '*');

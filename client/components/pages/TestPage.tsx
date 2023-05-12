@@ -49,15 +49,26 @@ const TestPage: React.FC = () => {
         Stop Recording & Generate Test
       </button>
       <details>
-        <summary>Instructions</summary>
-        <ol>
-          <li>Enter your `it` statement</li>
-          <li>Start recording</li>
-          <li>Perform actions on the page</li>
-          <li>When you are ready, "Generate Test"</li>
-        </ol>
-        <p>Remember, `describe` breaks your test suite into components. </p>
-        <p>`it` statements further break down `describe` tests into smaller individual tests</p>
+        <div className='instructions'>
+          <summary><h3>Instructions:</h3></summary>
+          <ol>
+            <li>Enter your `it` statement</li>
+            <li>Click 'Start Recording'</li>
+            <li>Execute the user jounrey and we will capture the events</li>
+            <li>When you are ready, "Generate Test"</li>
+            <li>Now you're ready to copy your Cypress code, and paste it in your source code to run Cypress</li>
+         </ol>
+        </div>
+        <div className='assertions'>
+          <p><h3>Capturing assertions:</h3><br/>
+            Assertions enable you to validate scenarios such as whether an element is visible or has a particular attribute, CSS class, or state. </p>
+          <ol>
+            <li>Hover your mouse over the component you want to assert</li>
+            <li>Keydown 'e'+'z'</li>
+            <li>This will capture components on the page so cypress will check to see if the component exists when running your E2E test</li>
+            <li>Look in the 'Inputs Log' to see your assertion target</li>
+          </ol>
+        </div>
       </details>
     </div>
   );
