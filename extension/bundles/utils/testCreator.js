@@ -102,3 +102,4 @@ function actionCreator(eObj, URL) {
       }`;
     return resultText;
 }
+export default { switchCase, describeCreator };

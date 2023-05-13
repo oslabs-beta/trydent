@@ -108,3 +108,6 @@ function actionCreator(eObj: itObject, URL: string): string {
       }`;
   return resultText;
 }
+
+export default {switchCase, describeCreator};
+
