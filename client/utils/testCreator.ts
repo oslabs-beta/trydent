@@ -109,8 +109,5 @@ function actionCreator(eObj: itObject, URL: string): string {
   return resultText;
 }
 
-function test (num){
-  return num + 2;
-}
-export default switchCase;
+export default {switchCase, describeCreator};
 
