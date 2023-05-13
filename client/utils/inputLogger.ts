@@ -61,7 +61,7 @@ let firstKeyPressed: boolean = false;
 let secondKeyPressed: boolean = false;
 let assertionTarget;
 
-function inputEventListener(event: Event, callback): void {
+function inputEventListener(event: Event, callback: any): void {
   const xPath = getRelativeXPath(event.target as HTMLElement);
   const eventType = event.type;
   let initialValue: string | undefined;
