@@ -72,15 +72,19 @@ function inputEventListener(event: Event, callback: any): void {
   // Store different event types using a switch statement
   switch (eventType) {
     case 'click':
+      console.log(`User interaction with element: ${xPath}, Event type: click`);
       callback({ xPath, eventType });
       break;
     // case 'input':
     case 'change':
       inputValue = (event.target as HTMLInputElement).value;
+      console.log(`User interaction with element: ${xPath}, Event type: input, Input value: ${inputValue}`);
       callback({ xPath, eventType, inputValue });
+
       break;
     case 'focus':
       initialValue = (event.target as HTMLInputElement).value;
+      console.log(`User interaction with element: ${xPath}, Event type: click`);
       callback({ xPath, eventType });
       break;
     case 'blur':
