@@ -69,7 +69,7 @@ window.addEventListener('stopRecording', (e) => {
   // This allows CodeBlock.tsx to easily catch the message
   (async function() {
     let generatedCode = await describeCreatorImport();
-    // console.log("Generated code: ", generatedCode);
+    console.log("Generated code: ", generatedCode);
     window.postMessage({ type: 'GENERATED_CODE', code: generatedCode })
   })();
 });
@@ -81,6 +81,7 @@ window.addEventListener('stopRecording', (e) => {
  */
 async function describeCreatorImport() {
   const { describeCreator } = await import("./bundles/utils/testCreator.js");
+  console.log(describeObj)
   return describeCreator(describeObj);
 }
 
@@ -89,12 +90,4 @@ backgroundPageConnection.postMessage({
   tabId: chrome.devtools.inspectedWindow.tabId,
   scriptToInject: 'content-script.js',
 });
-
-
-/** This is how you can return a value without it being a promise 
-// (async function() {
-//   console.log(await describeCreatorImport());
-// })();
-// });
-*/
    
