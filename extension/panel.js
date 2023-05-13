@@ -5,7 +5,7 @@ const eventArr = [];
 const describeObj = {
   URL: null,
   description: 'Cypress test block',
-  writeUp: "Trydent is cool", //location where added comment features would go
+  writeUp: "Trydent Cypress Test Code", //location where added comment features would go
   itStatements: [
     {
       itStatement: '',
