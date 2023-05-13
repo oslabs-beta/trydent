@@ -33,7 +33,7 @@ chrome.runtime.onMessage.addListener((message) => {
   if (isRecording === true) {
     // Add the message to the event array
     eventArr.push(message);
-    console.log(message)
+//     console.log(message)
     // console.log('This is our updated events array: ', eventArr);
   
     // Input history querys the DOM for the classname and returns an HTMLCollection which is type array
@@ -69,7 +69,7 @@ window.addEventListener('stopRecording', (e) => {
   // This allows CodeBlock.tsx to easily catch the message
   (async function() {
     let generatedCode = await describeCreatorImport();
-    console.log("Generated code: ", generatedCode);
+//     console.log("Generated code: ", generatedCode);
     window.postMessage({ type: 'GENERATED_CODE', code: generatedCode })
   })();
 });
