@@ -42,7 +42,7 @@ export type itObject = {
 export type EventObj = {
   selector: string;
   action: string;
-  input: string | inputObj ;
+  input?: string | inputObj ;
   URL?: string;
   a?: boolean;
   href?: string;

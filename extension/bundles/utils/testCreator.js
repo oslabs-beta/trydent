@@ -13,14 +13,14 @@ function switchCase(event) {
             break;
         case 'navigate':
             return `cy.xpath('${selector}').click();
-      cy.location('pathname').should('eq','${href}');`;
+      cy.location('pathname').should("eq",'${href}');`;
             break;
         case 'assertion':
             let finalText = '';
             finalText += `cy.xpath('${selector}').should('exist');`;
             // if contains a inner text or outerText
-            if (href) {
-                finalText += `cy.xpath('${selector}').contains("a").should("have.attr", "href", "${href}");`;
+            if (href && a === true) {
+                finalText += `cy.xpath('${selector}').should("have.attr", "href").should("contains", "${href}");`;
             }
             if (input.innerHTML !== '' && input.innerHTML) {
                 finalText += `cy.xpath('${selector}').should('have.html',${JSON.stringify(input.innerHTML)}).and('be.visible');`;
@@ -32,6 +32,8 @@ function switchCase(event) {
                 finalText += `cy.xpath('${selector}').should('have.class', '${input.className}');`;
             }
             return finalText;
+        case 'readystatechange':
+            return `cy.location('pathname').should('eq', '${URL}')`;
         default:
             return 'didnt input a valid action';
     }
