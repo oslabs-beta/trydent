@@ -79,7 +79,7 @@ chrome.runtime.onMessage.addListener((message) => {
       // console.log('Changed, message: ', message);
       break;
     case 'keydown':
-      console.log('keydown, message: ', message);
+      // console.log('keydown, message: ', message);
       break;
     default:
       // console.log('Unknown event, message: ', message);
