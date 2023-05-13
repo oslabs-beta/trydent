@@ -5,7 +5,7 @@ const eventArr = [];
 const describeObj = {
   URL: null,
   description: 'Cypress test block',
-  writeUp: "Trydent is cool", //location where added comment features would go
+  writeUp: "Trydent Cypress Test Code", //location where added comment features would go
   itStatements: [
     {
       itStatement: '',
@@ -33,7 +33,7 @@ chrome.runtime.onMessage.addListener((message) => {
   if (isRecording === true) {
     // Add the message to the event array
     eventArr.push(message);
-    console.log(message)
+//     console.log(message)
     // console.log('This is our updated events array: ', eventArr);
   
     // Input history querys the DOM for the classname and returns an HTMLCollection which is type array
@@ -69,7 +69,7 @@ window.addEventListener('stopRecording', (e) => {
   // This allows CodeBlock.tsx to easily catch the message
   (async function() {
     let generatedCode = await describeCreatorImport();
-    // console.log("Generated code: ", generatedCode);
+//     console.log("Generated code: ", generatedCode);
     window.postMessage({ type: 'GENERATED_CODE', code: generatedCode })
   })();
 });
@@ -81,6 +81,7 @@ window.addEventListener('stopRecording', (e) => {
  */
 async function describeCreatorImport() {
   const { describeCreator } = await import("./bundles/utils/testCreator.js");
+  console.log(describeObj)
   return describeCreator(describeObj);
 }
 
@@ -89,12 +90,4 @@ backgroundPageConnection.postMessage({
   tabId: chrome.devtools.inspectedWindow.tabId,
   scriptToInject: 'content-script.js',
 });
-
-
-/** This is how you can return a value without it being a promise 
-// (async function() {
-//   console.log(await describeCreatorImport());
-// })();
-// });
-*/
    
