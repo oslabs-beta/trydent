@@ -1,9 +1,11 @@
 /* eslint-disable quotes */
 /* eslint-disable function-paren-newline */
-import switchCase from '../../../../client/utils/testCreator';
+import testCreator from '../../../../client/utils/testCreator';
+
+const { switchCase, describeCreator } = testCreator;
 
 describe('TestCreator Test', () => {
-  describe('SwitchCase Tester Generate Cypress code for each type of action: click, change, navigate, assertion', () => {
+  describe('Unit test for switchCase Generate Cypress code for each type of action: click, change, navigate, assertion', () => {
     it('should generate Cypress test for click', () => {
       expect(`${switchCase({
         action: 'click',
@@ -51,25 +53,75 @@ describe('TestCreator Test', () => {
       })}`).toBe(`cy.xpath(\'//a[@data-test="sidenav-user-settings"]/div[2]/span[1]\').should(\'exist\');cy.xpath(\'//a[@data-test="sidenav-user-settings"]/div[2]/span[1]\').should(\'have.html\',"My Account").and(\'be.visible\');cy.xpath(\'//a[@data-test="sidenav-user-settings"]/div[2]/span[1]\').should(\'have.attr\', \'MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock\');`);
     });
   });
-  describe('describeCreator', () => {
-    const Describe = {
-  URL: string;
-  description: string;
-  writeUp: string;
-  itStatements: itObject[];
-};
-    it('This will take our describe obj from panel.js and return the final cypress code', () => {
-      expect(``).toBe(``);
+  describe('Integration test for describeCreator', () => {
+    const describeObj = {
+      URL: "http://localhost:3000/",
+      description: "",
+      writeUp: "Trydent is cool",
+      itStatements: [
+        {
+          itStatement: "",
+          eventArr: [
+            {
+              action: "click",
+              selector: "//main[@data-test=\"main\"]",
+              URL: "http://localhost:3000/",
+              a: false,
+              href: "",
+            },
+            {
+              action: "click",
+              selector: "//main[@data-test=\"main\"]",
+              URL: "http://localhost:3000/",
+              a: false,
+              href: "",
+            },
+            {
+              action: "click",
+              selector: "//main[@data-test=\"main\"]",
+              URL: "http://localhost:3000/",
+              a: false,
+              href: "",
+            },
+            {
+              action: "click",
+              selector: "//main[@data-test=\"main\"]",
+              URL: "http://localhost:3000/",
+              a: false,
+              href: "",
+            },
+            {
+              action: "click",
+              selector: "//main[@data-test=\"main\"]",
+              URL: "http://localhost:3000/",
+              a: false,
+              href: "",
+            },
+          ],
+        },
+      ],
+    };
+    it('This will take our describe obj from panel.js and return the final cypress code. It will pass through describeCreator -> itCreator -> actionCreator -> switchCase', () => {
+      expect(`${describeCreator(describeObj)}`).toContain(`//Trydent is cool
+    describe('', () => {
+      beforeEach(() => {
+        cy.visit('http://localhost:3000/')
+      })
+        
+      
+    it('', () => {
+        cy.xpath('//main[@data-test="main"]').should('exist');
+      cy.xpath('//main[@data-test="main"]').click({force:true});
+        cy.xpath('//main[@data-test="main"]').should('exist');
+      cy.xpath('//main[@data-test="main"]').click({force:true});
+        cy.xpath('//main[@data-test="main"]').should('exist');
+      cy.xpath('//main[@data-test="main"]').click({force:true});
+        cy.xpath('//main[@data-test="main"]').should('exist');
+      cy.xpath('//main[@data-test="main"]').click({force:true});
+        cy.xpath('//main[@data-test="main"]').should('exist');
+      cy.xpath('//main[@data-test="main"]').click({force:true});
+      })
+    })`);
     });
   });
-  // describe('itCreator', () => {
-  //   it('This will take in our eventArr and send each obj to our action', () => {
-  //     expect(``).toBe(``);
-  //   });
-  // });
-  // describe('actionCreator', () => {
-  //   it('This will take in our eventArr and send each obj to our switchCase', () => {
-  //     expect(``).toBe(``);
-  //   });
-  // });
 });

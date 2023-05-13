@@ -29,7 +29,7 @@ function switchCase(event) {
                 finalText += `cy.xpath('${selector}').should('have.id', '${input.id}');`;
             }
             if (input.className !== '' && input.className) {
-                finalText += `cy.xpath('${selector}').should('have.attr', '${input.className}');`;
+                finalText += `cy.xpath('${selector}').should('have.class', '${input.className}');`;
             }
             return finalText;
         default:
@@ -102,40 +102,4 @@ function actionCreator(eObj, URL) {
       }`;
     return resultText;
 }
-const eventObj = {
-    'action': 'click',
-    'selector': '//input[@id="username"]',
-    'URL': 'http://localhost:3000/signin',
-    'a': false,
-    'href': '',
-};
-console.log(switchCase());
-export default switchCase;
-// {
-//       'action': 'change',
-//       'selector': '//input[@id="username"]',
-//       'input': 'Test',
-//       'URL': 'http://localhost:3000/signin',
-//       'a': false,
-//       'href': '',
-//     },
-//     {
-//       'action': 'navigate',
-//       'selector': '//a[@data-test="sidenav-home"]/div[2]/span[1]',
-//       'URL': 'http://localhost:3000/signin',
-//       'a': true,
-//       'href': '/',
-//     },
-//     {
-//       'action': 'assertion',
-//       'selector': '//a[@data-test="sidenav-user-settings"]/div[2]/span[1]',
-//       'input': {
-//         'mouseXPath': '//a[@data-test="sidenav-user-settings"]/div[2]/span[1]',
-//         'className': 'MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock',
-//         'innerHTML': 'My Account',
-//         'id': '',
-//         'innerText': 'My Account',
-//       },
-//       'URL': 'http://localhost:3000/signin',
-//       'a': false,
-//     },
+export default { switchCase, describeCreator };
