@@ -29,7 +29,7 @@ function switchCase(event) {
                 finalText += `cy.xpath('${selector}').should('have.id', '${input.id}');`;
             }
             if (input.className !== '' && input.className) {
-                finalText += `cy.xpath('${selector}').should('have.attr', '${input.className}');`;
+                finalText += `cy.xpath('${selector}').should('have.class', '${input.className}');`;
             }
             return finalText;
         default:
