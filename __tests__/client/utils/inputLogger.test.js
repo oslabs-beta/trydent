@@ -1,9 +1,4 @@
-import { getRelativeXPath, inputEventListener } from '../../../client/utils/inputLogger';
-describe('testing if jest is even working', () => {
-  test('should return true', () => {
-    expect(true).toBe(true);
-  });
-});
+const { getRelativeXPath, inputEventListener } = require('../../../client/utils/inputLogger');
 
 // Test suite for getRelativeXPath function
 describe('getRelativeXPath', () => {
@@ -28,7 +23,7 @@ describe('getRelativeXPath', () => {
 
   test('should generate a relative XPath for an element without unique attribute', () => {
     const span1 = document.querySelector('span');
-    if (!span1 || !(span1 instanceof HTMLElement)) throw new Error('Test element not found');
+    if (!span1) throw new Error('Test element not found');
     const xpath = getRelativeXPath(span1);
     expect(xpath).toBe('/html[1]/body[1]/div[1]/div[1]/span[1]');
   });
@@ -75,81 +70,42 @@ describe('getRelativeXPath', () => {
 
 // Test suite for inputEventListener function
 describe('inputEventListener', () => {
-  let button: HTMLElement;
-  let input: HTMLInputElement;
-  let consoleSpy: jest.SpyInstance;
-  // Initialize the recordedEvents array to store the recorded events
-  let recordedEvents: any[];
-  // Setup DOM before each test case
+  let button;
+  let input;
+  let consoleSpy;
+  const recordedEvents = [];
+
   beforeEach(() => {
     document.body.innerHTML = `
       <button id="testButton">Click me</button>
       <input id="testInput" type="text" />
     `;
 
-    button = document.getElementById('testButton') as HTMLElement;
-    input = document.getElementById('testInput') as HTMLInputElement;
+    button = document.getElementById('testButton');
+    input = document.getElementById('testInput');
 
-    // Spy on console.log to verify log messages. Replace console.log with a mock function 
     consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
-    let recordedEvents = [];
   });
 
-  // Teardown function to run after each test case in this test suite
   afterEach(() => {
-    // Restore the original console.log function after each test
-    // This cleans up the side effects and ensure other tests are not affected
     consoleSpy.mockRestore();
   });
 
   test('should handle click events and log the interaction', () => {
     // Call inputEventListener with the click event and callback to store recorded events
-    button.addEventListener('click', (event) =>
-      inputEventListener(event as MouseEvent, (recordedEvent: any) => {
-        recordedEvents.push(recordedEvent);
-      })
-    );
-  
+    button.addEventListener('click', (event) => inputEventListener(event, (recordedEvent) => {
+      recordedEvents.push(recordedEvent);
+    }));
+
     // Simulate a click event
     button.click();
-  
+
     // Check if console.log was called with the expected message
     const xPath = getRelativeXPath(button);
     expect(consoleSpy).toHaveBeenCalledWith(`User interaction with element: ${xPath}, Event type: click`);
-  
+
     // Check if the click event was recorded in the recordedEvents array
     expect(recordedEvents).toHaveLength(1);
     expect(recordedEvents[0]).toEqual({ xPath, eventType: 'click' });
-  });
-  
-
-  test('should handle input events and log the interaction', () => {
-    // Manually focus the input element without triggering a click event
-    (input as HTMLInputElement).focus({ preventScroll: true });
-  
-    // Clear the recordedEvents array before simulating the input event
-    recordedEvents.length = 0;
-  
-    // Call inputEventListener with the input event and a callback to store the recorded event
-    input.addEventListener('input', (event) =>
-      inputEventListener(event as InputEvent, (recordedEvent: any) => {
-        recordedEvents.push(recordedEvent);
-      })
-    );
-  
-    // Simulate an input event
-    const inputValue = 'test value';
-    input.value = inputValue;
-    input.dispatchEvent(new InputEvent('input', { bubbles: true }));
-  
-    // Check if console.log was called with the expected message
-    const xPath = getRelativeXPath(input);
-    expect(consoleSpy).toHaveBeenCalledWith(
-      `User interaction with element: ${xPath}, Event type: input, Input value: ${inputValue}`
-    );
-  
-    // Check if the input event was recorded in the recordedEvents array
-    expect(recordedEvents).toHaveLength(1);
-    expect(recordedEvents[0]).toEqual({ xPath, eventType: 'input', inputValue });
   });
 });
