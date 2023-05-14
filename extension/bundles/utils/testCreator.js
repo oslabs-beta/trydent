@@ -13,7 +13,7 @@ function switchCase(event) {
             break;
         case 'navigate':
             return `cy.xpath('${selector}').click();
-      cy.location('pathname').should("eq",'${href}');`;
+      cy.location('pathname').should("contains",'${href}');`;
             break;
         case 'assertion':
             let finalText = '';
@@ -33,7 +33,7 @@ function switchCase(event) {
             }
             return finalText;
         case 'readystatechange':
-            return `cy.location('pathname').should('eq', '${URL}')`;
+            return `cy.url('eq', '${URL}')`;
         default:
             return 'didnt input a valid action';
     }
