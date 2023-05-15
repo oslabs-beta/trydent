@@ -1,0 +1,13 @@
+name: Trydent CI/CD
+
+on:
+  pull_request:
+    branches:
+      - dev
+jobs:
+  builds:
+    runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v3
+    - name: run tests
+       run: npm run test
