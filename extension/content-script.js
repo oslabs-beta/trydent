@@ -1,10 +1,8 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-plusplus */
 /* eslint-disable max-len */
-
 // Flag to indicate if the target element is an anchor tag with an href attribute
 let a = false;
-// Store the href attribute value of the anchor tag
 let href = '';
 
 /**
@@ -65,7 +63,10 @@ let secondKeyPressed = false;
 let assertionTarget;
 
 function inputEventListener(event, callback) {
-  const xPath = getRelativeXPath(event.target);
+  let xPath;
+  if (event.type !== 'readystatechange') {
+    xPath = getRelativeXPath(event.target);
+  }
   const eventType = event.type;
   let initialValue;
   let inputValue;
@@ -77,10 +78,16 @@ function inputEventListener(event, callback) {
     case 'click':
       callback({ xPath, eventType });
       break;
-    // case 'input':
+      // case 'input':
     case 'change':
       inputValue = event.target.value;
       callback({ xPath, eventType, inputValue });
+      break;
+      //
+    case 'readystatechange':
+      initialValue = 'N/A';
+      console.log('RSC');
+      callback({ XPath: '', eventType });
       break;
     case 'focus':
       initialValue = event.target.value;
@@ -98,7 +105,7 @@ function inputEventListener(event, callback) {
       // only changes if first key is an 'e' - will remain until key up (see 'keyup event listener')
       if (!firstKeyPressed && event.key === 'e') {
         firstKeyPressed = true;
-      // eslint-disable-next-line brace-style
+        // eslint-disable-next-line brace-style
       }
       // listen for second key down an making sure its 'z'
       else if (firstKeyPressed && !secondKeyPressed && event.key === 'z') {
@@ -135,10 +142,15 @@ function inputEventListener(event, callback) {
 // Store the current window's URL
 const URL = window.location.href;
 
+// console.log('DOM fully loaded and parsed');
+
 // Add event listeners for 'click', 'focus', 'blur', and 'change' events
-['click', 'focus', 'blur', 'change', 'keydown', 'keyup', 'mouseover'].forEach((action) => {
+['click', 'focus', 'blur', 'change', 'keydown', 'keyup', 'mouseover', 'readystatechange'].forEach((action) => {
   document.addEventListener(action, (event) => {
     // Call the inputEventListener for each event
+    // console.log('action: ', action);
+    // console.log('event: ', event);
+    // setTimeout(console.log('action: ', action), 1000);
     inputEventListener(event, (recordedEvent) => {
       const { xPath, eventType, inputValue } = recordedEvent;
       // Send the xPath as a message to the window
@@ -153,5 +165,6 @@ const URL = window.location.href;
     href = '';
   });
 });
+
 // Set up the inputEventListener with an empty callback function
 inputEventListener({}, () => {});
