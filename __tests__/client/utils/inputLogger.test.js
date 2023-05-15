@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 const { getRelativeXPath, inputEventListener } = require('../../../client/utils/inputLogger');
 
 // Test suite for getRelativeXPath function
