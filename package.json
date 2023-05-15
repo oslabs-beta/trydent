@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --verbose",
+    "test": "jest",
     "test-hh": "bash ./scripts/run-test.sh"
   },
   "keywords": [],
