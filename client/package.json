@@ -9,8 +9,6 @@
     "build": "vite build && tsc",
     "build:watch": "vite build --watch",
     "serve": "vite preview",
-    "test": "jest --verbose",
-    "test-hh": "bash ./scripts/run-test.sh"
   },
   "dependencies": {
     "prettier": "^2.8.8",

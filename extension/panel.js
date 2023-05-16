@@ -29,12 +29,11 @@ chrome.runtime.onMessage.addListener((message) => {
 
   // If the message a is true (has anchor tag), change action to navigate
   if (message.a === true) message.action = 'navigate';
-
   if (isRecording === true) {
     // Add the message to the event array
+    console.log(message)
     eventArr.push(message);
-//     console.log(message)
-    // console.log('This is our updated events array: ', eventArr);
+    console.log('This is our updated events array: ', eventArr);
   
     // Input history querys the DOM for the classname and returns an HTMLCollection which is type array
     // In order to append to the DOM from here, we have to treat it as an array and appropriate methods against it
