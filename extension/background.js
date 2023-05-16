@@ -25,7 +25,6 @@ chrome.runtime.onConnect.addListener((connection) => {
    * @param {Object} message - The message object
    */
   const devToolsListener = function (message) {
-    // console.log('we are in background.js');
 
     chrome.scripting.executeScript({
       target: { tabId: message.tabId },
@@ -40,7 +39,6 @@ chrome.runtime.onConnect.addListener((connection) => {
    * @listens chrome.tab.onActivated
    */
   chrome.tabs.onActivated.addListener(() => {
-    // console.log('changed to tab: ', tabId);
     chrome.scripting.executeScript({
       target: { tabId: message.tabId },
       files: [message.scriptToInject],
@@ -64,30 +62,8 @@ chrome.runtime.onConnect.addListener((connection) => {
  * @param {Object} message - The message object
  */
 chrome.runtime.onMessage.addListener((message) => {
-  // Check event and proceed message accordingly
-  switch (message.action) {
-    case 'click':
-      // console.log('Clicked, message: ', message);
-      break;
-    case 'focus':
-      // console.log('Focused, message: ', message);
-      break;
-    case 'blur':
-      // console.log('Blurred, message: ', message);
-      break;
-    case 'change':
-      // console.log('Changed, message: ', message);
-      break;
-    case 'keydown':
-      // console.log('keydown, message: ', message);
-      break;
-    default:
-      // console.log('Unknown event, message: ', message);
-  }
   if (devToolsConnection) {
     devToolsConnection.postMessage(message);
-  } else {
-    // console.error('devToolsConnection is not established yet');
   }
 });
 

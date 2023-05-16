@@ -7,10 +7,7 @@ import CodeBlock from './pages/CodeBlock';
 
 // MASTER REPO-IMPORTS LIST
 // repo-imports necessary to prevent bundling errors.
-// ###TODO - remove imports that are not used in any other file
-// --- --- --- --- --- --- --- --- ---
 import { describeCreator } from '../utils/testCreator';
-// ./client/utils/types folder
 import { Describe, itObject, EventObj } from '../utils/types/types';
 
 /**

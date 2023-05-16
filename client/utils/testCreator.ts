@@ -48,11 +48,8 @@ function switchCase(event: EventObj): string {
  * @returns {string} Full cypress test suite to be sent to user
  */
 export function describeCreator(obj: Describe): string {
-  // destructuring the 'describe' object
   const { URL, description, writeUp, itStatements } = obj;
   let resultStr;
-  //create line for 'describe' statement in which we call the itCreator?
-  // ###TO-DO: push 'it' statement down to itCreator
   return (resultStr = `
     //${writeUp}
     describe('${description}', () => {
@@ -70,7 +67,6 @@ export function describeCreator(obj: Describe): string {
  * @param {string} URL - URL of the page to be tested.
  * @returns {string} - Concatenated string of 'it' statements.
  */
-// ###TO-DO: Fully convert to TypeScript
 function itCreator(itStatementsArr: itObject[], URL: string): string {
   // Initialize empty array to push formatted 'it' statements into
   const formattedItStatments = [];
@@ -112,4 +108,3 @@ function actionCreator(eObj: itObject, URL: string): string {
 }
 
 export default {switchCase, describeCreator};
-
