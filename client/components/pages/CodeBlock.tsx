@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; // ###TODO: useEffect is never used. Remove it?
+import React, { useState, useEffect } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import prettier from 'prettier/standalone';
@@ -55,7 +55,7 @@ const CodeBlock: React.FC = () => {
     const handleMessageEvent = (event: MessageEvent) => {
       if (event.data.type === 'GENERATED_CODE') {
         const inputText = event.data.code;
-        console.log(inputText);
+        // console.log(inputText);
         const formatted = prettierFormat(inputText);
         setFormattedText(formatted);
       }

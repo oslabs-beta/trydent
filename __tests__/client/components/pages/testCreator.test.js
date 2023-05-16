@@ -35,7 +35,7 @@ describe('TestCreator Test', () => {
         a: true,
         href: '/',
       })}`).toBe(`cy.xpath('//a[@data-test="sidenav-home"]/div[2]/span[1]').click();
-      cy.location('pathname').should('eq','/');`);
+      cy.location('pathname').should("contains",'/');`);
     });
     it('should generate Cypress test for assertion', () => {
       expect(`${switchCase({
@@ -50,7 +50,7 @@ describe('TestCreator Test', () => {
         },
         URL: 'http://localhost:3000/signin',
         a: false,
-      })}`).toBe(`cy.xpath(\'//a[@data-test="sidenav-user-settings"]/div[2]/span[1]\').should(\'exist\');cy.xpath(\'//a[@data-test="sidenav-user-settings"]/div[2]/span[1]\').should(\'have.html\',"My Account").and(\'be.visible\');cy.xpath(\'//a[@data-test="sidenav-user-settings"]/div[2]/span[1]\').should(\'have.attr\', \'MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock\');`);
+      })}`).toBe(`cy.xpath('//a[@data-test="sidenav-user-settings"]/div[2]/span[1]').should('exist');cy.xpath('//a[@data-test="sidenav-user-settings"]/div[2]/span[1]').should('have.html',"My Account").and('be.visible');cy.xpath('//a[@data-test="sidenav-user-settings"]/div[2]/span[1]').should('have.class', 'MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock');`);
     });
   });
   describe('Integration test for describeCreator', () => {
@@ -102,7 +102,7 @@ describe('TestCreator Test', () => {
       ],
     };
     it('This will take our describe obj from panel.js and return the final cypress code. It will pass through describeCreator -> itCreator -> actionCreator -> switchCase', () => {
-      expect(`${describeCreator(describeObj)}`).toContain(`//Trydent is cool
+      expect(`${describeCreator(describeObj)}`).toContain(`    //Trydent is cool
     describe('', () => {
       beforeEach(() => {
         cy.visit('http://localhost:3000/')

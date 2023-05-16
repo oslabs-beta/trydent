@@ -86,7 +86,6 @@ function inputEventListener(event, callback) {
       //
     case 'readystatechange':
       initialValue = 'N/A';
-      console.log('RSC');
       callback({ XPath: '', eventType });
       break;
     case 'focus':
@@ -142,15 +141,10 @@ function inputEventListener(event, callback) {
 // Store the current window's URL
 const URL = window.location.href;
 
-// console.log('DOM fully loaded and parsed');
-
 // Add event listeners for 'click', 'focus', 'blur', and 'change' events
 ['click', 'focus', 'blur', 'change', 'keydown', 'keyup', 'mouseover', 'readystatechange'].forEach((action) => {
   document.addEventListener(action, (event) => {
     // Call the inputEventListener for each event
-    // console.log('action: ', action);
-    // console.log('event: ', event);
-    // setTimeout(console.log('action: ', action), 1000);
     inputEventListener(event, (recordedEvent) => {
       const { xPath, eventType, inputValue } = recordedEvent;
       // Send the xPath as a message to the window

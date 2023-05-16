@@ -46,9 +46,6 @@ const WelcomePage: React.FC = () => {
           <li>Once you are ready, "Start Test"</li>
           <li>Trydent won't start recording until you ask, so click 'Start Recording' on the next page when you're ready</li>
         </ol>
-        {/* <p>Remember, `describe` breaks your test suite into components. </p>
-        <p>`it` statements further break down `describe` tests into smaller individual tests</p> */}
-      
       </details>
     </div>
   );
