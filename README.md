@@ -60,8 +60,7 @@ Trydent logs user inputs during development for the purpose of creating end-to-e
 
 ## Installation
 Please note that Trydent is not yet available on the Chrome Web Store.  
-1. Ensure you have the required prerequeisites installed:
-    - [Node.js](https://nodejs.org/en/)
+1. Ensure you have the required prerequisites installed:
     - [npm](https://www.npmjs.com/)
     - [Google Chrome](https://www.google.com/chrome/)
 2. Fork the Trydent repository to your own GitHub account.
