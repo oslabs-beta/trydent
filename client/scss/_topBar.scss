@@ -27,7 +27,7 @@
     align-items: center;
 
     button {
-      @extend .standard-button;
+      @include standard-button;
     }
   }
 }

@@ -36,7 +36,7 @@
   }
 
   button {
-    @extend .standard-button;
+    @include standard-button;
     margin-bottom: 2rem;
   }
 
