@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from '../../scss/TestPage.module.scss';
+import  '../../scss/TestPage.scss';
 
 /**
  * The TestPage component renders a form for the user to enter
@@ -36,21 +36,21 @@ const TestPage: React.FC = () => {
     navigate('/codeBlock');
   };
   return (
-    <div className={styles.testPage}>
+    <div className="testPage">
       <h1>User Inputs</h1>
       <input id="itStatement" type="text" placeholder='"it" statement' />
-      <button id="startRecording" onClick={handleStartRecording} className={isRecording ? styles.recording : ''}>
+      <button id="startRecording" onClick={handleStartRecording} className={isRecording ? 'recording' : ''}>
         {isRecording ? 'Recording in progress...' : 'Start Recording'}
       </button>
       <summary>Inputs Log:</summary>
-      <div className={styles.inputContainer}>
-        <ol className={styles.inputHistory}></ol>
+      <div className="inputContainer">
+        <ol className="inputHistory"></ol>
       </div>
-      <button className={styles.generate} onClick={handleGenerate}>
+      <button className="generate" onClick={handleGenerate}>
         Stop Recording & Generate Test
       </button>
       <details>
-        <div className={styles.instructions}>
+        <div className="instructions">
           <summary><h3>Instructions:</h3></summary>
           <ol>
             <li>Enter your `it` statement</li>
@@ -60,7 +60,7 @@ const TestPage: React.FC = () => {
             <li>Now you're ready to copy your Cypress code, and paste it in your source code to run Cypress</li>
          </ol>
         </div>
-        <div className={styles.assertions}>
+        <div className="assertions">
           <p><h3>Capturing assertions:</h3><br/>
             Assertions enable you to validate scenarios such as whether an element is visible or has a particular attribute, CSS class, or state. </p>
           <ol>

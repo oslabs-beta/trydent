@@ -42,7 +42,7 @@
       }
     }
   }
-  
+
   .inputHistory {
     margin: 1rem 0;
     height: 10rem;
@@ -61,6 +61,8 @@
       padding: 0.5rem 1rem;
       text-align: center;
       background-color: lighten($color-input-background, 5%);
+      background: transparent;
+
     }
   }
 
