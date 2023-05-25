@@ -1,0 +1,17 @@
+@mixin standard-button {
+  padding: 0.625rem 1.25rem;
+  background-color: $color-primary;
+  color: $color-text;
+  font-family: $font-family;
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  border: none;
+  border-radius: 0.3rem; // Increase the border-radius for a rounder appearance
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease; // Add transform transition
+
+  &:hover {
+    background-color: $color-primary-hover;
+    transform: translateY(-2px); // Add translateY transform for a subtle lift effect on hover
+  }
+}

@@ -4,6 +4,8 @@ import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import prettier from 'prettier/standalone';
 import parserBabel from 'prettier/parser-babel';
 import GitHubButton from 'react-github-btn';
+import styles from '../../scss/CodeBlock.module.scss';
+
 
 /**
  * Formats the input string using prettier
@@ -69,16 +71,16 @@ const CodeBlock: React.FC = () => {
   }, []);
 
   return (
-    <div className="codeBlock">
-      <div className="head">
+    <div className={styles.codeBlock}>
+      <div className={styles.head}>
         <h1>Generated Test</h1>
-        <div className="copy-button">
-          <button onClick={handleCopy} disabled={copied} className={copied ? 'copied' : ''}>
+        <div className={styles.copyButton}>
+          <button onClick={handleCopy} disabled={copied} className={copied ? styles.copied : ''}>
             {copied ? 'Copied to clipboard!' : 'Copy'}
           </button>
         </div>
       </div>
-      <div className="code">
+      <div className={styles.code}>
         <SyntaxHighlighter
           language="javascript"
           style={oneDark}

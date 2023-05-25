@@ -5,6 +5,7 @@ import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import prettier from 'prettier/standalone';
 import parserBabel from 'prettier/parser-babel';
 import GitHubButton from 'react-github-btn';
+import styles from '../../scss/CodeBlock.module.scss';
 /**
  * Formats the input string using prettier
  *
@@ -51,7 +52,7 @@ const CodeBlock = () => {
         const handleMessageEvent = (event) => {
             if (event.data.type === 'GENERATED_CODE') {
                 const inputText = event.data.code;
-                console.log(inputText);
+                // console.log(inputText);
                 const formatted = prettierFormat(inputText);
                 setFormattedText(formatted);
             }
@@ -61,6 +62,6 @@ const CodeBlock = () => {
             window.removeEventListener('message', handleMessageEvent);
         };
     }, []);
-    return (_jsxs("div", { className: "codeBlock", children: [_jsxs("div", { className: "head", children: [_jsx("h1", { children: "Generated Test" }), _jsx("div", { className: "copy-button", children: _jsx("button", { onClick: handleCopy, disabled: copied, className: copied ? 'copied' : '', children: copied ? 'Copied to clipboard!' : 'Copy' }) })] }), _jsx("div", { className: "code", children: _jsx(SyntaxHighlighter, { language: "javascript", style: oneDark, customStyle: { background: '#1A1A1A' }, codeTagProps: { style: { background: '#1A1A1A' } }, wrapLines: true, lineProps: { style: { paddingRight: '1em' } }, children: formattedText ? formattedText : '' }) }), _jsxs("p", { children: ["Thank you for supporting TRYDENT. If you enjoyed, please give our", ' ', _jsx("a", { href: "https://github.com/oslabs-beta/trydent", target: "_blank", children: "Github" }), ' ', "a star!"] }), _jsx(GitHubButton, { href: "https://github.com/oslabs-beta/trydent", "data-icon": "octicon-star", "aria-label": "Star oslabs-beta/trydent on GitHub", children: "Star" })] }));
+    return (_jsxs("div", { className: styles.codeBlock, children: [_jsxs("div", { className: styles.head, children: [_jsx("h1", { children: "Generated Test" }), _jsx("div", { className: styles.copyButton, children: _jsx("button", { onClick: handleCopy, disabled: copied, className: copied ? styles.copied : '', children: copied ? 'Copied to clipboard!' : 'Copy' }) })] }), _jsx("div", { className: styles.code, children: _jsx(SyntaxHighlighter, { language: "javascript", style: oneDark, customStyle: { background: '#1A1A1A' }, codeTagProps: { style: { background: '#1A1A1A' } }, wrapLines: true, lineProps: { style: { paddingRight: '1em' } }, children: formattedText ? formattedText : '' }) }), _jsxs("p", { children: ["Thank you for supporting TRYDENT. If you enjoyed, please give our", ' ', _jsx("a", { href: "https://github.com/oslabs-beta/trydent", target: "_blank", children: "Github" }), ' ', "a star!"] }), _jsx(GitHubButton, { href: "https://github.com/oslabs-beta/trydent", "data-icon": "octicon-star", "aria-label": "Star oslabs-beta/trydent on GitHub", children: "Star" })] }));
 };
 export default CodeBlock;

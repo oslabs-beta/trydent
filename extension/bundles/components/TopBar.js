@@ -1,5 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useNavigate } from 'react-router-dom';
+import styles from '../scss/TopBar.module.scss';
 /**
  * TopBar component that displays the logo and a button to create a new test.
  * When the button is clicked, the user is navigated to the root path.
@@ -20,6 +21,6 @@ const TopBar = () => {
         event.preventDefault();
         navigate('/');
     };
-    return (_jsxs("div", { className: "topBar", children: [_jsx("div", { className: "topBar__logo", children: _jsx("h1", { children: "TRYDENT" }) }), _jsx("div", { className: "Title", children: _jsx("button", { onClick: handleSubmit, children: "New Test" }) })] }));
+    return (_jsxs("div", { className: styles.topBar, children: [_jsx("div", { className: styles.topBarlogo, children: _jsx("h1", { children: "TRYDENT" }) }), _jsx("div", { className: styles.Title, children: _jsx("button", { onClick: handleSubmit, children: "New Test" }) })] }));
 };
 export default TopBar;

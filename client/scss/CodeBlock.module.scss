@@ -27,16 +27,15 @@
     font-size: 0.75rem;
   }
   
-  .copy-button {
+  .copyButton {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 0.5rem;
     button {
-      @extend .standard-button;
+      @include standard-button;
       font-size: 0.75rem;
       padding: 0.25rem 0.5rem;
-      transition: background-color 0.3s ease-in-out;
 
       &.copied {
         background-color: #4caf50;
