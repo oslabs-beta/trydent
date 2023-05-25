@@ -37,6 +37,9 @@ const WelcomePage: React.FC = () => {
         Start Test
       </button>
       <details>
+        <div>
+          
+        </div>
         <summary>Instructions</summary>
         <ol>
           <li>Enter your describe statement for your test!

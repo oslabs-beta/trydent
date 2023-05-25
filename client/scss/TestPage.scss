@@ -23,13 +23,10 @@
   }
 
   details {
-    .instructions,
-    .assertions {
     margin-top: .5rem;
     border: 1px solid white;
     padding: 1rem;
     border-radius: 4px;
-  }
     summary {
       font-weight: $font-weight-semibold;
       margin-bottom: 0.5rem;
