@@ -104,6 +104,14 @@ Below are descriptions of each npm script:
 .
 ├── LICENSE
 ├── README.md
+├── __tests__
+│   └── client
+│       ├── components
+│       │   └── pages
+│       │       └── testCreator.test.js
+│       └── utils
+│           └── inputLogger.test.js
+├── babel.config.js
 ├── client
 │   ├── components
 │   │   ├── App.tsx
@@ -112,23 +120,33 @@ Below are descriptions of each npm script:
 │   │       ├── CodeBlock.tsx
 │   │       ├── TestPage.tsx
 │   │       └── WelcomePage.tsx
+│   ├── cypress
+│   │   ├── e2e
+│   │   │   └── tydent.cy.ts
+│   │   └── support
+│   │       ├── commands.ts
+│   │       └── e2e.ts
+│   ├── cypress.config.ts
 │   ├── index.html
-│   ├── jest.config.js
 │   ├── main.tsx
 │   ├── package-lock.json
 │   ├── package.json
 │   ├── scss
-│   │   ├── _codeBlock.scss
-│   │   ├── _eventLogger.scss
+│   │   ├── CodeBlock.module.scss
+│   │   ├── EventLogger.module.scss
+│   │   ├── TestPage.scss
+│   │   ├── TopBar.module.scss
+│   │   ├── WelcomePage.module.scss
 │   │   ├── _styles.scss
-│   │   ├── _testPage.scss
-│   │   ├── _topBar.scss
 │   │   ├── _variables.scss
-│   │   ├── _welcomePage.scss
-│   │   └── application.scss
+│   │   ├── application.scss
+│   │   └── components
+│   │       ├── buttons.scss
+│   │       └── input.scss
 │   ├── tsconfig.json
 │   ├── tsconfig.node.json
 │   ├── utils
+│   │   ├── inputLogger.ts
 │   │   ├── testCreator.ts
 │   │   └── types
 │   │       └── types.ts
@@ -143,6 +161,7 @@ Below are descriptions of each npm script:
 │   │   │       ├── CodeBlock.js
 │   │   │       ├── TestPage.js
 │   │   │       └── WelcomePage.js
+│   │   ├── cypress.config.js
 │   │   ├── index.html
 │   │   ├── main.js
 │   │   ├── utils
@@ -157,12 +176,7 @@ Below are descriptions of each npm script:
 │   ├── panel.html
 │   └── panel.js
 ├── package-lock.json
-├── package.json
-└── server
-    ├── index.ts
-    ├── package-lock.json
-    ├── package.json
-    └── tsconfig.json
+└── package.json
 ```
 
 ## Contributions
