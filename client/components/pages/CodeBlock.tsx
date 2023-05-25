@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+// import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import prettier from 'prettier/standalone';
 import parserBabel from 'prettier/parser-babel';
 import GitHubButton from 'react-github-btn';
+import styles from '../../scss/CodeBlock.module.scss';
+
 
 /**
  * Formats the input string using prettier
@@ -69,17 +71,17 @@ const CodeBlock: React.FC = () => {
   }, []);
 
   return (
-    <div className="codeBlock">
-      <div className="head">
+    <div className={styles.codeBlock}>
+      <div className={styles.head}>
         <h1>Generated Test</h1>
-        <div className="copy-button">
-          <button onClick={handleCopy} disabled={copied} className={copied ? 'copied' : ''}>
+        <div className={styles.copyButton}>
+          <button onClick={handleCopy} disabled={copied} className={copied ? styles.copied : ''}>
             {copied ? 'Copied to clipboard!' : 'Copy'}
           </button>
         </div>
       </div>
-      <div className="code">
-        <SyntaxHighlighter
+      <div className={styles.code}>
+        {/* <SyntaxHighlighter
           language="javascript"
           style={oneDark}
           customStyle={{ background: '#1A1A1A' }}
@@ -88,7 +90,7 @@ const CodeBlock: React.FC = () => {
           lineProps={{ style: { paddingRight: '1em' } }}
         >
           {formattedText ? formattedText : ''}
-        </SyntaxHighlighter>
+        </SyntaxHighlighter> */}
       </div>
       <p>
         Thank you for supporting TRYDENT. If you enjoyed, please give our{' '}

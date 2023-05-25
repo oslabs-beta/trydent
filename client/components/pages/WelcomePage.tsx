@@ -1,5 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import styles from '../../scss/WelcomePage.module.scss';
+
 
 /**
  * The WelcomePage component renders a form for the user to enter
@@ -28,7 +30,7 @@ const WelcomePage: React.FC = () => {
   };
 
   return (
-    <div className="welcomePage">
+    <div className={styles.welcomePage}>
       <h1>New Test</h1>
       <textarea id="describeStatement" placeholder="describe statement" />
       <button id="startTest" onClick={handleClick}>
