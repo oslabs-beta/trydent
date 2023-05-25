@@ -16,27 +16,12 @@
   }
 
   textarea {
-    padding: 1rem 0.625rem;
-    margin-bottom: 1.25rem;
-    border: 0.1rem solid $color-input-border;
-    border-radius: 0.3rem;
-    font-size: $font-size-base;
-    color: $color-text;
-    background-color: $color-input-background;
-    outline: none;
-    
-
-    &::placeholder {
-      color: $color-input-placeholder;
-    }
-
-    &:focus {
-      border-color: $color-primary;
-    }
+    @include inputField;
   }
+  
 
   button {
-    @extend .standard-button;
+    @include standard-button;
     margin-bottom: 2rem;
   }
 
@@ -45,10 +30,7 @@
     border: 1px solid white;
     padding: 1rem;
     border-radius: 4px;
-    background-color: #202020;
-      *{
-      background-color: #202020;
-      }
+
     summary {
       font-weight: $font-weight-semibold;
       margin-bottom: 0.5rem;
@@ -60,10 +42,6 @@
       li {
         margin: 0.5rem 0;
       }
-    }
-
-    p {
-      margin-bottom: 1rem;
     }
   }
 }

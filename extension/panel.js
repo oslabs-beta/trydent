@@ -1,4 +1,3 @@
-
 // Array to store the recorded events
 const eventArr = [];
 // Test object used to create test script
@@ -36,7 +35,7 @@ chrome.runtime.onMessage.addListener((message) => {
     // Input history querys the DOM for the classname and returns an HTMLCollection which is type array
     // In order to append to the DOM from here, we have to treat it as an array and appropriate methods against it
     // ** should probably create a function outside of this to modularize :) - NL
-    const inputHistory = document.getElementsByClassName('input-history');
+    const inputHistory = document.getElementsByClassName('inputHistory');
     const input = document.createElement('li');
     input.innerText = `${message.action}${message.action === 'assertion' ? ` to:  ${message.input.innerText}` : ''}${message.input && message.action !== 'assertion' ? ` to:  ${message.input}` : ''}${message.a ? ` to:  ${message.href}` : ''}`;
     inputHistory[0].appendChild(input);

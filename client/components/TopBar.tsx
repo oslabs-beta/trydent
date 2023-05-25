@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import styles from '../scss/TopBar.module.scss';
 
 /**
  * TopBar component that displays the logo and a button to create a new test.
@@ -24,11 +25,11 @@ const TopBar: React.FC = () => {
   };
 
   return (
-    <div className="topBar">
-      <div className="topBar__logo">
+    <div className={styles.topBar}>
+      <div className={styles.topBarlogo}>
         <h1>TRYDENT</h1>
       </div>
-      <div className="Title">
+      <div className={styles.Title}>
         <button onClick={handleSubmit}>New Test</button>
       </div>
     </div>
