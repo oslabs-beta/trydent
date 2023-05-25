@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import prettier from 'prettier/standalone';
 import parserBabel from 'prettier/parser-babel';
@@ -81,7 +81,7 @@ const CodeBlock: React.FC = () => {
         </div>
       </div>
       <div className={styles.code}>
-        {/* <SyntaxHighlighter
+        <SyntaxHighlighter
           language="javascript"
           style={oneDark}
           customStyle={{ background: '#1A1A1A' }}
@@ -90,7 +90,7 @@ const CodeBlock: React.FC = () => {
           lineProps={{ style: { paddingRight: '1em' } }}
         >
           {formattedText ? formattedText : ''}
-        </SyntaxHighlighter> */}
+        </SyntaxHighlighter>
       </div>
       <p>
         Thank you for supporting TRYDENT. If you enjoyed, please give our{' '}
