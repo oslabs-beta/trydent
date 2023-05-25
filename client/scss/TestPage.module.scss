@@ -29,10 +29,6 @@
     border: 1px solid white;
     padding: 1rem;
     border-radius: 4px;
-    background-color: #202020;
-      *{
-      background-color: #202020;
-      }
   }
     summary {
       font-weight: $font-weight-semibold;
@@ -45,13 +41,9 @@
         margin: 0.5rem 0;
       }
     }
-
-    p {
-      margin-bottom: 1rem;
-    }
-
   }
-  .input-history {
+  
+  .inputHistory {
     margin: 1rem 0;
     height: 10rem;
     // width: 80vw;
@@ -64,7 +56,11 @@
     background-color: $color-input-background;
 
     li {
-      background-color: transparent;
+      border: 0.1rem solid $color-input-border;
+      border-radius: 0.3rem;
+      padding: 0.5rem 1rem;
+      text-align: center;
+      background-color: lighten($color-input-background, 5%);
     }
   }
 
@@ -73,25 +69,16 @@
     color: white;
     &:hover {
       background-color: #4aa14d;
-      transform: translateY(-2px); // Add translateY transform for a subtle lift effect on hover
+      transform: translateY(-2px);
     }
   }
 
-  #generate {
+  .generate {
     background-color: #e44848;
     color: white;
     &:hover {
       background-color: #f85c5c;
-      transform: translateY(-2px); // Add translateY transform for a subtle lift effect on hover
+      transform: translateY(-2px); 
     }
   }
-
-  .input-history
-    li {
-      border: 0.1rem solid $color-input-border;
-      border-radius: 0.3rem;
-      padding: 0.5rem 1rem;
-      text-align: center;
-      background-color: lighten($color-input-background, 5%);
-    }
 }
